@@ -1,15 +1,13 @@
 ﻿using CrowdSystem;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class AgentDesigner
+/// <summary>
+/// Design the agent's character by assigning random character designs.
+/// </summary>
+public class AgentDesigner : MonoBehaviour
 {
     private const int SchemeOffset = 3;
     private const int MaxSeedValue = 3;
-
-    public AgentDesigner()
-    {
-    }
 
     private Animator _animator;
 
