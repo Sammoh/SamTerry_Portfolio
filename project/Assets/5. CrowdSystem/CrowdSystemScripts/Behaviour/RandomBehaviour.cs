@@ -5,7 +5,7 @@ namespace Sammoh.CrowdSystem
     [CreateAssetMenu(fileName = "RandomBehaviour", menuName = "ScriptableObjects/RandomBehaviour", order = 3)]
     public class RandomBehaviour : BehaviourBase
     {
-        public override void InitBehaviour(Vector3[] newWaypoints)
+        public override void InitBehaviour(CrowdAgentAi agentAi, Vector3[] newWaypoints)
         {
             Debug.LogError("Doing Something Random");
         }

@@ -49,7 +49,7 @@ namespace Sammoh.CrowdSystem
 
         // Utilities
         private AgentDesigner _agentDesigner;
-
+        private Camera _mainCamera;
 
         //animation instancing. 
         List<CrowdAgentAi> agentList = new List<CrowdAgentAi>();
@@ -108,7 +108,8 @@ namespace Sammoh.CrowdSystem
                 var randDesign = currentCharacters[Random.Range(0, currentCharacters.Length - 1)];
                 
                 // creating a new behaviour for the agent that can be adjusted
-                var newBehaviour = spawn.spawnBehaviour;
+                var behaviourType = spawn.spawnBehaviour.GetType();
+                var newBehaviour = ScriptableObject.CreateInstance(behaviourType) as BehaviourBase;
                 
                 if (newBehaviour == null)
                 {
@@ -149,7 +150,7 @@ namespace Sammoh.CrowdSystem
                 OnPathComplete += _currentAgent.OnPathComplete;
                 
                 _currentAgent.Init(newBehaviour, spawnIndex);
-                newBehaviour.InitBehaviour(_crowdWaypoints);
+                newBehaviour.InitBehaviour(_currentAgent, _crowdWaypoints);
 
                 _agentDesigner.AssignRandomCharacter(_currentAgent, randDesign);
                 

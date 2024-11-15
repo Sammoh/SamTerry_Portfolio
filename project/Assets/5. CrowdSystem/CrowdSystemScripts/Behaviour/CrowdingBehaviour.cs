@@ -5,7 +5,7 @@ namespace Sammoh.CrowdSystem
     [CreateAssetMenu(fileName = "CrowdingBehaviour", menuName = "ScriptableObjects/CrowdingBehaviour", order = 3)]
     public class CrowdingBehaviour : BehaviourBase
     {
-        public override void InitBehaviour(Vector3[] newWaypoints)
+        public override void InitBehaviour(CrowdAgentAi agentAi, Vector3[] newWaypoints)
         {
             Debug.LogError("Searching for the next crowd");
         }

@@ -5,7 +5,7 @@ namespace Sammoh.CrowdSystem
     [CreateAssetMenu(fileName = "StaticBehaviour", menuName = "ScriptableObjects/StaticBehaviour", order = 3)]
     public class StaticBehaviour : BehaviourBase
     {
-        public override void InitBehaviour(Vector3[] newWaypoints)
+        public override void InitBehaviour(CrowdAgentAi agentAi, Vector3[] newWaypoints)
         {
             Debug.LogError("Doing nothing");
         }

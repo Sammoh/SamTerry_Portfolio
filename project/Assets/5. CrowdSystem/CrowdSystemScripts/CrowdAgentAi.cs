@@ -24,9 +24,9 @@ namespace Sammoh.CrowdSystem
         [SerializeField] private BehaviourBase _currentBehaviour;
         [SerializeField] private IdleState _currentIdle;
         [SerializeField] private int _step;
-        private static readonly int Moving = Animator.StringToHash("IsMoving");
+        private static readonly int Moving = Animator.StringToHash("Moving");
         private static readonly int State = Animator.StringToHash("IdleState");
-
+        
         public void Init<T>(T behaviourBase, int spawnIndex = 0) where T : BehaviourBase
         {
             if (behaviourBase == null)
@@ -41,7 +41,7 @@ namespace Sammoh.CrowdSystem
             gameObject.name = $"{behaviourType}_{spawnIndex}";
 
             _currentBehaviour = behaviourBase;
-            _currentBehaviour.AgentAi = this;
+            // _currentBehaviour.AgentAi = this;
             _agentPace = Random.Range(_currentBehaviour.PaceRangeMin, _currentBehaviour.PaceRangeMax);
 
             if (!TryGetComponent(out _animator))
@@ -94,6 +94,8 @@ namespace Sammoh.CrowdSystem
             {
                 case ForwardAndBackBehaviour fwdbk:
                     _currentAgent.SetDestination(fwdbk.GetBehaviourDestination(_step));
+                    _animator.SetFloat("InputY", 1);
+                    _animator.SetBool(Moving, true);
                     break;
                 case StaticBehaviour:
                     break;

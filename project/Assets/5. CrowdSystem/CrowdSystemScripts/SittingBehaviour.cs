@@ -5,7 +5,7 @@ namespace Sammoh.CrowdSystem
     [CreateAssetMenu(fileName = "SittingBehaviour", menuName = "ScriptableObjects/SittingBehaviour", order = 3)]
     public class SittingBehaviour : BehaviourBase
     {
-        public override void InitBehaviour(Vector3[] newWaypoints)
+        public override void InitBehaviour(CrowdAgentAi agentAi, Vector3[] newWaypoints)
         {
             Debug.LogError("Just sitting.. maybe looking for another thing to do?");
         }

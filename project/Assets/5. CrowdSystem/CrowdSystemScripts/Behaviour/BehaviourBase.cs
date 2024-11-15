@@ -15,12 +15,13 @@ namespace Sammoh.CrowdSystem
         public float WalkingDistance = 10;
         public Vector3[] Waypoints;
         // public BehaviourType Behaviour;
-        public CrowdAgentAi AgentAi;
+        // public CrowdAgentAi AgentAi;
+        public CrowdAgentAi _AgentAi;
 
-        public abstract void InitBehaviour(Vector3[] newWaypoints);
+        public abstract void InitBehaviour(CrowdAgentAi agentAi, Vector3[] newWaypoints);
         public abstract Vector3 GetBehaviourDestination(int step);
         
-        
+        /*
         #region Old
 
         // public float PaceRangeMax;
@@ -108,7 +109,6 @@ namespace Sammoh.CrowdSystem
 //             _currentDestination = d;
 //             return d;
 //         }
-
         //only returns what's behind the agent.
         private Vector3 ForwardAndBack(int step)
         {
@@ -186,6 +186,6 @@ namespace Sammoh.CrowdSystem
         // }
         
         #endregion
-
+*/
     }
 }
