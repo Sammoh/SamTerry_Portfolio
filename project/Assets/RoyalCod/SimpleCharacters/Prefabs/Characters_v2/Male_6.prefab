@@ -98,7 +98,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b5d0477bee677d641a4debe11c87d428, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6604630151033613557, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -173,8 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ed89f7a03707794bb6c938c914eb90d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyAgent: {fileID: 0}
-  AgentPace: 0
   MeshList: []
   SeedValue: []
   _currentBehaviour: {fileID: 0}
