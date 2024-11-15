@@ -2,10 +2,10 @@
 using System;
 using TMPro;
 using UnityEngine;
-using SpecularTheory.Four;
+using Sammoh.Four;
 using UnityEngine.UI;
 
-namespace SpecularTheory.Four
+namespace Sammoh.Four
 {
     public class FlightGUI : MonoBehaviour
     {

@@ -1,9 +1,9 @@
 
 using System;
 using UnityEngine;
-using SpecularTheory.Four;
+using Sammoh.Four;
 
-namespace SpecularTheory.Four
+namespace Sammoh.Four
 {
     public class FlightController : MonoBehaviour
     {

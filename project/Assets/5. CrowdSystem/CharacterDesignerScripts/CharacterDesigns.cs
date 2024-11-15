@@ -1,12 +1,17 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable, CreateAssetMenu(fileName = "NewCharacterDesign", menuName = "ScriptableObjects/NewCharacterDesign", order = 1)]
-public class CharacterDesigns: ScriptableObject
+namespace Sammoh.CrowdSystem
 {
-    public GameObject instancedCharacter;
-    public CharacterPartBase[] CharacterHeads;
-    public CharacterPartBase[] CharacterTorso;
-    public CharacterPartBase[] CharacterLeg;
+    [Serializable, CreateAssetMenu(fileName = "NewCharacterDesign", menuName = "ScriptableObjects/NewCharacterDesign", order = 1)]
+    public class CharacterDesigns: ScriptableObject
+    {
+        public GameObject instancedCharacter;
+        public Texture2D[] characterSkin;
+        public Texture2D[] characterColorVariants;
+        // public CharacterPartBase[] CharacterHeads;
+        // public CharacterPartBase[] CharacterTorso;
+        // public CharacterPartBase[] CharacterLeg;
 
+    }
 }

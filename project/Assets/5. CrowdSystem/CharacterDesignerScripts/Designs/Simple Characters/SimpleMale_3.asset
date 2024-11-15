@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769c0029d87695247b8ef22ebc087444, type: 3}
+  m_Name: SimpleMale_3
+  m_EditorClassIdentifier: 
+  instancedCharacter: {fileID: 8519483370421578724, guid: 5cce24acfe53c1040b7b5893f1baf78d, type: 3}
+  characterSkin:
+  - {fileID: 2800000, guid: b8ced1bfc7d3750448ab211797d07908, type: 3}
+  - {fileID: 2800000, guid: 39e5fa346fae13947b5a99e9bc2333a6, type: 3}
+  - {fileID: 2800000, guid: f96a18e097c3e2b40a47b7ca07948071, type: 3}
+  characterColorVariants:
+  - {fileID: 2800000, guid: 0f6c801accbb0b148aa2c331c3d869f4, type: 3}
+  - {fileID: 2800000, guid: 627fa2d07902dfe44b417b8ee4e93bcc, type: 3}
+  - {fileID: 2800000, guid: 26c6c641cf2fb924ba4e3bf42aa42b4c, type: 3}

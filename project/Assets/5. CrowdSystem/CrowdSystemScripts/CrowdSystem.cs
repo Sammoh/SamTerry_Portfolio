@@ -4,38 +4,37 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public enum BehaviourType
+namespace Sammoh.CrowdSystem
 {
-    Static = 0,
-    Random = 1,
-    ForwardAndBack = 2,
-    CrowdUp = 3,
-    Sitting = 4,
-    Talking = 5
-}
+    public enum BehaviourType
+    {
+        Static = 0,
+        Random = 1,
+        ForwardAndBack = 2,
+        CrowdUp = 3,
+        Sitting = 4,
+        Talking = 5
+    }
 
-public enum ColorScheme
-{
-    Dark = 0,
-    Midtone = 1,
-    Pastel = 2
-}
+    public enum ColorScheme
+    {
+        Dark = 0,
+        Midtone = 1,
+        Pastel = 2
+    }
 
-public enum PartType
-{
-    Head = 0,
-    Body = 1,
-    Legs = 2
-}
+    public enum PartType
+    {
+        Head = 0,
+        Body = 1,
+        Legs = 2
+    }
 
-namespace CrowdSystem
-{
+//attach this to a gameobject and it should build a basic crowd. 
+//make sure to yell at the user if they don't have a navmesh setup. 
+// make sure to label and only spawn the layer that we want. 
 
-    //attach this to a gameobject and it should build a basic crowd. 
-    //make sure to yell at the user if they don't have a navmesh setup. 
-    // make sure to label and only spawn the layer that we want. 
-
-    //if doing a wait time, just yield out of any logic so that we don't have to keep processing. 
+//if doing a wait time, just yield out of any logic so that we don't have to keep processing. 
 
     public class CrowdSystem : MonoBehaviour
     {
@@ -58,7 +57,7 @@ namespace CrowdSystem
   
         [Header("AI Behaviours")]
         [SerializeField] private CharacterDesigns[] currentCharacters;
-        [SerializeField] private BehaviourBase[] BehaviourTypes;
+        // [SerializeField] private BehaviourBase[] behaviourTypes;
         
         public Action<CrowdAgentAi> OnPathComplete = delegate {  };
 
@@ -73,10 +72,9 @@ namespace CrowdSystem
         
         private void Update()
         {
-            
             foreach (var agentAi in agentList)
             {
-                var agent = agentAi._myAgent;
+                var agent = agentAi.CurrentAgent;
 
                 if (!agent.isOnNavMesh)
                     continue;
@@ -90,6 +88,7 @@ namespace CrowdSystem
         
         private void SpawnAgents()
         {
+            var spawnIndex = 0;
 //            _crowdWaypoints = new Vector3 [waypointCount];
             spawnLocations = staticWaypointParent.GetComponentsInChildren<SpawnLocation>();
 //            
@@ -98,28 +97,49 @@ namespace CrowdSystem
 //                _crowdWaypoints[i] = _meshSpawner.GenerateRandomSpawnPoint(_walkableAreaMesh);
 //            }
 
+            if (currentCharacters.Length == 0)
+            {
+                Debug.LogError("No characters assigned to the crowd system. Please assign characters to the crowd system.");
+                return;
+            }
+
             foreach (var spawn in spawnLocations)
             {
-                var randDesign = currentCharacters[Random.Range(0, currentCharacters.Length)];
-                var newBehaviour = CreateNewBehaviour((int)spawn.CurrentSpawn);
+                var randDesign = currentCharacters[Random.Range(0, currentCharacters.Length - 1)];
+                
+                // creating a new behaviour for the agent that can be adjusted
+                var newBehaviour = spawn.spawnBehaviour;
+                
+                if (newBehaviour == null)
+                {
+                    Debug.LogError("No behaviours assigned to the crowd system. Please assign behaviours to the crowd system.");
+                    return;
+                }
+                
                 var obj = Instantiate(randDesign.instancedCharacter, crowdParent);
-                obj.name = newBehaviour.Behaviour.ToString();
+                obj.name = newBehaviour.ToString();
 
                 var spawnPoint = spawn;
                 var t = spawnPoint.transform;
 
                 _currentAgent = obj.GetComponent<CrowdAgentAi>();
 
-                if (newBehaviour.Behaviour != BehaviourType.Sitting)
+                if (_currentAgent == null)
+                {
+                    Debug.LogError("No agent assigned to the crowd system. Please assign agents to the crowd system.");
+                    return;
+                }
+
+                if (newBehaviour is not SittingBehaviour)
                 {
                     var agent = obj.AddComponent<NavMeshAgent>();
                     agent.speed = _agentSpeed;
                     agent.angularSpeed = _agentAngularSpeed;
-                    agent.areaMask = 1 << 4;
+                    // agent.areaMask = 1 << 4;
                     agent.stoppingDistance = 0.2f;
                     
-                    _currentAgent._myAgent = agent;
-                    _currentAgent._myAgent.Warp(t.transform.position);
+                    _currentAgent._currentAgent = agent;
+                    _currentAgent._currentAgent.Warp(t.transform.position);
                     agentList.Add(_currentAgent);
                 }
                 else
@@ -128,31 +148,41 @@ namespace CrowdSystem
                 obj.transform.rotation = spawn.transform.rotation;
 
                 OnPathComplete += _currentAgent.OnPathComplete;
-                _currentAgent.Init(newBehaviour);
-                newBehaviour.InitBehaviour(_crowdWaypoints, newBehaviour.Behaviour);
+                
+                _currentAgent.Init(newBehaviour, spawnIndex);
+                newBehaviour.InitBehaviour(_crowdWaypoints);
 
                 _agentDesigner.AssignRandomCharacter(_currentAgent, randDesign);
                 
+                spawnIndex++;
             }
         }
 
-        private BehaviourBase CreateNewBehaviour(int type)
-        {
-            var randBehaviour = ScriptableObject.CreateInstance<BehaviourBase>();
-
-            // this just needs the same index as the list. Little janky, but I got other things to do. 
-            var newB = BehaviourTypes[type];
-
-//            var newB = _staticWaypoints[1].CurrentSpawn;
-            randBehaviour.Behaviour = newB.Behaviour;
-            randBehaviour.name = newB.Behaviour.ToString();
-            randBehaviour.PaceRangeMin = newB.PaceRangeMin;
-            randBehaviour. PaceRangeMax = newB.PaceRangeMax;
-
-            return randBehaviour;
-        }
+//         private BehaviourBase CreateNewBehaviour(BehaviourType type)
+//         {
+//             if (behaviourTypes.Length == 0)
+//             {
+//                 Debug.LogError("No behaviours assigned to the crowd system. Please assign behaviours to the crowd system.");
+//                 return null;
+//             }
+//             
+//             var randBehaviour = ScriptableObject.CreateInstance<BehaviourBase>();
+//             var newB = behaviourTypes.FirstOrDefault(behaviour => behaviour.Behaviour == type);
+//
+//             if (newB == null)
+//             {
+//                 Debug.LogError("No behaviours assigned to the crowd system. Please assign behaviours to the crowd system.");
+//             }
+//
+// //            var newB = _staticWaypoints[1].SpawnBehaviour;
+//             randBehaviour.Behaviour = newB.Behaviour;
+//             randBehaviour.name = newB.Behaviour.ToString();
+//             randBehaviour.PaceRangeMin = newB.PaceRangeMin;
+//             randBehaviour. PaceRangeMax = newB.PaceRangeMax;
+//
+//             return randBehaviour;
+//         }
         
         
     }
 }
-

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorScheme: 2
   PartType: 2
-  MaterialComponents: {fileID: 2100000, guid: 2df8b46164a36d544ba9d5ff2a5f10db, type: 2}
+  MaterialComponents: {fileID: 2100000, guid: 6ef3944ac8d3c684898bf39e826638e4, type: 2}

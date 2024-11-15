@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpecularTheory.Four
+namespace Sammoh.Four
 {
     public class GameController : MonoBehaviour
     {

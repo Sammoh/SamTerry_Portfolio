@@ -1,68 +1,66 @@
-﻿using CrowdSystem;
+﻿using Sammoh.CrowdSystem;
 using UnityEngine;
 
-/// <summary>
-/// Design the agent's character by assigning random character designs.
-/// </summary>
-public class AgentDesigner : MonoBehaviour
+namespace Sammoh.CrowdSystem
 {
-    private const int SchemeOffset = 3;
-    private const int MaxSeedValue = 3;
-
-    private Animator _animator;
-
-    int schemeIndex = 0;
-    int headCount = 0;
-    int topCount = 0;
-    int botCount = 0;
-
-    public void AssignRandomCharacter(CrowdAgentAi agentAi, CharacterDesigns characterDesign)
+    /// <summary>
+    /// Design the agent's character by assigning random character designs.
+    /// </summary>
+    public class AgentDesigner : MonoBehaviour
     {
-        headCount = 0;
-        topCount = 0;
-        botCount = 0;
+        private Animator _animator;
 
-        var randScheme = (ColorScheme)Random.Range(0, MaxSeedValue);
-        var headSeed = Random.Range(0, MaxSeedValue);
-        var topSeed = Random.Range(0, MaxSeedValue);
-        var botSeed = Random.Range(0, MaxSeedValue);
+        int schemeIndex = 0;
+        private static readonly int MainTexture = Shader.PropertyToID("_Main_Texture");
+        private static readonly int SkinTexture = Shader.PropertyToID("_Skin_Texture");
 
-        schemeIndex = (int)randScheme * SchemeOffset;
-
-        var randHead = characterDesign.CharacterHeads[schemeIndex + headSeed];
-        var randTop = characterDesign.CharacterHeads[schemeIndex + topSeed];
-        var randBot = characterDesign.CharacterHeads[schemeIndex + botSeed];
-
-        for (var i = 0; i < agentAi.meshList.Length; i++)
+        public void AssignRandomCharacter(CrowdAgentAi agentAi, CharacterDesigns characterDesign)
         {
-            var index = i % 3;
-            switch (index)
+            #region MyRegion
+
+            var selectedSkinColor = characterDesign.characterSkin[Random.Range(0, characterDesign.characterSkin.Length)];
+            var MaxSeedValue = characterDesign.characterColorVariants.Length;
+            // var SchemeOffset = 3; // this offset is used to group types together, eg. light, dark, etc.
+
+            var randScheme = (ColorScheme)Random.Range(0, MaxSeedValue);
+            var headSeed = Random.Range(0, MaxSeedValue);
+            var topSeed = Random.Range(0, MaxSeedValue);
+            var botSeed = Random.Range(0, MaxSeedValue);
+            
+
+            var randHead = characterDesign.characterColorVariants[headSeed];
+            var randTop = characterDesign.characterColorVariants[topSeed];
+            var randBot = characterDesign.characterColorVariants[botSeed];
+            
+            for (var i = 0; i < agentAi.MeshList.Length; i++)
             {
-                case 0:
-                    headCount++;
-                    if (headCount - 1 == headSeed)
-                        SetMaterialAndActivate(agentAi.meshList[i], randHead.MaterialComponents);
-                    break;
-                case 1:
-                    topCount++;
-                    if (topCount - 1 == topSeed)
-                        SetMaterialAndActivate(agentAi.meshList[i], randTop.MaterialComponents);
-                    break;
-                case 2:
-                    botCount++;
-                    if (botCount - 1 == botSeed)
-                        SetMaterialAndActivate(agentAi.meshList[i], randBot.MaterialComponents);
-                    break;
+                switch (i)
+                {
+                    case 0:
+                        SetMaterialAndActivate(agentAi.MeshList[i], randHead, selectedSkinColor);
+                        break;
+                    case 1:
+                        SetMaterialAndActivate(agentAi.MeshList[i], randTop, selectedSkinColor);
+                        break;
+                    case 2:
+                        SetMaterialAndActivate(agentAi.MeshList[i], randBot, selectedSkinColor);
+                        break;
+                }
             }
-        }
-    }
 
-    private void SetMaterialAndActivate(GameObject mesh, Material material)
-    {
-        foreach (var renderer in mesh.GetComponentsInChildren<Renderer>())
-        {
-            renderer.sharedMaterial = material;
+            #endregion
         }
-        mesh.SetActive(true);
+
+        private void SetMaterialAndActivate(GameObject mesh, Texture2D material, Texture2D secondMaterial)
+        {
+            MaterialPropertyBlock props = new MaterialPropertyBlock();
+            props.SetTexture(MainTexture, material);
+            props.SetTexture(SkinTexture, secondMaterial);
+            
+            var rend = mesh.GetComponent<Renderer>();
+            rend.SetPropertyBlock(props);
+            
+            mesh.SetActive(true);
+        }
     }
 }

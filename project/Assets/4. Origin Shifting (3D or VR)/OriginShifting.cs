@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace SpecularTheory.Four
+namespace Sammoh.Four
 {
     public class OriginShifting : MonoBehaviour
     {

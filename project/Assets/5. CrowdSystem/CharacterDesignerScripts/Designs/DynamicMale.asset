@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769c0029d87695247b8ef22ebc087444, type: 3}
   m_Name: DynamicMale
   m_EditorClassIdentifier: 
-  instancedCharacter: {fileID: 4157302070402101920, guid: 9c346e4c02f80fb4b84c4f101b16da5e,
-    type: 3}
+  instancedCharacter: {fileID: 5342685527796412188, guid: 6ad46220d8c662c40b0860b4d436e097, type: 3}
   CharacterHeads:
   - {fileID: 11400000, guid: b1ddfeac3a25d374fbca420d7299d584, type: 2}
   - {fileID: 11400000, guid: ffd8cb0d677ef424c874e8af63e1a24e, type: 2}

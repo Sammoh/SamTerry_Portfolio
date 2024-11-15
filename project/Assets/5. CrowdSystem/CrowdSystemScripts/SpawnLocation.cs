@@ -2,67 +2,51 @@
 using UnityEditor;
 using UnityEngine;
 
-public class SpawnLocation : MonoBehaviour
+namespace Sammoh.CrowdSystem
 {
-    public float spawnRadius = 1;
-
-//    public enum SpawnType
-//    {
-//        staticSpawn, 
-//        randomSpawn, 
-//        pingPongSpawn
-//        
-//    }
-
-public BehaviourType CurrentSpawn;
-    
-    
-//    public int GetSpawnPopulation(int maxPopulation, int factor)
-//    {
-//        var pop = Mathf.RoundToInt(spawnRadius * 20 * factor/ maxPopulation);
-//        return pop;
-//    }
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
+    public class SpawnLocation : MonoBehaviour
     {
-        switch (CurrentSpawn)
+        public float spawnRadius = 1;
+        public BehaviourBase spawnBehaviour;
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
         {
-            case BehaviourType.Static:
-                Handles.color = Color.green;
-                Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
-                Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
-
-                break;
-            case BehaviourType.Random:
-                Handles.color = Color.red;
-                Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
-                Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
-
-                break;
-            case BehaviourType.ForwardAndBack:
-                Handles.color = Color.red;
-                Handles.DrawLine(transform.position, transform.position + -transform.forward * 10);
-                break;
-            case BehaviourType.CrowdUp:
-                break;
-            case BehaviourType.Sitting:
-                Handles.color = Color.gray;
-                Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
-                Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
-
-                break;
-            case BehaviourType.Talking:
-                Handles.color = Color.yellow;
-                Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
-                Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
-
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            if (spawnBehaviour == null) return;
+            
+            switch (spawnBehaviour)
+            {
+                case StaticBehaviour _:
+                    Handles.color = Color.green;
+                    Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
+                    Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
+                    break;
+                case RandomBehaviour _:
+                    Handles.color = Color.red;
+                    Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
+                    Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
+                    break;
+                case ForwardAndBackBehaviour _:
+                    Handles.color = Color.red;
+                    Handles.DrawLine(transform.position, transform.position + -transform.forward * 10);
+                    break;
+                case CrowdingBehaviour _:
+                    break;
+                case SittingBehaviour _:
+                    Handles.color = Color.gray;
+                    Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
+                    Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
+                    break;
+                case TalkingBehaviour _:
+                    Handles.color = Color.yellow;
+                    Handles.DrawWireDisc(transform.position , transform.up, spawnRadius);
+                    Debug.DrawLine(transform.position, transform.position + transform.forward * spawnRadius * 2, Color.blue);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
-        
-        
-    }
 #endif
 
+    }
 }
