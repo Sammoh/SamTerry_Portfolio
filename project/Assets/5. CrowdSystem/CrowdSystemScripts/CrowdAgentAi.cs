@@ -79,7 +79,13 @@ namespace Sammoh.CrowdSystem
             IsMoving = false;
             _currentAction = StartCoroutine(DoBehaviour(agentAi._currentBehaviour));
         }
-
+        
+        public void AddAgent(NavMeshAgent agent, Vector3 spawnPosition)
+        {
+            _currentAgent = agent;
+            _currentAgent.Warp(spawnPosition);
+        }
+ 
         private IEnumerator DoBehaviour<T>(T behaviourBase) where T : BehaviourBase
         {
             yield return new WaitForSeconds(_agentPace);

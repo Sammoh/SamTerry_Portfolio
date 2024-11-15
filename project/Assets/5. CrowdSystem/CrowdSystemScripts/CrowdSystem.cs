@@ -138,8 +138,7 @@ namespace Sammoh.CrowdSystem
                     // agent.areaMask = 1 << 4;
                     agent.stoppingDistance = 0.2f;
                     
-                    _currentAgent._currentAgent = agent;
-                    _currentAgent._currentAgent.Warp(t.transform.position);
+                    _currentAgent.AddAgent(agent, t.transform.position);
                     agentList.Add(_currentAgent);
                 }
                 else
