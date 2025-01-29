@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 12
-  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -123,6 +119,61 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &181343969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 181343970}
+  - component: {fileID: 181343971}
+  m_Layer: 0
+  m_Name: SpawnLocation _Crowding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &181343970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181343969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.27, y: 0, z: -6.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1940606676}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &181343971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181343969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7f5d9869d444e4b80bfd073e95569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 1.24
+  behaviour:
+    rid: 166072013957103700
+  references:
+    version: 2
+    RefIds:
+    - rid: 166072013957103700
+      type: {class: AiBehavior_Crowding, ns: , asm: Portfolio}
+      data:
+        behaviorName: New Behavior
+        duration: 5
 --- !u!1 &291431002
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,9 +199,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291431002}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 1
-  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -248,7 +298,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crowdParent: {fileID: 517571682}
   staticWaypointParent: {fileID: 1940606676}
-  _crowdWaypoints: []
   spawnLocations: []
   _agentSpeed: 1.2
   _agentAngularSpeed: 200
@@ -263,9 +312,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8433c251e12881c4fb3371e96783065c, type: 2}
   - {fileID: 11400000, guid: 735f469db467a6a4a85d34b23b0742e7, type: 2}
   - {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
-  behaviourTypes:
-  - {fileID: 11400000, guid: 675267f9388462a4a8aefdc21efea3ef, type: 2}
-  - {fileID: 11400000, guid: a15869dc242b00249a8224ec17e252e6, type: 2}
   timer: 0.5
 --- !u!4 &517571682
 Transform:
@@ -282,6 +328,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &679962400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 679962401}
+  - component: {fileID: 679962402}
+  m_Layer: 0
+  m_Name: SpawnLocation _Sitting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &679962401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679962400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.86, y: 0, z: 0.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1940606676}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &679962402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679962400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7f5d9869d444e4b80bfd073e95569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 1.24
+  behaviour:
+    rid: 166072013957103698
+  references:
+    version: 2
+    RefIds:
+    - rid: 166072013957103698
+      type: {class: AiBehavior_Sitting, ns: , asm: Portfolio}
+      data:
+        behaviorName: New Behavior
+        duration: 5
 --- !u!1 &720999653
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +394,7 @@ GameObject:
   - component: {fileID: 720999654}
   - component: {fileID: 720999655}
   m_Layer: 0
-  m_Name: SpawnLocation (1)
+  m_Name: SpawnLocation _ForwardBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +428,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRadius: 1.24
-  spawnBehaviour: {fileID: 11400000, guid: a15869dc242b00249a8224ec17e252e6, type: 2}
+  behaviour:
+    rid: 166072013957103692
+  references:
+    version: 2
+    RefIds:
+    - rid: 166072013957103692
+      type: {class: AiBehavior_ForwardBack, ns: , asm: Portfolio}
+      data:
+        behaviorName: New Behavior
+        travelDistance: 10
 --- !u!1 &982020684
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +449,7 @@ GameObject:
   - component: {fileID: 982020685}
   - component: {fileID: 982020686}
   m_Layer: 0
-  m_Name: SpawnLocation
+  m_Name: SpawnLocation_Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +483,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRadius: 1.24
-  spawnBehaviour: {fileID: 11400000, guid: d9fa778d6e5cb5f4cac562c9099ace3e, type: 2}
+  behaviour:
+    rid: 166072013957103693
+  references:
+    version: 2
+    RefIds:
+    - rid: 166072013957103693
+      type: {class: AiBehavior_Idle, ns: , asm: Portfolio}
+      data:
+        behaviorName: New Behavior
+        waitTime: 3
+        ObjToDestroy: {fileID: 0}
 --- !u!1 &1680214451
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +586,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1848897828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1848897829}
+  - component: {fileID: 1848897830}
+  m_Layer: 0
+  m_Name: SpawnLocation _Talking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1848897829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848897828}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.76, y: 0, z: -7.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1940606676}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1848897830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848897828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7f5d9869d444e4b80bfd073e95569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 1.24
+  behaviour:
+    rid: 166072013957103699
+  references:
+    version: 2
+    RefIds:
+    - rid: 166072013957103699
+      type: {class: AiBehavior_Talking, ns: , asm: Portfolio}
+      data:
+        behaviorName: New Behavior
+        duration: 5
 --- !u!1 &1940606675
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +672,9 @@ Transform:
   m_Children:
   - {fileID: 982020685}
   - {fileID: 720999654}
+  - {fileID: 679962401}
+  - {fileID: 1848897829}
+  - {fileID: 181343970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

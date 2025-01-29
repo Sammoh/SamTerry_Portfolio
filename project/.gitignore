@@ -30,6 +30,9 @@
 /[Aa]ssets/_Git Exclude
 /[Aa]ssets/_Git Exclude.meta
 
+# Odin Inspector plugin
+/[Aa]ssets/Plugins/Sirenix/
+
 # Visual Studio cache directory
 .vs/
 

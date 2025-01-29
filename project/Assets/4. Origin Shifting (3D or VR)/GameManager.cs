@@ -1,24 +1,27 @@
-using Sammoh.Four;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Sammoh.Four
 {
-    [SerializeField] private FloatingOrigin originShifting;
-    [SerializeField] private Transform worldOrigin;
 
-    private PlaneManager flightController;
-
-    private void Start()
+    public class GameManager : MonoBehaviour
     {
-        flightController = PlaneManager.Instance;
-        flightController.OnControlSwitch += OnControlSwitch;
-        
+        [SerializeField] private FloatingOrigin originShifting;
+        [SerializeField] private Transform worldOrigin;
+
+        private PlaneManager flightController;
+
+        private void Start()
+        {
+            flightController = PlaneManager.Instance;
+            flightController.OnControlSwitch += OnControlSwitch;
+
+        }
+
+
+
+        private void OnControlSwitch(PlaneController obj)
+        {
+        }
+
     }
-    
-
-
-    private void OnControlSwitch(PlaneController obj)
-    {
-    }
-
 }

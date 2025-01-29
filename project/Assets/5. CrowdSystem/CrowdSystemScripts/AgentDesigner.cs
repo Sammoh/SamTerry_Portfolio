@@ -1,5 +1,9 @@
-﻿using Sammoh.CrowdSystem;
+﻿using System;
+using System.Collections.Generic;
+using Sammoh.CrowdSystem;
+using Sirenix.Utilities;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Sammoh.CrowdSystem
 {
@@ -16,6 +20,66 @@ namespace Sammoh.CrowdSystem
 
         public void AssignRandomCharacter(CrowdAgentAi agentAi, CharacterDesigns characterDesign)
         {
+            // #region MyRegion
+            //
+            // var selectedSkinColor = characterDesign.characterSkin[Random.Range(0, characterDesign.characterSkin.Length)];
+            // var MaxSeedValue = characterDesign.characterColorVariants.Length;
+            // // var SchemeOffset = 3; // this offset is used to group types together, eg. light, dark, etc.
+            //
+            // var randScheme = (ColorScheme)Random.Range(0, MaxSeedValue);
+            // var headSeed = Random.Range(0, MaxSeedValue);
+            // var topSeed = Random.Range(0, MaxSeedValue);
+            // var botSeed = Random.Range(0, MaxSeedValue);
+            //
+            //
+            // var randHead = characterDesign.characterColorVariants[headSeed];
+            // var randTop = characterDesign.characterColorVariants[topSeed];
+            // var randBot = characterDesign.characterColorVariants[botSeed];
+            //
+            // for (var i = 0; i < agentAi.MeshList.Length; i++)
+            // {
+            //     switch (i)
+            //     {
+            //         case 0:
+            //             SetMaterialAndActivate(agentAi.MeshList[i], randHead, selectedSkinColor);
+            //             break;
+            //         case 1:
+            //             SetMaterialAndActivate(agentAi.MeshList[i], randTop, selectedSkinColor);
+            //             break;
+            //         case 2:
+            //             SetMaterialAndActivate(agentAi.MeshList[i], randBot, selectedSkinColor);
+            //             break;
+            //     }
+            // }
+            //
+            // #endregion
+        }
+
+        private void SetMaterialAndActivate(MeshRenderer mesh, Texture2D material, Texture2D secondMaterial)
+        {
+            MaterialPropertyBlock props = new MaterialPropertyBlock();
+            props.SetTexture(MainTexture, material);
+            props.SetTexture(SkinTexture, secondMaterial);
+            
+            // var rend = mesh.GetComponent<Renderer>();
+            mesh.SetPropertyBlock(props);
+            
+            // todo should activate again.
+            // mesh.SetActive(true);
+        }
+
+        public CrowdAgentAi CreateAgent<T>(CharacterDesigns characterDesign, T behaviourType) where T : AIBehavior
+        {
+            // creating a new agent from a GO
+            var characterMeshesRenderers = characterDesign.instancedCharacter.GetComponentsInChildren<MeshRenderer>();
+
+            // add meshes to new agent
+            
+            
+            var newCrowdAgent = new GameObject("CrowdAgent").AddComponent<CrowdAgentAi>();
+            
+            // TODO instantiate the agent's mesh from prefab?
+
             #region MyRegion
 
             var selectedSkinColor = characterDesign.characterSkin[Random.Range(0, characterDesign.characterSkin.Length)];
@@ -32,35 +96,26 @@ namespace Sammoh.CrowdSystem
             var randTop = characterDesign.characterColorVariants[topSeed];
             var randBot = characterDesign.characterColorVariants[botSeed];
             
-            for (var i = 0; i < agentAi.MeshList.Length; i++)
+            for (var i = 0; i < characterMeshesRenderers.Length; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        SetMaterialAndActivate(agentAi.MeshList[i], randHead, selectedSkinColor);
+                        SetMaterialAndActivate(characterMeshesRenderers[i], randHead, selectedSkinColor);
                         break;
                     case 1:
-                        SetMaterialAndActivate(agentAi.MeshList[i], randTop, selectedSkinColor);
+                        SetMaterialAndActivate(characterMeshesRenderers[i], randTop, selectedSkinColor);
                         break;
                     case 2:
-                        SetMaterialAndActivate(agentAi.MeshList[i], randBot, selectedSkinColor);
+                        SetMaterialAndActivate(characterMeshesRenderers[i], randBot, selectedSkinColor);
                         break;
                 }
             }
 
             #endregion
-        }
-
-        private void SetMaterialAndActivate(GameObject mesh, Texture2D material, Texture2D secondMaterial)
-        {
-            MaterialPropertyBlock props = new MaterialPropertyBlock();
-            props.SetTexture(MainTexture, material);
-            props.SetTexture(SkinTexture, secondMaterial);
             
-            var rend = mesh.GetComponent<Renderer>();
-            rend.SetPropertyBlock(props);
-            
-            mesh.SetActive(true);
+            // create a new agent
+            return newCrowdAgent;
         }
     }
 }
