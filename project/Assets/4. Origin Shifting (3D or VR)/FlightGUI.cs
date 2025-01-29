@@ -6,8 +6,8 @@ namespace Sammoh.Four
 {
     public class FlightGUI : MonoBehaviour
     {
-        // public FlightController planeController;
-        // public FlightController otherPlaneController;
+        // public PlaneController planeController;
+        // public PlaneController otherPlaneController;
 
         // this object can be rotated.
         [SerializeField] private Image mapHud;
@@ -20,7 +20,7 @@ namespace Sammoh.Four
 
         private void Awake()
         {
-            // var plane = FlightController.Instance.PlayerObject;
+            // var plane = PlaneController.Instance.PlayerObject;
             // plane.GetFlightData += FlightUpdate;
             
             // find all the planes in the scene.

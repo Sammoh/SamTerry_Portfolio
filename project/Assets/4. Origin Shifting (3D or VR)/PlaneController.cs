@@ -4,13 +4,10 @@ namespace Sammoh.Four
 {
     public class PlaneController : MonoBehaviour
     {
-        public Rigidbody Rigidbody { get; private set; }
-        private IControlStrategy controlStrategy;
+        public Vector3 Position => controlStrategy.Postion;
+        public Vector3 Rotation => controlStrategy.Rotation;
 
-        void Start()
-        {
-            Rigidbody = GetComponent<Rigidbody>();
-        }
+        private IControlStrategy controlStrategy;
 
         void Update()
         {

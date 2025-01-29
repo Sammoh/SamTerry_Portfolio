@@ -4,27 +4,27 @@ namespace Sammoh.Four
 {
     public class CameraController : MonoBehaviour
     {
-        private PlaneController currentPlane;
+        private PlaneController _currentPlane;
         public Camera mainCamera;
         public float followSpeed = 5f;
         public Vector3 offset = new Vector3(0, 10, -20); // Offset for the camera
 
         public void SwitchToPlane(PlaneController newPlane)
         {
-            currentPlane = newPlane;
+            _currentPlane = newPlane;
         }
 
         private void UpdateCameraPosition()
         {
-            Vector3 targetPosition = currentPlane.transform.position + offset;
+            Vector3 targetPosition = _currentPlane.transform.position + offset;
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPosition,
                 followSpeed * Time.deltaTime);
-            mainCamera.transform.LookAt(currentPlane.transform);
+            mainCamera.transform.LookAt(_currentPlane.transform);
         }
 
         private void LateUpdate()
         {
-            if (currentPlane != null)
+            if (_currentPlane != null)
             {
                 UpdateCameraPosition();
             }
