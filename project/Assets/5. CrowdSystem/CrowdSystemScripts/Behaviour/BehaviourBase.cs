@@ -22,32 +22,6 @@ namespace Sammoh.CrowdSystem
         public abstract Vector3 GetBehaviourDestination(int step);
         
         /*
-        #region Old
-
-        // public float PaceRangeMax;
-        // public float PaceRangeMin;
-
-        public float radius;
-
-        private bool firstBehaviour;
-
-        public float walkingDistance = 10;
-
-
-
-        // this could get a determined value of waypoints. 
-        public Vector3[] waypoints;
-        [SerializeField] private Vector3 _currentDestination;
-
-        // public BehaviourType Behaviour;
-        //
-        // [HideInInspector]
-        // public CrowdAgentAi AgentAi;
-
-        public void InitBehaviour()
-        {
-        
-        }
     
 //         public Vector3[] InitBehaviour(Vector3[] newWaypoints, BehaviourType initType)
 //         {
@@ -79,32 +53,7 @@ namespace Sammoh.CrowdSystem
 //
 //             return waypoints;
 //         }
-    
-//         public Vector3 GetBehaviourDestination(int step)
-//         {
-//             var d = new Vector3();
-//         
-//             switch (Behaviour)
-//             {
-//                 case BehaviourType.Static:
-//                     break;
-//                 case BehaviourType.Random:
-//                     d = RandomNavmeshLocation();
-//                     break;
-//                 case BehaviourType.ForwardAndBack:
-// //                d = ForwardAndBack(); // this should just go from waypoint to waypoint. 
-//                     d = NextWaypoint(step);
-//                     break;
-//                 case BehaviourType.CrowdUp:
-// //                d = NewCrowdPosition(step, _waypoints);
-//                     break;
-//                 case BehaviourType.Sitting:
-//                     break;
-//                 case BehaviourType.Talking:
-//                     break;
-//                 default:
-//                     throw new ArgumentOutOfRangeException();
-//             }
+
 //
 //             _currentDestination = d;
 //             return d;

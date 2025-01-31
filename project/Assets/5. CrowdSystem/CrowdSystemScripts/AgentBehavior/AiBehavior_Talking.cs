@@ -1,4 +1,5 @@
 using System;
+using Sammoh.CrowdSystem;
 using UnityEngine;
 
 // Concrete Behavior Scripts (Attach them to the AI GameObject)
@@ -8,8 +9,12 @@ public class AiBehavior_Talking : AIBehavior
 {
     public float duration = 5f; // Editable in Inspector
 
-    public override void Execute()
+    // public override void Execute()
+    // {
+    //     Debug.Log($"Executing Sitting Behavior for {duration} seconds");
+    // }
+    public override void Control(CrowdAgentAi crowdAgentAi)
     {
-        Debug.Log($"Executing Sitting Behavior for {duration} seconds");
+        // throw new NotImplementedException();
     }
 }

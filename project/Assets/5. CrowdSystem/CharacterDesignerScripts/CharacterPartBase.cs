@@ -7,8 +7,8 @@ namespace Sammoh.CrowdSystem
     public class CharacterPartBase : ScriptableObject
     {
 //    public Mesh MeshComponents;
-        public ColorScheme ColorScheme;
-        public PartType PartType;
+        // public ColorScheme ColorScheme;
+        // public PartType PartType;
         public Material MaterialComponents;    
     }
 }

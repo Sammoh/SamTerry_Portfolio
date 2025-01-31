@@ -260,13 +260,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291431002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.91934544, y: -0.21664311, z: 0.035114355, w: 0.3265529}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 142.001, y: 5.602005, z: 28.449997}
 --- !u!1 &517571680
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +438,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         travelDistance: 10
+        speed: 5
 --- !u!1 &982020684
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +494,6 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         waitTime: 3
-        ObjToDestroy: {fileID: 0}
 --- !u!1 &1680214451
 GameObject:
   m_ObjectHideFlags: 0
