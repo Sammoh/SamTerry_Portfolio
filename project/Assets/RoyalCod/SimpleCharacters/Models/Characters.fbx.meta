@@ -3,7 +3,12 @@ guid: 0940da46cb529f6458578c054115c1e4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LowPolyManMaterial
+    second: {fileID: -876546973899608171, guid: faadc041b582aee448919d0e59c47aa4, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -16,12 +21,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
-      does not match position in animation file:\n\t'shin.L' : position error = 6.322380
-      mm\n\t'foot.L' : position error = 4.713347 mm\n\t'toe.L' : position error =
-      2.890094 mm\n\t'shin.R' : position error = 6.322380 mm\n\t'foot.R' : position
-      error = 4.713347 mm\n\t'toe.R' : position error = 2.890094 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

@@ -12,12 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769c0029d87695247b8ef22ebc087444, type: 3}
   m_Name: SimpleFemale_1
   m_EditorClassIdentifier: 
-  instancedCharacter: {fileID: 50205156177389922, guid: b9103fe58f8894745ad94fbacdd4ab07, type: 3}
+  instancedCharacter: {fileID: 6789671045580929158, guid: 1a6e48cda14be184dbe365494ae96b2d, type: 3}
+  instanceMaterial: {fileID: -876546973899608171, guid: faadc041b582aee448919d0e59c47aa4, type: 3}
+  characterHeads:
+  - {fileID: -1748380412321418298, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  - {fileID: 3776413101202252472, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  - {fileID: -5340753866331895693, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  characterTorsos:
+  - {fileID: -6636281415838265804, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  - {fileID: 8065063009951211302, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  - {fileID: -7424995428272563489, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  characterLegs:
+  - {fileID: 4624338996488216805, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  - {fileID: -4550674703394890197, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
+  - {fileID: -1109485541329166206, guid: 9ad6169c323837c48a332f542c440db3, type: 3}
   characterSkin:
   - {fileID: 2800000, guid: b8ced1bfc7d3750448ab211797d07908, type: 3}
   - {fileID: 2800000, guid: 39e5fa346fae13947b5a99e9bc2333a6, type: 3}
   - {fileID: 2800000, guid: f96a18e097c3e2b40a47b7ca07948071, type: 3}
   characterColorVariants:
-  - {fileID: 2800000, guid: 0f6c801accbb0b148aa2c331c3d869f4, type: 3}
-  - {fileID: 2800000, guid: 627fa2d07902dfe44b417b8ee4e93bcc, type: 3}
-  - {fileID: 2800000, guid: 26c6c641cf2fb924ba4e3bf42aa42b4c, type: 3}
+  - {fileID: 2800000, guid: 9472a9174dd52bd4c9642e185e1a1b50, type: 3}
+  - {fileID: 2800000, guid: b23655d5da85ed643b4e218456a8730d, type: 3}
+  - {fileID: 2800000, guid: f5ea124b745c60940a0dc752eab3ca2b, type: 3}

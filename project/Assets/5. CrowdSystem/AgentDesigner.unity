@@ -174,6 +174,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1091511
 GameObject:
@@ -230,6 +231,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1387608
 GameObject:
@@ -286,6 +288,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1936799
 GameObject:
@@ -342,6 +345,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &4942994
 GameObject:
@@ -398,6 +402,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &17407257
 GameObject:
@@ -454,6 +459,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &22161170
 GameObject:
@@ -510,6 +516,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &25759459
 GameObject:
@@ -566,6 +573,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &36086750
 GameObject:
@@ -622,6 +630,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &49558077
 GameObject:
@@ -678,6 +687,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &50688452
 GameObject:
@@ -826,6 +836,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &60515610
 GameObject:
@@ -882,6 +893,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &61756668
 GameObject:
@@ -938,6 +950,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &68899539
 GameObject:
@@ -994,6 +1007,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &74944724
 GameObject:
@@ -1050,6 +1064,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &79980153
 GameObject:
@@ -1106,6 +1121,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &81900723
 GameObject:
@@ -1162,6 +1178,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &82943020
 GameObject:
@@ -1218,6 +1235,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &96580069
 GameObject:
@@ -1274,6 +1292,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &98854240
 GameObject:
@@ -1330,6 +1349,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &105104880
 GameObject:
@@ -1386,6 +1406,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &141876477
 GameObject:
@@ -1442,6 +1463,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &142225952
 GameObject:
@@ -1498,6 +1520,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &156547719
 GameObject:
@@ -1554,6 +1577,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &159687902
 GameObject:
@@ -1610,6 +1634,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &162575163
 GameObject:
@@ -1666,6 +1691,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &174877845
 GameObject:
@@ -1722,6 +1748,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &180846179
 GameObject:
@@ -1778,6 +1805,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &185044377
 GameObject:
@@ -1834,6 +1862,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &188923594
 GameObject:
@@ -1890,6 +1919,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &195004647
 GameObject:
@@ -1946,6 +1976,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &204889411
 GameObject:
@@ -2002,6 +2033,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &205431586
 GameObject:
@@ -2058,6 +2090,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &206754328
 GameObject:
@@ -2114,6 +2147,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &210404009
 GameObject:
@@ -2170,6 +2204,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &220525509
 GameObject:
@@ -2226,6 +2261,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &221962755
 GameObject:
@@ -2282,6 +2318,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &226017187
 GameObject:
@@ -2338,6 +2375,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &227637092
 GameObject:
@@ -2394,6 +2432,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &229399682
 GameObject:
@@ -2450,6 +2489,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &246466648
 GameObject:
@@ -2506,6 +2546,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &250996199
 GameObject:
@@ -2562,6 +2603,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &256179567
 GameObject:
@@ -2618,6 +2660,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &263153896
 GameObject:
@@ -2674,6 +2717,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &263396083
 GameObject:
@@ -2730,6 +2774,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &275134962
 GameObject:
@@ -2786,6 +2831,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &275656689
 GameObject:
@@ -2842,6 +2888,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &275910935
 GameObject:
@@ -2898,6 +2945,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &280571639
 GameObject:
@@ -2954,6 +3002,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &282091622
 GameObject:
@@ -3010,6 +3059,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &299747125
 GameObject:
@@ -3066,6 +3116,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &304057048
 GameObject:
@@ -3122,6 +3173,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &307590839
 GameObject:
@@ -3178,6 +3230,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &308459135
 GameObject:
@@ -3234,6 +3287,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &317371132
 GameObject:
@@ -3290,6 +3344,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &320680120
 GameObject:
@@ -3346,6 +3401,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &327930936
 GameObject:
@@ -3402,6 +3458,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &331394726
 GameObject:
@@ -3458,6 +3515,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &331438544
 GameObject:
@@ -3514,6 +3572,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &331916242
 GameObject:
@@ -3570,6 +3629,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &359449069
 GameObject:
@@ -3626,6 +3686,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &363393096
 GameObject:
@@ -3682,6 +3743,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &365437659
 GameObject:
@@ -3738,6 +3800,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &365734021
 GameObject:
@@ -3794,6 +3857,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &381483371
 GameObject:
@@ -3850,6 +3914,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &383832085
 GameObject:
@@ -3906,6 +3971,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &399147827
 GameObject:
@@ -3962,6 +4028,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &404409965
 GameObject:
@@ -4018,6 +4085,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &405948033
 GameObject:
@@ -4074,6 +4142,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &414697502
 GameObject:
@@ -4130,6 +4199,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &414943314
 GameObject:
@@ -4186,6 +4256,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &425853245
 GameObject:
@@ -4242,6 +4313,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &432647888
 GameObject:
@@ -4298,6 +4370,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &435766606
 GameObject:
@@ -4354,6 +4427,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &454590953
 GameObject:
@@ -4410,6 +4484,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &468366003
 GameObject:
@@ -4466,6 +4541,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &483260178
 GameObject:
@@ -4522,6 +4598,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &488821313
 GameObject:
@@ -4578,6 +4655,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &510772042
 GameObject:
@@ -4634,6 +4712,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &512066528
 GameObject:
@@ -4690,6 +4769,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &521921214
 GameObject:
@@ -4746,6 +4826,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &531344454
 GameObject:
@@ -4802,6 +4883,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &533646885
 GameObject:
@@ -4858,6 +4940,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &535102649
 GameObject:
@@ -4914,6 +4997,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &536731252
 GameObject:
@@ -4970,6 +5054,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &538030456
 GameObject:
@@ -5026,6 +5111,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &539607291
 GameObject:
@@ -5082,6 +5168,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &541902905
 GameObject:
@@ -5138,6 +5225,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &544305922
 GameObject:
@@ -5194,6 +5282,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &554435179
 GameObject:
@@ -5250,6 +5339,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &554837569
 GameObject:
@@ -5306,6 +5396,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &557644526
 GameObject:
@@ -5362,6 +5453,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &560860273
 GameObject:
@@ -5418,6 +5510,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &580915443
 GameObject:
@@ -5474,6 +5567,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &595013140
 GameObject:
@@ -5530,6 +5624,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &603947148
 GameObject:
@@ -5586,6 +5681,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &608017381
 GameObject:
@@ -5642,6 +5738,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &611624030
 GameObject:
@@ -5698,6 +5795,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &613482896
 GameObject:
@@ -5754,6 +5852,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &615560085
 GameObject:
@@ -5810,6 +5909,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &618992334
 GameObject:
@@ -5866,6 +5966,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &622024234
 GameObject:
@@ -5922,6 +6023,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &624995218
 GameObject:
@@ -5978,6 +6080,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &635564443
 GameObject:
@@ -6034,6 +6137,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &642668735
 GameObject:
@@ -6090,6 +6194,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &645150617
 GameObject:
@@ -6146,6 +6251,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &657086203
 GameObject:
@@ -6202,6 +6308,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &660334168
 GameObject:
@@ -6258,6 +6365,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &665479560
 GameObject:
@@ -6314,6 +6422,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &667777052
 GameObject:
@@ -6370,6 +6479,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &669900825
 GameObject:
@@ -6426,6 +6536,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &676956162
 GameObject:
@@ -6482,6 +6593,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &680236481
 GameObject:
@@ -6538,6 +6650,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &684475233
 GameObject:
@@ -6594,6 +6707,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &701327977
 GameObject:
@@ -6650,6 +6764,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &702321370
 GameObject:
@@ -6706,6 +6821,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &722934204
 GameObject:
@@ -6762,6 +6878,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &723079213
 GameObject:
@@ -6818,6 +6935,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &724511929
 GameObject:
@@ -6874,6 +6992,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &726592384
 GameObject:
@@ -6930,6 +7049,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &728825730
 GameObject:
@@ -6986,6 +7106,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &736354323
 GameObject:
@@ -7042,6 +7163,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &738048137
 GameObject:
@@ -7098,6 +7220,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &745033316
 GameObject:
@@ -7154,6 +7277,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &749226963
 GameObject:
@@ -7210,6 +7334,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &752704199
 GameObject:
@@ -7266,6 +7391,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &761126159
 GameObject:
@@ -7322,6 +7448,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &778026204
 GameObject:
@@ -7378,6 +7505,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &784943546
 GameObject:
@@ -7434,6 +7562,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &787138365
 GameObject:
@@ -7490,6 +7619,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &808261275
 GameObject:
@@ -7546,6 +7676,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &815569145
 GameObject:
@@ -7602,6 +7733,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &820100375
 GameObject:
@@ -7658,6 +7790,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &821134969
 GameObject:
@@ -7714,6 +7847,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &830301114
 GameObject:
@@ -7770,6 +7904,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &836285771
 GameObject:
@@ -7826,6 +7961,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &838511782
 GameObject:
@@ -7882,6 +8018,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &840075246
 GameObject:
@@ -7938,6 +8075,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &846833127
 GameObject:
@@ -7994,6 +8132,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &852188918
 GameObject:
@@ -8050,6 +8189,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &856265795
 GameObject:
@@ -8106,6 +8246,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &864765149
 GameObject:
@@ -8162,6 +8303,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &866688580
 GameObject:
@@ -8218,6 +8360,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &867086086
 GameObject:
@@ -8274,6 +8417,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &872646639
 GameObject:
@@ -8330,6 +8474,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &872864982
 GameObject:
@@ -8386,6 +8531,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &874995501
 GameObject:
@@ -8442,6 +8588,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &882346304
 GameObject:
@@ -8498,6 +8645,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &890392105
 GameObject:
@@ -8554,6 +8702,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &891748018
 GameObject:
@@ -8610,6 +8759,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &892648695
 GameObject:
@@ -8666,6 +8816,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &895369785
 GameObject:
@@ -8722,6 +8873,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &898471587
 GameObject:
@@ -8778,6 +8930,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &899539529
 GameObject:
@@ -8834,6 +8987,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &900946661
 GameObject:
@@ -8890,6 +9044,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &906426037
 GameObject:
@@ -8946,6 +9101,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &914243976
 GameObject:
@@ -9002,6 +9158,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &924911580
 GameObject:
@@ -9058,6 +9215,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &927635043
 GameObject:
@@ -9114,6 +9272,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &930978094
 GameObject:
@@ -9170,6 +9329,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &934137993
 GameObject:
@@ -9226,6 +9386,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &939442227
 GameObject:
@@ -9282,6 +9443,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &946988608
 GameObject:
@@ -9338,6 +9500,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &952415342
 GameObject:
@@ -9394,6 +9557,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &954664736
 GameObject:
@@ -9450,6 +9614,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &956576866
 GameObject:
@@ -9506,6 +9671,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &961517222
 GameObject:
@@ -9562,6 +9728,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &963087955
 GameObject:
@@ -9618,6 +9785,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &963430284
 GameObject:
@@ -9674,6 +9842,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &963463463
 GameObject:
@@ -9730,6 +9899,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!4 &971930245 stripped
 Transform:
@@ -9791,6 +9961,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &987542955
 GameObject:
@@ -9847,6 +10018,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &987735113
 GameObject:
@@ -9903,6 +10075,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &991965852
 GameObject:
@@ -9959,6 +10132,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &992256292
 GameObject:
@@ -10015,6 +10189,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &994589639
 GameObject:
@@ -10071,6 +10246,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &997649155
 GameObject:
@@ -10127,6 +10303,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1012517495
 GameObject:
@@ -10183,6 +10360,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1013674847
 GameObject:
@@ -10239,6 +10417,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1020566761
 GameObject:
@@ -10295,6 +10474,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1024122761
 GameObject:
@@ -10351,6 +10531,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1042505105
 GameObject:
@@ -10407,6 +10588,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1059953807
 GameObject:
@@ -10463,6 +10645,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1065381547
 GameObject:
@@ -10519,6 +10702,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1066134470
 GameObject:
@@ -10575,6 +10759,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1068026386
 GameObject:
@@ -10631,6 +10816,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1072810932
 GameObject:
@@ -10687,6 +10873,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1081851763
 GameObject:
@@ -10743,6 +10930,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1086225749
 GameObject:
@@ -10799,6 +10987,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1099747607
 GameObject:
@@ -10855,6 +11044,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1109733308
 GameObject:
@@ -10911,6 +11101,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1113983509
 GameObject:
@@ -10967,6 +11158,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1115679015
 GameObject:
@@ -11023,6 +11215,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1116391859
 GameObject:
@@ -11079,6 +11272,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1117154772
 GameObject:
@@ -11135,6 +11329,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1124510981
 GameObject:
@@ -11191,6 +11386,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1128137622
 GameObject:
@@ -11247,6 +11443,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1130759503
 GameObject:
@@ -11303,6 +11500,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1143873176
 GameObject:
@@ -11359,6 +11557,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1166416993
 GameObject:
@@ -11415,6 +11614,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1171657809
 GameObject:
@@ -11471,6 +11671,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1173018266
 GameObject:
@@ -11527,6 +11728,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1174860583
 GameObject:
@@ -11583,6 +11785,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1185425936
 GameObject:
@@ -11639,6 +11842,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1186179681
 GameObject:
@@ -11695,6 +11899,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1195099793
 GameObject:
@@ -11751,6 +11956,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1197547698
 GameObject:
@@ -11807,6 +12013,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1199130263
 GameObject:
@@ -11863,6 +12070,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1203997087
 GameObject:
@@ -11919,6 +12127,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1205136726
 GameObject:
@@ -11975,6 +12184,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1211852066
 GameObject:
@@ -12031,6 +12241,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1222826845
 GameObject:
@@ -12087,6 +12298,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1230464974
 GameObject:
@@ -12143,6 +12355,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1235440284
 GameObject:
@@ -12199,6 +12412,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1236086106
 GameObject:
@@ -12255,6 +12469,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1246721946
 GameObject:
@@ -12311,6 +12526,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1248863367
 GameObject:
@@ -12367,6 +12583,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1255640804
 GameObject:
@@ -12423,6 +12640,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1264258080
 GameObject:
@@ -12479,6 +12697,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1265903878
 GameObject:
@@ -12535,6 +12754,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1266027713
 GameObject:
@@ -12591,6 +12811,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1266152251
 GameObject:
@@ -12647,6 +12868,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1275946256
 GameObject:
@@ -12703,6 +12925,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1288011324
 GameObject:
@@ -12759,6 +12982,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1290126465
 GameObject:
@@ -12815,6 +13039,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1297648266
 GameObject:
@@ -12871,6 +13096,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1320237879
 GameObject:
@@ -12927,6 +13153,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1320645034
 GameObject:
@@ -12983,6 +13210,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1324469416
 GameObject:
@@ -13039,6 +13267,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1338896368
 GameObject:
@@ -13095,6 +13324,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1339110088
 GameObject:
@@ -13151,6 +13381,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1340247450
 GameObject:
@@ -13207,6 +13438,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1341589978
 GameObject:
@@ -13263,6 +13495,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1347728235
 GameObject:
@@ -13319,6 +13552,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1351931152
 GameObject:
@@ -13375,6 +13609,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1370460657
 GameObject:
@@ -13431,6 +13666,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1376080305
 GameObject:
@@ -13487,6 +13723,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1383098032
 GameObject:
@@ -13543,6 +13780,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1391653561
 GameObject:
@@ -13599,6 +13837,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1392249738
 GameObject:
@@ -13655,6 +13894,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1400144934
 GameObject:
@@ -13711,6 +13951,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1407054482
 GameObject:
@@ -13767,6 +14008,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1411437018
 GameObject:
@@ -13823,6 +14065,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1412578574
 GameObject:
@@ -13879,6 +14122,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1426134684
 GameObject:
@@ -13935,6 +14179,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1430140456
 GameObject:
@@ -13991,6 +14236,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1447554569
 GameObject:
@@ -14047,6 +14293,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1453153470
 GameObject:
@@ -14103,6 +14350,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1456962012
 GameObject:
@@ -14159,6 +14407,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1461868912
 GameObject:
@@ -14215,6 +14464,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1470984273
 GameObject:
@@ -14271,6 +14521,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1473674647
 GameObject:
@@ -14391,6 +14642,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1479482958
 GameObject:
@@ -14447,6 +14699,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1508725387
 GameObject:
@@ -14503,6 +14756,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1512559265
 GameObject:
@@ -14559,6 +14813,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1515690683
 GameObject:
@@ -14615,6 +14870,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1520850599
 GameObject:
@@ -14671,6 +14927,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1528722033
 GameObject:
@@ -14727,6 +14984,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1537610808
 GameObject:
@@ -14783,6 +15041,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1549618705
 GameObject:
@@ -14839,6 +15098,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1553872324
 GameObject:
@@ -14895,6 +15155,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1561682024
 GameObject:
@@ -14951,6 +15212,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1567280923
 GameObject:
@@ -15007,6 +15269,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1582295152
 GameObject:
@@ -15063,6 +15326,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1594519347
 GameObject:
@@ -15119,6 +15383,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1598466110
 GameObject:
@@ -15175,6 +15440,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1604861201
 GameObject:
@@ -15231,6 +15497,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1610691262
 GameObject:
@@ -15287,6 +15554,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1615902480
 GameObject:
@@ -15343,6 +15611,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1623540027
 GameObject:
@@ -15399,6 +15668,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1634360550
 GameObject:
@@ -15455,6 +15725,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1639055661
 GameObject:
@@ -15511,6 +15782,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1641048828
 GameObject:
@@ -15567,6 +15839,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1653237059
 GameObject:
@@ -15623,6 +15896,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1655154328
 GameObject:
@@ -15679,6 +15953,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1667060017
 GameObject:
@@ -15735,6 +16010,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1669786411
 GameObject:
@@ -15791,6 +16067,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1672655895
 GameObject:
@@ -15847,6 +16124,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1681567015
 GameObject:
@@ -15903,6 +16181,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1683180593
 GameObject:
@@ -15959,6 +16238,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1684493493
 GameObject:
@@ -16015,6 +16295,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1688848822
 GameObject:
@@ -16071,6 +16352,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1690211841
 GameObject:
@@ -16127,6 +16409,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1706302535
 GameObject:
@@ -16183,6 +16466,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1710557496
 GameObject:
@@ -16239,6 +16523,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1712761454
 GameObject:
@@ -16295,6 +16580,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1715264731
 GameObject:
@@ -16351,6 +16637,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1717996463
 GameObject:
@@ -16407,6 +16694,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1729608779
 GameObject:
@@ -16463,6 +16751,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1733074605
 GameObject:
@@ -16519,6 +16808,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1737501384
 GameObject:
@@ -16575,6 +16865,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1740835279
 GameObject:
@@ -16631,6 +16922,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1742547477
 GameObject:
@@ -16687,6 +16979,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1758726254
 GameObject:
@@ -16743,6 +17036,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1761378301
 GameObject:
@@ -16892,6 +17186,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1773188694
 GameObject:
@@ -16948,6 +17243,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1780066297
 GameObject:
@@ -17004,6 +17300,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1788529599
 GameObject:
@@ -17060,6 +17357,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1795007508
 GameObject:
@@ -17116,6 +17414,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1795980709
 GameObject:
@@ -17172,6 +17471,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1806033451
 GameObject:
@@ -17228,6 +17528,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1808472678
 GameObject:
@@ -17284,6 +17585,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1810303240
 GameObject:
@@ -17340,6 +17642,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1817352235
 GameObject:
@@ -17396,6 +17699,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1822528783
 GameObject:
@@ -17452,6 +17756,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1829106640
 GameObject:
@@ -17508,6 +17813,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1830579957
 GameObject:
@@ -17564,6 +17870,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1830972404
 GameObject:
@@ -17620,6 +17927,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1843427452
 GameObject:
@@ -17676,6 +17984,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1844866964
 GameObject:
@@ -17732,6 +18041,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1846357712
 GameObject:
@@ -17788,6 +18098,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1848744834
 GameObject:
@@ -17844,6 +18155,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!4 &1858648180 stripped
 Transform:
@@ -17905,6 +18217,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1863836723
 GameObject:
@@ -17961,6 +18274,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1866423486
 GameObject:
@@ -18017,6 +18331,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1873755729
 GameObject:
@@ -18073,6 +18388,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1875380833
 GameObject:
@@ -18129,6 +18445,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1879443087
 GameObject:
@@ -18185,6 +18502,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1886882404
 GameObject:
@@ -18241,6 +18559,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1894809903
 GameObject:
@@ -18297,6 +18616,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1897242366
 GameObject:
@@ -18353,6 +18673,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1899752504
 GameObject:
@@ -18409,6 +18730,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1901548017
 GameObject:
@@ -18465,6 +18787,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1904145241
 GameObject:
@@ -18521,6 +18844,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1905306785
 GameObject:
@@ -18577,6 +18901,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1907889849
 GameObject:
@@ -18633,6 +18958,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1914397370
 GameObject:
@@ -18689,6 +19015,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1915107836
 GameObject:
@@ -18745,6 +19072,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1917133038
 GameObject:
@@ -18801,6 +19129,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1918665723
 GameObject:
@@ -18857,6 +19186,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1937299015
 GameObject:
@@ -18913,6 +19243,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1943349440
 GameObject:
@@ -18969,6 +19300,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1943696982
 GameObject:
@@ -19025,6 +19357,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1953060101
 GameObject:
@@ -19081,6 +19414,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1960598602
 GameObject:
@@ -19137,6 +19471,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1969315566
 GameObject:
@@ -19193,6 +19528,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1971595974
 GameObject:
@@ -19249,6 +19585,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1980084592
 GameObject:
@@ -19305,6 +19642,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1990025937
 GameObject:
@@ -19361,6 +19699,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1992977256
 GameObject:
@@ -19417,6 +19756,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &1996444681
 GameObject:
@@ -19473,6 +19813,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &1997126344
 GameObject:
@@ -19529,6 +19870,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2000307213
 GameObject:
@@ -19585,6 +19927,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2003392021
 GameObject:
@@ -19641,6 +19984,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2004716929
 GameObject:
@@ -19697,6 +20041,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2008535868
 GameObject:
@@ -19753,6 +20098,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2026284520
 GameObject:
@@ -19809,6 +20155,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2030561923
 GameObject:
@@ -19865,6 +20212,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2035508534
 GameObject:
@@ -19921,6 +20269,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2040233346
 GameObject:
@@ -19977,6 +20326,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2042819537
 GameObject:
@@ -20033,6 +20383,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2046162400
 GameObject:
@@ -20089,6 +20440,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2046533810
 GameObject:
@@ -20145,6 +20497,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2055697646
 GameObject:
@@ -20201,6 +20554,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2056029347
 GameObject:
@@ -20257,6 +20611,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2057577990
 GameObject:
@@ -20313,6 +20668,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2060604126
 GameObject:
@@ -20369,6 +20725,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2064381266
 GameObject:
@@ -20425,6 +20782,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2065896982
 GameObject:
@@ -20481,6 +20839,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2066526367
 GameObject:
@@ -20537,6 +20896,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2068095014
 GameObject:
@@ -20593,6 +20953,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2072511234
 GameObject:
@@ -20649,6 +21010,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2072845389
 GameObject:
@@ -20705,6 +21067,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2073375786
 GameObject:
@@ -20761,6 +21124,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2074611277
 GameObject:
@@ -20817,6 +21181,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2079819140
 GameObject:
@@ -20873,6 +21238,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2084968000
 GameObject:
@@ -20929,6 +21295,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2085033802
 GameObject:
@@ -20985,6 +21352,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2087590115
 GameObject:
@@ -21041,6 +21409,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2090426277
 GameObject:
@@ -21097,6 +21466,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2097455231
 GameObject:
@@ -21153,6 +21523,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2098528193
 GameObject:
@@ -21317,6 +21688,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2104115802
 GameObject:
@@ -21373,6 +21745,7 @@ MonoBehaviour:
       data:
         behaviorName: ForwardBack
         Speed: 3
+        AngularSpeed: 300
         travelDistance: 5
 --- !u!1 &2113033489
 GameObject:
@@ -21429,6 +21802,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1 &2121215141
 GameObject:
@@ -21485,6 +21859,7 @@ MonoBehaviour:
       data:
         behaviorName: New Behavior
         Speed: 0
+        AngularSpeed: 0
         waitTime: 3
 --- !u!1001 &2131454058
 PrefabInstance:
@@ -26980,7 +27355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: currentCharacters.Array.size
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[0]'
@@ -26989,35 +27364,35 @@ PrefabInstance:
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 2abc6b4f21e9227448b29099ad38f7d0, type: 2}
+      objectReference: {fileID: 11400000, guid: dbbd1ead67fb9d240b950eb8dd6000b0, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: b47de7b76142c6645986067453e44604, type: 2}
+      objectReference: {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: dbbd1ead67fb9d240b950eb8dd6000b0, type: 2}
+      objectReference: {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[4]'
       value: 
-      objectReference: {fileID: 11400000, guid: 768f523acb6458042a711b0f50751d03, type: 2}
+      objectReference: {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[5]'
       value: 
-      objectReference: {fileID: 11400000, guid: 780c55f51402fb443a0192bfe1c5165b, type: 2}
+      objectReference: {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[6]'
       value: 
-      objectReference: {fileID: 11400000, guid: 6032ec03334161248b8c3ab54687be42, type: 2}
+      objectReference: {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[7]'
       value: 
-      objectReference: {fileID: 11400000, guid: 8433c251e12881c4fb3371e96783065c, type: 2}
+      objectReference: {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[8]'
       value: 
-      objectReference: {fileID: 11400000, guid: 735f469db467a6a4a85d34b23b0742e7, type: 2}
+      objectReference: {fileID: 11400000, guid: 173e9813d0db02044a6e37cc5f53d902, type: 2}
     - target: {fileID: 1057526131, guid: 42c84a9e00ffaff478bd0967b6f30919, type: 3}
       propertyPath: 'currentCharacters.Array.data[9]'
       value: 

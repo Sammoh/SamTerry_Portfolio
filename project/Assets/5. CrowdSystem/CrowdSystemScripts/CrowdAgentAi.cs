@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -9,6 +8,8 @@ namespace Sammoh.CrowdSystem
 {
     public class CrowdAgentAi : MonoBehaviour
     {
+        [SerializeField] AgentParts agentParts;
+        public AgentParts AgentParts => agentParts;
         
         public NavMeshAgent NavMeshAgent => _navAgent;
         private NavMeshAgent _navAgent;

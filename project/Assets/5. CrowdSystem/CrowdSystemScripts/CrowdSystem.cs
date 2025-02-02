@@ -79,7 +79,7 @@ namespace Sammoh.CrowdSystem
 
             foreach (var spawn in spawnLocations)
             {
-                var randDesign = currentCharacters[Random.Range(0, currentCharacters.Length - 1)];
+                var randDesign = currentCharacters[Random.Range(0, currentCharacters.Length)];
                 var agent = _agentFactory.CreateAgent(randDesign, spawn, crowdParent);
                 
                 agent.name += $"_{spawnIndex}_{spawn.name}";
