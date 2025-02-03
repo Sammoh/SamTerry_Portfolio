@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class AgentParts
+public struct AgentParts
 {
     [SerializeField] GameObject[] characterHeads;
     public GameObject[] CharacterHeads => characterHeads;

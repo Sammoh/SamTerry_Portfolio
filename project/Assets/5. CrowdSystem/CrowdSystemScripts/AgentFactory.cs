@@ -21,13 +21,10 @@ namespace Sammoh.CrowdSystem
             mesh.SetPropertyBlock(props);
         }
 
-        public CrowdAgentAi CreateAgent(CharacterDesigns characterDesign, SpawnLocation spawnLocation, Transform spawnParent)
+        public CrowdAgentAi CreateAgent(CharacterDesigns characterDesign, SpawnLocation spawnLocation, Transform spawnParent, int index)
         {
             // this is the base object that will be used...
             var agentObject = Instantiate(characterDesign.instancedCharacter, spawnLocation.transform.position, spawnLocation.transform.rotation, spawnParent);
-            // var agentHead = characterDesign.characterHeads[Random.Range(0, characterDesign.characterHeads.Length)];
-            // var agentTorso = characterDesign.characterTorsos[Random.Range(0, characterDesign.characterTorsos.Length)];
-            // var agentLegs = characterDesign.characterLegs[Random.Range(0, characterDesign.characterLegs.Length)];
             
             var randomHead = agentObject.AgentParts.CharacterHeads[Random.Range(0, agentObject.AgentParts.CharacterHeads.Length)];
             var randomTorso = agentObject.AgentParts.CharacterTorsos[Random.Range(0, agentObject.AgentParts.CharacterTorsos.Length)];
@@ -72,38 +69,6 @@ namespace Sammoh.CrowdSystem
             // add meshes to new agent
             var crowdAgent = agentObject.GetComponent<CrowdAgentAi>();
             crowdAgent.AddBehaviour(spawnBehavior);
-
-            #region Design the agent's character by assigning random character designs.
-            
-            // var characterMeshesRenderers = characterDesign.instancedCharacter.GetComponentsInChildren<Renderer>();
-            // var selectedSkinColor = characterDesign.characterSkin[Random.Range(0, characterDesign.characterSkin.Length)];
-            // var maxSeedValue = characterDesign.characterColorVariants.Length;
-            //
-            // var headSeed = Random.Range(0, maxSeedValue);
-            // var topSeed = Random.Range(0, maxSeedValue);
-            // var botSeed = Random.Range(0, maxSeedValue);
-            //
-            //
-            // var randHead = characterDesign.characterColorVariants[headSeed];
-            // var randTop = characterDesign.characterColorVariants[topSeed];
-            // var randBot = characterDesign.characterColorVariants[botSeed];
-            //
-            // for (var i = 0; i < characterMeshesRenderers.Length; i++)
-            // {
-            //     switch (i)
-            //     {
-            //         case 0:
-            //             SetMaterialAndActivate(headRenderer, randHead, selectedSkinColor);
-            //             break;
-            //         case 1:
-            //             SetMaterialAndActivate(torsoRenderer, randTop, selectedSkinColor);
-            //             break;
-            //         case 2:
-            //             SetMaterialAndActivate(legsRenderer, randBot, selectedSkinColor);
-            //             break;
-            //     }
-            // }
-            #endregion
             
             // create a new agent
             return crowdAgent;
