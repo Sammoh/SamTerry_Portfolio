@@ -12,7 +12,7 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 3. [Advanced Interaction (3D or VR)](#advanced-interaction-3d-or-vr)
 4. [Origin Shifting (3D or VR)](#origin-shifting-3d-or-vr)
 5. [Crowd System](#crowd-system)
-5. [Multiplayer Photon](#multiplayer-photon)
+5. [Multiplayer Netcode](#multiplayer-netcode)
 
 ---
 
@@ -72,11 +72,11 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 
 ---
 
-## Crowd System
+## AI Massive Crowd System
 
-**Project**: [Multiplayer Photon Integration](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/project/Assets/5.%20CrowdSystem)
+**Project**: [AI Massive Crowd System](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/project/Assets/5.%20CrowdSystem)
 **Tech Stack**: Unity3D, C#  
-**Description**: The Crowd System is designed to simulate a crowd of agents with various behaviors in a Unity environment. It utilizes Unity's NavMesh for pathfinding and movement, and ScriptableObjects for defining different behaviors and character designs. The system allows for dynamic spawning of agents with randomized appearances and behaviors, providing a realistic crowd simulation.
+**Description**: The Crowd System is designed to simulate a crowd of thousands of agents with various behaviors in an environment. It utilizes Unity's NavMesh for pathfinding and movement, and Command Patterns for defining different behaviors. A factory pattern to generate character designs, and instanced materals to optimize rendering. The system allows for dynamic spawning of agents with randomized appearances and behaviors, providing a realistic crowd simulation.
 
 * Key Features:
   - Dynamic agent spawning with randomized character designs
@@ -84,6 +84,7 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
   - Integration with Unity's NavMesh for pathfinding and movement
   - Customizable agent speed and angular speed
   - Event-driven system for handling path completion
+  - Variants include, skin, body region type, and clothing color.
 
 ---
 
