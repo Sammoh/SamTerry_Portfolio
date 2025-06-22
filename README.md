@@ -91,15 +91,14 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 
 ## Multiplayer Netcode
 
-**Project**: [Multiplayer Netcode Integration]()
-**Tech Stack**: Unity3D, Networking, C#  
-**Description**: Extended either the Advanced Interaction or Origin Shifting projects to support multiplayer functionality. Implemented NetCode-based networking to synchronize object interactions across clients, ensuring real-time consistency.
+**Project**: [Multiplayer Netcode Integration](https://github.com/Sammoh/Multiplayer-Base)
+**Tech Stack**: Unity3D, Networking, Netcode, C#  
+**Description**: Multiplayer Lobby Client/Host Platform. Used to connect players with a lobby chat system through Vivox. 
 
 * Key Features:
-  - Networked synchronization of object states
-  - User-controlled interaction limits per object
-  - Multiplayer support for up to three users
-  - Localized origin shifting for each client in multi-user environments
+  - Networked synchronization of lobby states.
+  - Full chat channels.
+  - Host and Client network data for game initialization (maps, characters)
 
 ---
 
