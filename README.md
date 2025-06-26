@@ -23,10 +23,10 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 **Description**: Developed a global data system that includes lists of adjectives, nouns, and colors (restricted to non-neutral hues) for generating unique game objects. Implemented an editor tool to manage these objects, enabling filtering, selection, and color-based display.
 
 * Key Features:
-  - Random color selection from a predefined list
-  - Unique object naming from adjectives and nouns
-  - Editor tool to display and filter objects in a scene by name and color
-  - Interactive click-to-select feature for GameObjects
+  - Random color selection from a predefined list.
+  - Unique object naming from adjectives and nouns.
+  - Editor tool to display and filter objects in a scene by name and color.
+  - Interactive click-to-select feature for GameObjects.
 
 ---
 
@@ -37,10 +37,10 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 **Description**: Created a 2D application using Unity's Canvas system to manage reports with data persistence in JSON and XML formats. The application supports listing reports, editing report details, and creating new reports with various metadata.
 
 * Key Features:
-  - Dynamic report listing and filtering
-  - Edit report state and priority in a detailed view
-  - New report creation with serialized data storage
-  - Switchable data formats (JSON/XML)
+  - Dynamic report listing and filtering.
+  - Edit report state and priority in a detailed view.
+  - New report creation with serialized data storage.
+  - Switchable data formats (JSON/XML).
 
 ---
 
@@ -51,10 +51,10 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 **Description**: Designed a rotatable knob with various snapping and event-driven interactions, providing both free and fixed rotation options. The project includes unit tests for key methods and events to ensure robust functionality.
 
 * Key Features:
-  - Snapping and free rotation with adjustable values
-  - Event-based responses on value changes
-  - Custom methods for direct value setting and retrieval
-  - Multiple knobs with distinct values and snap positions
+  - Snapping and free rotation with adjustable values.
+  - Event-based responses on value changes.
+  - Custom methods for direct value setting and retrieval.
+  - Multiple knobs with distinct values and snap positions.
 
 ---
 
@@ -65,26 +65,28 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 **Description**: Developed a shifting origin system for an aircraft simulation, allowing seamless navigation in an expansive environment. The project includes dual aircraft control, camera switching, and a mini-map with position tracking.
 
 * Key Features:
-  - Origin shifting for continuous movement in large worlds
-  - Dual aircraft control with camera and speed management
-  - Mini-map displaying relative and absolute positioning
-  - GUI elements for speed, position, and shifted position data
+  - Origin shifting for continuous movement in large worlds.
+  - Dual aircraft control with camera and speed management.
+  - Mini-map displaying relative and absolute positioning.
+  - GUI elements for speed, position, and shifted position data.
 
 ---
 
-## AI Massive Crowd System
+## Crowd System
 
-**Project**: [AI Massive Crowd System](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/project/Assets/5.%20CrowdSystem)
+**Project**: [Crowd System](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/project/Assets/5.%20CrowdSystem)
 **Tech Stack**: Unity3D, C#  
 **Description**: The Crowd System is designed to simulate a crowd of thousands of agents with various behaviors in an environment. It utilizes Unity's NavMesh for pathfinding and movement, and Command Patterns for defining different behaviors. A factory pattern to generate character designs, and instanced materals to optimize rendering. The system allows for dynamic spawning of agents with randomized appearances and behaviors, providing a realistic crowd simulation.
 
 * Key Features:
-  - Dynamic agent spawning with randomized character designs
-  - Multiple behavior types for agents, including static, random movement, forward and back, crowd up, sitting, and talking
-  - Integration with Unity's NavMesh for pathfinding and movement
-  - Customizable agent speed and angular speed
-  - Event-driven system for handling path completion
+  - Dynamic agent spawning with randomized character designs.
+  - Multiple behavior types for agents, including static, random movement, forward and back, crowd up, sitting, and talking.
+  - Integration with Unity's NavMesh for pathfinding and movement.
+  - Customizable agent speed and angular speed.
+  - Event-driven system for handling path completion.
   - Variants include, skin, body region type, and clothing color.
+  
+  https://github.com/user-attachments/assets/c8db3f9a-3be1-4190-a2c1-034acd2ad8f7
 
 ---
 
@@ -93,12 +95,12 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 
 **Project**: [Multiplayer Netcode Integration](https://github.com/Sammoh/Multiplayer-Base)
 **Tech Stack**: Unity3D, Networking, Netcode, C#  
-**Description**: Multiplayer Lobby Client/Host Platform. Used to connect players with a lobby chat system through Vivox. 
+**Description**: WORK IN PROGRESS: Multiplayer Lobby Client/Host Platform. Used to connect players with a lobby chat system through Vivox. 
 
 * Key Features:
   - Networked synchronization of lobby states.
   - Full chat channels.
-  - Host and Client network data for game initialization (maps, characters)
+  - Host and Client network data for game initialization (maps, characters).
 
 ---
 
