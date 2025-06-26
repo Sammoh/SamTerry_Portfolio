@@ -25,13 +25,14 @@ namespace Sammoh.CrowdSystem
         {
             // this is the base object that will be used...
             var agentObject = Instantiate(characterDesign.instancedCharacter, spawnLocation.transform.position, spawnLocation.transform.rotation, spawnParent);
-            
-            var randomHead = agentObject.AgentParts.CharacterHeads[Random.Range(0, agentObject.AgentParts.CharacterHeads.Length)];
-            var randomTorso = agentObject.AgentParts.CharacterTorsos[Random.Range(0, agentObject.AgentParts.CharacterTorsos.Length)];
-            var randomLegs = agentObject.AgentParts.CharacterLegs[Random.Range(0, agentObject.AgentParts.CharacterLegs.Length)];
+            var randomValue = Random.Range(0, agentObject.AgentParts.CharacterTorsos.Length);
+            var randomHead = agentObject.AgentParts.CharacterHeads[randomValue];
+            var randomTorso = agentObject.AgentParts.CharacterTorsos[randomValue];
+            var randomLegs = agentObject.AgentParts.CharacterLegs[randomValue];
             var selectedSkinColor = characterDesign.characterSkin[Random.Range(0, characterDesign.characterSkin.Length)];
 
-            
+            var hair = agentObject.AgentParts.AddHair(randomValue);
+
             // turn off all other gameobjects except the selected ones.
             foreach (var head in agentObject.AgentParts.CharacterHeads)
             {
@@ -63,6 +64,8 @@ namespace Sammoh.CrowdSystem
                 var selectedLegsColor = characterDesign.characterColorVariants[Random.Range(0, characterDesign.characterColorVariants.Length)];
                 SetMaterialAndActivate(legsRenderer, selectedLegsColor, selectedSkinColor);
             }
+            // activate hair
+            
             
             var spawnBehavior = spawnLocation.SpawnBehaviour ?? new AiBehavior_Idle(waitTime: 3);
             

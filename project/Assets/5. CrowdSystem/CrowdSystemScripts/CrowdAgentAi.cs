@@ -40,7 +40,7 @@ namespace Sammoh.CrowdSystem
 
             var agent = gameObject.AddComponent<NavMeshAgent>();
             agent.speed = behaviourType.Speed;
-            Debug.LogError($"Adding agent with speed {behaviourType.Speed}");
+            // Debug.LogError($"Adding agent with speed {behaviourType.Speed}");
             agent.angularSpeed = behaviourType.AngularSpeed;
             // agent.areaMask = 1 << 4;
             agent.stoppingDistance = 0.2f;
@@ -60,7 +60,7 @@ namespace Sammoh.CrowdSystem
         {
             if (_navAgent == null) return;
             
-            Debug.LogError("Moving to destination");
+            // Debug.LogError("Moving to destination");
 
             _navAgent.SetDestination(destination);
             IsMoving = true;
