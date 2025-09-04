@@ -12,7 +12,8 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 3. [Advanced Interaction (3D or VR)](#advanced-interaction-3d-or-vr)
 4. [Origin Shifting (3D or VR)](#origin-shifting-3d-or-vr)
 5. [Crowd System](#crowd-system)
-5. [Multiplayer Netcode](#multiplayer-netcode)
+6. [Multiplayer Netcode](#multiplayer-netcode)
+7. [Turn-Based Strategy Game](#turn-based-strategy-game)
 
 ---
 
@@ -101,6 +102,25 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
   - Networked synchronization of lobby states.
   - Full chat channels.
   - Host and Client network data for game initialization (maps, characters).
+
+---
+
+## Turn-Based Strategy Game
+
+**Project**: [Turn-Based Strategy Game](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/project/Assets/8.%20Turn-Based%20Strategy)
+**Tech Stack**: Unity3D, C#, Factory Pattern, Turn-Based Systems  
+**Description**: A complete turn-based strategy game system featuring character creation through factory patterns, strategic combat, and comprehensive game state management. The system is self-contained with cleanup/restart capabilities and includes both AI and player-controlled characters.
+
+* Key Features:
+  - Factory pattern for character creation with multiple classes (Warrior, Mage, Rogue, Healer)
+  - Dynamic character stats and abilities system with health, mana, attack, defense, and speed
+  - Turn-based combat with speed-based turn ordering
+  - AI-controlled enemy characters with tactical decision making
+  - Complete game state management with win/loss conditions
+  - Self-contained system with cleanup and restart functionality
+  - Comprehensive UI with ability selection and target choosing
+  - Extensive test suite covering all major systems and edge cases
+  - Modular design allowing for easy expansion and customization
 
 ---
 
