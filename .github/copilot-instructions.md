@@ -129,6 +129,18 @@ Always reference these instructions first and fallback to search or bash command
 
 ## Common Tasks
 
+### Code Quality Validation
+```bash
+# Check for TODO/FIXME items before committing
+cd project && grep -r "TODO\|FIXME\|HACK" Assets --include="*.cs"
+
+# List all C# scripts by directory
+find Assets -name "*.cs" -exec dirname {} \; | sort | uniq -c | sort -nr
+
+# Count total scripts
+find Assets -name "*.cs" | wc -l
+```
+
 ### Working with Scenes
 ```bash
 # List all scenes
@@ -149,12 +161,29 @@ find Assets -name "*.unity"
 - `Assets/1. Global Data & Editor Tools/Editor/`
 - `Assets/3. Advanced Interaction (3D or VR)/Editor/KnobSnapPositionEditor.cs`
 
+**Known code issues to be aware of**:
+- RotatableKnob.cs has TODO items for snap value improvements
+- MeshSpawner.cs doesn't work with scaled transforms (documented limitation)
+- UI Flow system has TODO for display timing optimization
+
 ### Package Dependencies
 **Required Unity packages** (auto-installed):
 - `com.unity.ai.navigation` - NavMesh for crowd system
 - `com.unity.animation.rigging` - Character animation
 - `com.unity.ugui` - UI system
 - `com.unity.multiplayer.center` - Multiplayer setup (future use)
+
+**Verification commands**:
+```bash
+# Check package manifest
+cat project/Packages/manifest.json
+
+# Verify Unity version
+cat project/ProjectSettings/ProjectVersion.txt
+
+# Check assembly definitions
+find project/Assets -name "*.asmdef" -exec echo "Assembly: {}" \; -exec cat {} \;
+```
 
 ## Critical Warnings
 
@@ -174,6 +203,8 @@ find Assets -name "*.unity"
 - **Crowd system can spawn 1000+ agents** - performance testing required
 - **Origin shifting handles large world coordinates** - test at extreme positions  
 - **VR scenes require VR headset** for full testing (optional for basic validation)
+- **MeshSpawner limitation**: Does not work for meshes with scaled transforms (documented in code)
+- **Instanced materials used** for crowd rendering optimization
 
 ## Troubleshooting
 
@@ -183,6 +214,9 @@ find Assets -name "*.unity"
 3. **"Assembly reference errors"** - Check .asmdef files and package dependencies
 4. **"Long import times"** - Normal for Unity 6 Preview, wait for completion
 5. **"Build fails"** - Check Unity Console for specific errors, ensure all packages installed
+6. **"NavMesh missing"** - Crowd system requires baked NavMesh (Window > AI > Navigation)
+7. **"MeshSpawner errors"** - Does not work with scaled transform meshes (known limitation)
+8. **"Test position returns to Off"** - Expected behavior in RotatableKnob after 2 seconds
 
 ### Build Times (Estimated)
 - **First project open**: 5-10 minutes (asset import)
