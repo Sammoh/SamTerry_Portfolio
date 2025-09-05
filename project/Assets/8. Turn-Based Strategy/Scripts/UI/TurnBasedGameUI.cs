@@ -208,7 +208,11 @@ namespace Sammoh.TurnBasedStrategy
 
         private void CreateAbilityButtons(CharacterAbility[] abilities)
         {
-            if (abilityButtonParent == null || abilityButtonPrefab == null) return;
+            if (abilityButtonParent == null || abilityButtonPrefab == null)
+            {
+                Debug.LogError($"There is no parent or prefabs to create buttons.");
+                return;
+            }
 
             foreach (var ability in abilities)
             {

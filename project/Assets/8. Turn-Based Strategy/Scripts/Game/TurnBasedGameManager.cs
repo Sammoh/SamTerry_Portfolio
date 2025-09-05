@@ -29,7 +29,7 @@ namespace Sammoh.TurnBasedStrategy
         public event Action<string> OnGameMessage;
 
         // Properties
-        public GameStateData GameState => gameState;
+        public GameStateData GameStateData => gameState;
         public List<Character> PlayerTeam => playerTeam;
         public List<Character> EnemyTeam => enemyTeam;
         public Character CurrentCharacter => turnManager.CurrentCharacter;

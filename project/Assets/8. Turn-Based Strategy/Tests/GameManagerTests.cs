@@ -51,8 +51,8 @@ public class GameManagerTests
     [Test]
     public void GameManager_InitialState_IsNotStarted()
     {
-        Assert.AreEqual(GameState.NotStarted, gameManager.GameState.currentState);
-        Assert.AreEqual(0, gameManager.GameState.turnNumber);
+        Assert.AreEqual(GameState.NotStarted, gameManager.GameStateData.currentState);
+        Assert.AreEqual(0, gameManager.GameStateData.turnNumber);
     }
 
     [Test]
@@ -62,7 +62,7 @@ public class GameManagerTests
         
         Assert.GreaterOrEqual(gameManager.PlayerTeam.Count, 1);
         Assert.GreaterOrEqual(gameManager.EnemyTeam.Count, 1);
-        Assert.AreNotEqual(GameState.NotStarted, gameManager.GameState.currentState);
+        Assert.AreNotEqual(GameState.NotStarted, gameManager.GameStateData.currentState);
     }
 
     [Test]
@@ -79,7 +79,7 @@ public class GameManagerTests
         
         Assert.AreEqual(0, gameManager.PlayerTeam.Count);
         Assert.AreEqual(0, gameManager.EnemyTeam.Count);
-        Assert.AreEqual(GameState.NotStarted, gameManager.GameState.currentState);
+        Assert.AreEqual(GameState.NotStarted, gameManager.GameStateData.currentState);
     }
 
     [Test]
@@ -91,7 +91,7 @@ public class GameManagerTests
         gameManager.RestartGame();
         
         Assert.AreEqual(firstPlayerTeamSize, gameManager.PlayerTeam.Count);
-        Assert.AreNotEqual(GameState.NotStarted, gameManager.GameState.currentState);
+        Assert.AreNotEqual(GameState.NotStarted, gameManager.GameStateData.currentState);
     }
 
     [Test]
