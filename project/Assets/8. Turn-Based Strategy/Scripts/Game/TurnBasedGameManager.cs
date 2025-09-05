@@ -129,10 +129,11 @@ namespace Sammoh.TurnBasedStrategy
         {
             gameState.playerTeamAlive = playerTeam.Count(c => c.CanAct());
             gameState.enemyTeamAlive = enemyTeam.Count(c => c.CanAct());
-            
+
             turnManager.InitializeTurnOrder(allCharacters);
-            
-            ChangeGameState(GameState.PlayerTurn);
+
+            // Start the first turn; this sets CurrentCharacter and triggers OnTurnStart.
+            // HandleTurnStart will set the GameState appropriately (PlayerTurn/EnemyTurn).
             turnManager.StartNextTurn();
 
             OnGameMessage?.Invoke($"Game started! {gameState.playerTeamAlive} players vs {gameState.enemyTeamAlive} enemies");
