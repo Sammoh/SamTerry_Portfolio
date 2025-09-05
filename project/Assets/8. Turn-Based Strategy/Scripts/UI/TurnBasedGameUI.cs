@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Sammoh.TurnBasedStrategy
 {
-    public class GameUI : MonoBehaviour
+    public class TurnBasedGameUI : MonoBehaviour
     {
         [Header("UI Panels")]
         [SerializeField] private GameObject mainMenuPanel;
@@ -24,7 +24,7 @@ namespace Sammoh.TurnBasedStrategy
         [Header("Character Display")]
         [SerializeField] private Transform playerTeamParent;
         [SerializeField] private Transform enemyTeamParent;
-        [SerializeField] private GameObject characterDisplayPrefab;
+        // TODO: [SerializeField] private GameObject characterDisplayPrefab;
 
         [Header("Control Buttons")]
         [SerializeField] private Button startGameButton;
@@ -154,14 +154,7 @@ namespace Sammoh.TurnBasedStrategy
             }
         }
 
-        private void HandleGameMessage(string message)
-        {
-            if (messageText != null)
-            {
-                messageText.text = message;
-                Debug.Log($"Game Message: {message}");
-            }
-        }
+        private void HandleGameMessage(string message) { if (messageText != null) messageText.text = message; }
 
         private void HandleCharacterDefeated(Character character)
         {

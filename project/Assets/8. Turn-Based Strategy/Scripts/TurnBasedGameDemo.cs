@@ -59,11 +59,11 @@ namespace Sammoh.TurnBasedStrategy
         {
             if (gameManager != null && !gameStarted)
             {
-                LogDebug("Starting Turn-Based Strategy Game Demo");
+                Debug.Log("Starting Turn-Based Strategy Game Demo");
                 gameManager.StartNewGame();
                 gameStarted = true;
                 
-                LogDebug($"Game started with {gameManager.PlayerTeam.Count} players vs {gameManager.EnemyTeam.Count} enemies");
+                Debug.Log($"Game started with {gameManager.PlayerTeam.Count} players vs {gameManager.EnemyTeam.Count} enemies");
                 
                 // Display team information
                 DisplayTeamInfo("Player Team", gameManager.PlayerTeam);
@@ -75,7 +75,7 @@ namespace Sammoh.TurnBasedStrategy
         {
             if (gameManager != null)
             {
-                LogDebug("Restarting Turn-Based Strategy Game Demo");
+                Debug.Log("Restarting Turn-Based Strategy Game Demo");
                 gameManager.RestartGame();
                 gameStarted = true;
             }
@@ -85,7 +85,7 @@ namespace Sammoh.TurnBasedStrategy
         {
             if (gameManager != null)
             {
-                LogDebug("Cleaning up Turn-Based Strategy Game Demo");
+                Debug.Log("Cleaning up Turn-Based Strategy Game Demo");
                 gameManager.CleanupGame();
                 gameStarted = false;
             }
@@ -93,50 +93,53 @@ namespace Sammoh.TurnBasedStrategy
 
         private void DisplayTeamInfo(string teamName, System.Collections.Generic.List<Character> team)
         {
-            LogDebug($"\n{teamName}:");
+            var msg = "";
+            msg += ($"\n{teamName}:");
             foreach (var character in team)
             {
-                LogDebug($"  - {character.CharacterName}:");
-                LogDebug($"    Health: {character.Stats.CurrentHealth}/{character.Stats.MaxHealth}");
-                LogDebug($"    Attack: {character.Stats.Attack}, Defense: {character.Stats.Defense}");
-                LogDebug($"    Speed: {character.Stats.Speed}, Mana: {character.Stats.CurrentMana}/{character.Stats.Mana}");
-                LogDebug($"    Abilities: {string.Join(", ", System.Array.ConvertAll(character.Abilities, a => a.AbilityName))}");
+                msg += ($"\n  - {character.CharacterName}:");
+                msg += ($"\n    Health: {character.Stats.CurrentHealth}/{character.Stats.MaxHealth}");
+                msg += ($"\n    Attack: {character.Stats.Attack}, Defense: {character.Stats.Defense}");
+                msg += ($"\n    Speed: {character.Stats.Speed}, Mana: {character.Stats.CurrentMana}/{character.Stats.Mana}");
+                msg += ($"\n    Abilities: {string.Join(", ", System.Array.ConvertAll(character.Abilities, a => a.AbilityName))}");
             }
+
+            Debug.Log(msg);
         }
 
         private void OnGameStateChanged(GameState newState)
         {
-            LogDebug($"Game State Changed: {newState}");
+            Debug.Log($"Game State Changed: {newState}");
             
             switch (newState)
             {
                 case GameState.PlayerTurn:
-                    LogDebug($"Player's turn: {gameManager.CurrentCharacter?.CharacterName}");
+                    Debug.Log($"Player's turn: {gameManager.CurrentCharacter?.CharacterName}");
                     DisplayAvailableActions();
                     break;
                     
                 case GameState.EnemyTurn:
-                    LogDebug($"Enemy's turn: {gameManager.CurrentCharacter?.CharacterName}");
+                    Debug.Log($"Enemy's turn: {gameManager.CurrentCharacter?.CharacterName}");
                     break;
                     
                 case GameState.GameOver:
-                    LogDebug("Game Over! All players have been defeated.");
+                    Debug.Log("Game Over! All players have been defeated.");
                     break;
                     
                 case GameState.Victory:
-                    LogDebug("Victory! All enemies have been defeated.");
+                    Debug.Log("Victory! All enemies have been defeated.");
                     break;
             }
         }
 
         private void OnGameMessage(string message)
         {
-            LogDebug($"Game Message: {message}");
+            Debug.Log($"Game Message: {message}");
         }
 
         private void OnCharacterDefeated(Character character)
         {
-            LogDebug($"{character.CharacterName} has been defeated!");
+            Debug.Log($"{character.CharacterName} has been defeated!");
         }
 
         private void DisplayAvailableActions()
@@ -144,22 +147,16 @@ namespace Sammoh.TurnBasedStrategy
             if (gameManager?.CurrentCharacter != null)
             {
                 var currentChar = gameManager.CurrentCharacter;
-                LogDebug($"Available abilities for {currentChar.CharacterName}:");
+                var msg = $"Available abilities for {currentChar.CharacterName}:";
                 
                 foreach (var ability in currentChar.Abilities)
                 {
                     bool canUse = gameManager.CanUseAbility(ability);
                     string status = canUse ? "Available" : "Not enough mana";
-                    LogDebug($"  - {ability.AbilityName} ({ability.ManaCost} MP): {status}");
+                    msg += ($"\n  - {ability.AbilityName} ({ability.ManaCost} MP): {status}");
                 }
-            }
-        }
 
-        private void LogDebug(string message)
-        {
-            if (enableDebugLogging)
-            {
-                Debug.Log($"[TurnBasedGameDemo] {message}");
+                Debug.Log(msg);
             }
         }
 
@@ -198,7 +195,7 @@ namespace Sammoh.TurnBasedStrategy
         // Demonstration of factory pattern usage
         public void DemonstrateFactoryPattern()
         {
-            LogDebug("Demonstrating Factory Pattern:");
+            Debug.Log("Demonstrating Factory Pattern:");
             
             GameObject factoryObj = new GameObject("DemoFactory");
             CharacterFactory factory = factoryObj.AddComponent<CharacterFactory>();
@@ -208,15 +205,15 @@ namespace Sammoh.TurnBasedStrategy
             foreach (CharacterClass characterClass in characterClasses)
             {
                 Character character = factory.CreateCharacter(characterClass, $"Demo_{characterClass}", false);
-                LogDebug($"Created {characterClass}: {character.CharacterName}");
-                LogDebug($"  Stats: HP={character.Stats.MaxHealth}, ATK={character.Stats.Attack}, DEF={character.Stats.Defense}, SPD={character.Stats.Speed}, MP={character.Stats.Mana}");
+                Debug.Log($"Created {characterClass}: {character.CharacterName}");
+                Debug.Log($"  Stats: HP={character.Stats.MaxHealth}, ATK={character.Stats.Attack}, DEF={character.Stats.Defense}, SPD={character.Stats.Speed}, MP={character.Stats.Mana}");
                 
                 // Cleanup
                 DestroyImmediate(character.gameObject);
             }
             
             DestroyImmediate(factoryObj);
-            LogDebug("Factory Pattern demonstration complete");
+            Debug.Log("Factory Pattern demonstration complete");
         }
     }
 }
