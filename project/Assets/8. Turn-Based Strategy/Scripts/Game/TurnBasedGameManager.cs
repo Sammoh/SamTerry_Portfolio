@@ -156,12 +156,14 @@ namespace Sammoh.TurnBasedStrategy
             if (target != null)
             {
                 message += $" on {target.CharacterName}";
-                if (ability.AbilityType == AbilityType.Attack)
+                if (ability.AbilityType == AbilityType.Attack || ability.AbilityType == AbilityType.Special)
                     message += $" for {result} damage";
+                else if (ability.AbilityType == AbilityType.Heal)
+                    message += $" and heals for {result}";
             }
             else if (ability.AbilityType == AbilityType.Heal)
             {
-                message += $" and heals for {result}";
+                message += $" and heals self for {result}";
             }
 
             OnGameMessage?.Invoke(message);
@@ -271,14 +273,24 @@ namespace Sammoh.TurnBasedStrategy
         // Public methods for UI interaction
         public List<Character> GetValidTargets(CharacterAbility ability)
         {
+            if (CurrentCharacter == null) return new List<Character>();
+            
             switch (ability.AbilityType)
             {
                 case AbilityType.Attack:
                 case AbilityType.Special:
-                    return enemyTeam.Where(e => e.CanAct()).ToList();
+                    // Player characters target enemies, enemy characters target players
+                    if (CurrentCharacter.IsPlayerControlled)
+                        return enemyTeam.Where(e => e.CanAct()).ToList();
+                    else
+                        return playerTeam.Where(p => p.CanAct()).ToList();
                 
                 case AbilityType.Heal:
-                    return playerTeam.Where(p => p.CanAct()).ToList();
+                    // Player characters can heal other players, enemy characters can heal other enemies
+                    if (CurrentCharacter.IsPlayerControlled)
+                        return playerTeam.Where(p => p.CanAct()).ToList();
+                    else
+                        return enemyTeam.Where(e => e.CanAct()).ToList();
                 
                 case AbilityType.Defend:
                     return new List<Character> { CurrentCharacter };
