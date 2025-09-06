@@ -57,8 +57,17 @@ namespace Sammoh.TurnBasedStrategy
                     break;
 
                 case AbilityType.Heal:
-                    casterStats.Heal(power);
-                    return power;
+                    if (targetStats != null)
+                    {
+                        targetStats.Heal(power);
+                        return power;
+                    }
+                    else
+                    {
+                        // If no target specified, heal self
+                        casterStats.Heal(power);
+                        return power;
+                    }
 
                 case AbilityType.Defend:
                     // Defensive abilities could reduce incoming damage for next turn
@@ -69,8 +78,9 @@ namespace Sammoh.TurnBasedStrategy
                     // Special abilities have custom logic
                     if (targetStats != null)
                     {
-                        targetStats.TakeDamage(power);
-                        return power;
+                        int damage = power + casterStats.Attack;
+                        targetStats.TakeDamage(damage);
+                        return damage;
                     }
                     break;
             }

@@ -246,7 +246,11 @@ namespace Sammoh.TurnBasedStrategy
 
         private void CreateTargetButtons(List<Character> targets)
         {
-            if (targetButtonParent == null || targetButtonPrefab == null) return;
+            if (targetButtonParent == null || targetButtonPrefab == null)
+            {
+                Debug.LogError($"There is no parent or prefabs to create target buttons.");
+                return;
+            }
 
             foreach (var target in targets)
             {
