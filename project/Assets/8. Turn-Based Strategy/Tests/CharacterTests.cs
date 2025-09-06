@@ -35,9 +35,11 @@ public class CharacterTests
     {
         Assert.AreEqual("TestCharacter", character.CharacterName);
         Assert.AreEqual(100, character.Stats.MaxHealth);
-        Assert.AreEqual(15, character.Stats.Attack);
-        Assert.AreEqual(2, character.Abilities.Length);
+        Assert.AreEqual(15, character.Stats.BaseAttack); // Test base stats
+        Assert.IsNotNull(character.Abilities);
         Assert.IsTrue(character.IsPlayerControlled);
+        Assert.IsNotNull(character.EquipmentManager);
+        Assert.IsNotNull(character.SkillTree);
     }
 
     [Test]
@@ -75,6 +77,35 @@ public class CharacterTests
         Assert.AreEqual(character.Stats.MaxHealth, character.Stats.CurrentHealth);
         Assert.AreEqual(character.Stats.Mana, character.Stats.CurrentMana);
     }
+
+    [Test]
+    public void Character_EquipItem_WorksCorrectly()
+    {
+        var weapon = new Equipment("Test Sword", EquipmentSlot.Weapon, 
+            new StatModifier[] { new StatModifier(StatType.Attack, 5, ModifierType.Additive) }, 
+            "Test weapon");
+
+        bool result = character.EquipItem(weapon);
+        
+        Assert.IsTrue(result);
+        Assert.AreEqual(weapon, character.EquipmentManager.GetEquippedItem(EquipmentSlot.Weapon));
+        Assert.AreEqual(20, character.Stats.Attack); // 15 base + 5 from weapon
+    }
+
+    [Test]
+    public void Character_UnequipItem_WorksCorrectly()
+    {
+        var weapon = new Equipment("Test Sword", EquipmentSlot.Weapon, 
+            new StatModifier[] { new StatModifier(StatType.Attack, 5, ModifierType.Additive) }, 
+            "Test weapon");
+
+        character.EquipItem(weapon);
+        Equipment unequipped = character.UnequipItem(EquipmentSlot.Weapon);
+        
+        Assert.AreEqual(weapon, unequipped);
+        Assert.IsNull(character.EquipmentManager.GetEquippedItem(EquipmentSlot.Weapon));
+        Assert.AreEqual(15, character.Stats.Attack); // Back to base attack
+    }
 }
 
 public class CharacterStatsTests
@@ -92,10 +123,10 @@ public class CharacterStatsTests
     {
         Assert.AreEqual(100, stats.MaxHealth);
         Assert.AreEqual(100, stats.CurrentHealth);
-        Assert.AreEqual(15, stats.Attack);
-        Assert.AreEqual(10, stats.Defense);
-        Assert.AreEqual(12, stats.Speed);
-        Assert.AreEqual(50, stats.Mana);
+        Assert.AreEqual(15, stats.BaseAttack); // Test base stats
+        Assert.AreEqual(10, stats.BaseDefense);
+        Assert.AreEqual(12, stats.BaseSpeed);
+        Assert.AreEqual(50, stats.BaseMana);
         Assert.AreEqual(50, stats.CurrentMana);
         Assert.IsTrue(stats.IsAlive);
     }

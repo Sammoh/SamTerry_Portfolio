@@ -30,10 +30,14 @@ namespace Sammoh.TurnBasedStrategy
         [SerializeField] private Button startGameButton;
         [SerializeField] private Button restartGameButton;
         [SerializeField] private Button mainMenuButton;
+        [SerializeField] private Button skillTreeButton;
 
         [Header("Prefabs")]
         [SerializeField] private GameObject abilityButtonPrefab;
         [SerializeField] private GameObject targetButtonPrefab;
+
+        [Header("Skill Tree UI")]
+        [SerializeField] private SkillTreeUI skillTreeUI;
 
         private TurnBasedGameManager gameManager;
         private CharacterAbility selectedAbility;
@@ -78,6 +82,9 @@ namespace Sammoh.TurnBasedStrategy
             
             if (endTurnButton != null)
                 endTurnButton.onClick.AddListener(EndTurn);
+
+            if (skillTreeButton != null)
+                skillTreeButton.onClick.AddListener(OpenSkillTree);
         }
 
         private void ShowMainMenu()
@@ -197,6 +204,7 @@ namespace Sammoh.TurnBasedStrategy
             }
 
             UpdateEndTurnButton();
+            UpdateSkillTreeButton();
         }
 
         private void CreateAbilityButtons(CharacterAbility[] abilities)
@@ -304,6 +312,23 @@ namespace Sammoh.TurnBasedStrategy
             if (endTurnButton != null)
             {
                 endTurnButton.interactable = gameManager?.IsPlayerTurn == true;
+            }
+        }
+
+        private void OpenSkillTree()
+        {
+            if (skillTreeUI != null && gameManager?.CurrentCharacter?.IsPlayerControlled == true)
+            {
+                skillTreeUI.SetCharacter(gameManager.CurrentCharacter);
+                skillTreeUI.ShowSkillTree();
+            }
+        }
+
+        private void UpdateSkillTreeButton()
+        {
+            if (skillTreeButton != null)
+            {
+                skillTreeButton.interactable = gameManager?.CurrentCharacter?.IsPlayerControlled == true;
             }
         }
 

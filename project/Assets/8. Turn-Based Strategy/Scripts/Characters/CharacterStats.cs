@@ -6,33 +6,55 @@ namespace Sammoh.TurnBasedStrategy
     [Serializable]
     public class CharacterStats
     {
-        [SerializeField] private int maxHealth = 100;
+        [SerializeField] private int baseMaxHealth = 100;
         [SerializeField] private int currentHealth = 100;
-        [SerializeField] private int attack = 15;
-        [SerializeField] private int defense = 10;
-        [SerializeField] private int speed = 12;
-        [SerializeField] private int mana = 50;
+        [SerializeField] private int baseAttack = 15;
+        [SerializeField] private int baseDefense = 10;
+        [SerializeField] private int baseSpeed = 12;
+        [SerializeField] private int baseMana = 50;
         [SerializeField] private int currentMana = 50;
 
-        public int MaxHealth => maxHealth;
+        private EquipmentManager equipmentManager;
+
+        // Base stats (without equipment)
+        public int BaseMaxHealth => baseMaxHealth;
+        public int BaseAttack => baseAttack;
+        public int BaseDefense => baseDefense;
+        public int BaseSpeed => baseSpeed;
+        public int BaseMana => baseMana;
+
+        // Effective stats (with equipment bonuses)
+        public int MaxHealth => equipmentManager?.CalculateStatWithEquipment(baseMaxHealth, StatType.MaxHealth) ?? baseMaxHealth;
+        public int Attack => equipmentManager?.CalculateStatWithEquipment(baseAttack, StatType.Attack) ?? baseAttack;
+        public int Defense => equipmentManager?.CalculateStatWithEquipment(baseDefense, StatType.Defense) ?? baseDefense;
+        public int Speed => equipmentManager?.CalculateStatWithEquipment(baseSpeed, StatType.Speed) ?? baseSpeed;
+        public int Mana => equipmentManager?.CalculateStatWithEquipment(baseMana, StatType.Mana) ?? baseMana;
+        
         public int CurrentHealth => currentHealth;
-        public int Attack => attack;
-        public int Defense => defense;
-        public int Speed => speed;
-        public int Mana => mana;
         public int CurrentMana => currentMana;
 
         public bool IsAlive => currentHealth > 0;
 
         public CharacterStats(int health, int attack, int defense, int speed, int mana)
         {
-            this.maxHealth = health;
+            this.baseMaxHealth = health;
             this.currentHealth = health;
-            this.attack = attack;
-            this.defense = defense;
-            this.speed = speed;
-            this.mana = mana;
+            this.baseAttack = attack;
+            this.baseDefense = defense;
+            this.baseSpeed = speed;
+            this.baseMana = mana;
             this.currentMana = mana;
+        }
+
+        public void SetEquipmentManager(EquipmentManager manager)
+        {
+            equipmentManager = manager;
+            // Adjust current health if max health changed due to equipment
+            if (currentHealth > MaxHealth)
+                currentHealth = MaxHealth;
+            // Adjust current mana if max mana changed due to equipment
+            if (currentMana > Mana)
+                currentMana = Mana;
         }
 
         public void TakeDamage(int damage)
@@ -43,7 +65,7 @@ namespace Sammoh.TurnBasedStrategy
 
         public void Heal(int amount)
         {
-            currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+            currentHealth = Mathf.Min(MaxHealth, currentHealth + amount);
         }
 
         public bool UseMana(int amount)
@@ -58,13 +80,13 @@ namespace Sammoh.TurnBasedStrategy
 
         public void RestoreMana(int amount)
         {
-            currentMana = Mathf.Min(mana, currentMana + amount);
+            currentMana = Mathf.Min(Mana, currentMana + amount);
         }
 
         public void FullRestore()
         {
-            currentHealth = maxHealth;
-            currentMana = mana;
+            currentHealth = MaxHealth;
+            currentMana = Mana;
         }
     }
 }
