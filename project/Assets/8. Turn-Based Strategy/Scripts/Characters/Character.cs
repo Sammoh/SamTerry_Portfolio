@@ -8,11 +8,13 @@ namespace Sammoh.TurnBasedStrategy
         [SerializeField] private CharacterStats stats;
         [SerializeField] private CharacterAbility[] abilities;
         [SerializeField] private bool isPlayerControlled;
+        [SerializeField] private EquipmentManager equipmentManager = new EquipmentManager();
 
         public string CharacterName => characterName;
         public CharacterStats Stats => stats;
         public CharacterAbility[] Abilities => abilities;
         public bool IsPlayerControlled => isPlayerControlled;
+        public EquipmentManager EquipmentManager => equipmentManager;
 
         public void Initialize(string name, CharacterStats characterStats, CharacterAbility[] characterAbilities, bool isPlayer = false)
         {
@@ -20,6 +22,39 @@ namespace Sammoh.TurnBasedStrategy
             stats = characterStats;
             abilities = characterAbilities;
             isPlayerControlled = isPlayer;
+            
+            // Connect equipment manager to stats
+            if (stats != null && equipmentManager != null)
+            {
+                stats.SetEquipmentManager(equipmentManager);
+            }
+        }
+
+        /// <summary>
+        /// Equips an item to this character
+        /// </summary>
+        /// <param name="equipment">The equipment to equip</param>
+        /// <returns>True if equipment was successfully equipped, false otherwise</returns>
+        public bool EquipItem(Equipment equipment)
+        {
+            if (equipment == null || equipmentManager == null)
+                return false;
+
+            equipmentManager.EquipItem(equipment);
+            return true;
+        }
+
+        /// <summary>
+        /// Unequips an item from the specified slot
+        /// </summary>
+        /// <param name="slot">The slot to unequip</param>
+        /// <returns>The unequipped item, or null if no item was equipped</returns>
+        public Equipment UnequipItem(EquipmentSlot slot)
+        {
+            if (equipmentManager == null)
+                return null;
+
+            return equipmentManager.UnequipItem(slot);
         }
 
         public bool CanAct()
@@ -44,6 +79,21 @@ namespace Sammoh.TurnBasedStrategy
             if (string.IsNullOrEmpty(characterName))
             {
                 characterName = gameObject.name;
+            }
+            
+            // Initialize equipment manager connection to stats
+            if (stats != null && equipmentManager != null)
+            {
+                stats.SetEquipmentManager(equipmentManager);
+            }
+        }
+
+        private void Awake()
+        {
+            // Ensure equipment manager is initialized
+            if (equipmentManager == null)
+            {
+                equipmentManager = new EquipmentManager();
             }
         }
     }
