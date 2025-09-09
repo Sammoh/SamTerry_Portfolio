@@ -184,14 +184,16 @@ public class CharacterEquipmentIntegrationTests
         
         character.Initialize("TestCharacter", stats, abilities, true);
 
-        // Create test equipment
-        testWeapon = new Equipment("Test Sword", EquipmentSlot.Weapon,
+        // Create test equipment using ScriptableObject
+        testWeapon = ScriptableObject.CreateInstance<Equipment>();
+        testWeapon.Initialize("Test Sword", EquipmentSlot.Weapon,
             new StatModifier[] {
                 new StatModifier(StatType.Attack, 5, ModifierType.Additive)
             },
             "A test weapon");
 
-        testArmor = new Equipment("Test Armor", EquipmentSlot.Armor,
+        testArmor = ScriptableObject.CreateInstance<Equipment>();
+        testArmor.Initialize("Test Armor", EquipmentSlot.Armor,
             new StatModifier[] {
                 new StatModifier(StatType.Defense, 3, ModifierType.Additive),
                 new StatModifier(StatType.MaxHealth, 20, ModifierType.Additive)
@@ -202,6 +204,10 @@ public class CharacterEquipmentIntegrationTests
     [TearDown]
     public void TearDown()
     {
+        // Clean up ScriptableObject equipment instances
+        if (testWeapon != null) Object.DestroyImmediate(testWeapon);
+        if (testArmor != null) Object.DestroyImmediate(testArmor);
+        
         if (characterObject != null)
             Object.DestroyImmediate(characterObject);
     }
