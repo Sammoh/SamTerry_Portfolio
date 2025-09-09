@@ -176,7 +176,7 @@ namespace Sammoh.TurnBasedStrategy
             if (equipmentDatabase == null)
             {
                 // Try to find one in the project
-                equipmentDatabase = Resources.FindObjectOfTypeAll<EquipmentDatabase>()[0];
+                equipmentDatabase = Resources.FindObjectsOfTypeAll<EquipmentDatabase>()[0];
             }
         }
     }

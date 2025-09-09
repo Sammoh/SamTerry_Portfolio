@@ -760,6 +760,77 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &724162493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 724162495}
+  - component: {fileID: 724162494}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &724162494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724162493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f6e04a46bd4606bf922e351ccb72fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 
+  stats:
+    maxHealth: 0
+    currentHealth: 0
+    attack: 0
+    defense: 0
+    speed: 0
+    mana: 0
+    currentMana: 0
+  abilities: []
+  isPlayerControlled: 0
+  equipmentManager:
+    weapon:
+      equipmentName: 
+      slot: 0
+      statModifiers: []
+      description: 
+    armor:
+      equipmentName: 
+      slot: 0
+      statModifiers: []
+      description: 
+    accessory:
+      equipmentName: 
+      slot: 0
+      statModifiers: []
+      description: 
+--- !u!4 &724162495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724162493}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 438.8472, y: 886.3015, z: 4.836207}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742154744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,3 +2599,4 @@ SceneRoots:
   - {fileID: 1421917598}
   - {fileID: 236276818}
   - {fileID: 1323373138}
+  - {fileID: 724162495}
