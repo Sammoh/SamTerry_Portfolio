@@ -174,25 +174,63 @@ namespace Sammoh.Two
             
             return allEquipment;
         }
+
+        #region Old content
+
+//         /// <summary>
+//         /// Gets or creates the main equipment database asset.
+//         /// </summary>
+//         public static EquipmentDatabase GetOrCreateEquipmentDatabase()
+//         {
+// #if UNITY_EDITOR
+//             var database = AssetDatabase.LoadAssetAtPath<EquipmentDatabase>(DATABASE_PATH);
+//             if (database == null)
+//             {
+//                 database = ScriptableObject.CreateInstance<EquipmentDatabase>();
+//                 AssetDatabase.CreateAsset(database, DATABASE_PATH);
+//                 AssetDatabase.SaveAssets();
+//                 Debug.Log($"Created Equipment Database at {DATABASE_PATH}");
+//             }
+//             return database;
+// #else
+//             return Resources.Load<EquipmentDatabase>("Equipment/EquipmentDatabase");
+// #endif
+//      }
+
+        #endregion
         
-        /// <summary>
-        /// Gets or creates the main equipment database asset.
-        /// </summary>
         public static EquipmentDatabase GetOrCreateEquipmentDatabase()
         {
-#if UNITY_EDITOR
-            var database = AssetDatabase.LoadAssetAtPath<EquipmentDatabase>(DATABASE_PATH);
-            if (database == null)
+            const string assetPath = "Assets/2. UI, Flow, & Files (2D Canvas)/Resources/Equipment/EquipmentDatabase.asset";
+
+            var db = AssetDatabase.LoadAssetAtPath<EquipmentDatabase>(assetPath);
+            if (db != null) return db;
+            
+            void EnsureAssetDirectoryExists(string assetPath)
             {
-                database = ScriptableObject.CreateInstance<EquipmentDatabase>();
-                AssetDatabase.CreateAsset(database, DATABASE_PATH);
-                AssetDatabase.SaveAssets();
-                Debug.Log($"Created Equipment Database at {DATABASE_PATH}");
+                var dir = Path.GetDirectoryName(assetPath)?.Replace('\\', '/');
+                if (string.IsNullOrEmpty(dir) || AssetDatabase.IsValidFolder(dir)) return;
+
+                var parts = dir.Split('/');
+                string current = parts[0]; // "Assets"
+                for (int i = 1; i < parts.Length; i++)
+                {
+                    var next = current + "/" + parts[i];
+                    if (!AssetDatabase.IsValidFolder(next))
+                        AssetDatabase.CreateFolder(current, parts[i]);
+                    current = next;
+                }
+                AssetDatabase.Refresh();
             }
-            return database;
-#else
-            return Resources.Load<EquipmentDatabase>("Equipment/EquipmentDatabase");
-#endif
+
+            EnsureAssetDirectoryExists(assetPath);
+
+            db = ScriptableObject.CreateInstance<EquipmentDatabase>();
+            AssetDatabase.CreateAsset(db, assetPath);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            return db;
         }
         
 #if UNITY_EDITOR
