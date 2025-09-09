@@ -100,9 +100,9 @@ namespace Sammoh.TurnBasedStrategy.Editor
                 // Show database contents
                 if (database != null)
                 {
-                    EditorGUILayout.LabelField($"Weapons: {database.Weapons.Count}");
-                    EditorGUILayout.LabelField($"Armor: {database.Armor.Count}");
-                    EditorGUILayout.LabelField($"Accessories: {database.Accessories.Count}");
+                    EditorGUILayout.LabelField($"Weapons: {database.Weapons.Length}");
+                    EditorGUILayout.LabelField($"Armor: {database.Armor.Length}");
+                    EditorGUILayout.LabelField($"Accessories: {database.Accessories.Length}");
                 }
 
                 EditorGUILayout.EndVertical();
@@ -181,7 +181,8 @@ namespace Sammoh.TurnBasedStrategy.Editor
                     EditorGUILayout.LabelField("Stat Changes Preview:", EditorStyles.boldLabel);
                     
                     var stats = previewCharacter.Stats;
-                    var tempEquipment = new Equipment(equipmentName, selectedSlot, modifiers.ToArray(), description);
+                    var tempEquipment = CreateInstance<Equipment>();
+                    tempEquipment.Initialize(equipmentName, selectedSlot, modifiers.ToArray(), description);
                     
                     // Show stat changes
                     foreach (StatType statType in System.Enum.GetValues(typeof(StatType)))
@@ -255,18 +256,36 @@ namespace Sammoh.TurnBasedStrategy.Editor
             if (string.IsNullOrEmpty(equipmentName) || database == null)
                 return;
 
-            var equipment = new Equipment(equipmentName, selectedSlot, modifiers.ToArray(), description);
-            database.AddEquipment(equipment);
-            
-            EditorUtility.SetDirty(database);
-            AssetDatabase.SaveAssets();
+            // Create the equipment ScriptableObject
+            var equipment = CreateInstance<Equipment>();
+            equipment.Initialize(equipmentName, selectedSlot, modifiers.ToArray(), description);
 
-            Debug.Log($"Created equipment: {equipment.EquipmentName}");
+            // Save as asset file
+            string fileName = equipmentName.Replace(" ", "_") + "_Equipment.asset";
+            string path = EditorUtility.SaveFilePanelInProject(
+                "Save Equipment Asset",
+                fileName,
+                "asset",
+                $"Choose where to save {equipmentName}");
 
-            // Clear form
-            equipmentName = "";
-            description = "";
-            modifiers.Clear();
+            if (!string.IsNullOrEmpty(path))
+            {
+                AssetDatabase.CreateAsset(equipment, path);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+
+                // Add to database
+                database.AddEquipment(equipment);
+                EditorUtility.SetDirty(database);
+                AssetDatabase.SaveAssets();
+
+                Debug.Log($"Created equipment asset: {equipment.EquipmentName} at {path}");
+
+                // Clear form
+                equipmentName = "";
+                description = "";
+                modifiers.Clear();
+            }
         }
     }
 }

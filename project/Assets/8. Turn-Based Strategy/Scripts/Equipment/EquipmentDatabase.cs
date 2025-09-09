@@ -4,18 +4,18 @@ using UnityEngine;
 namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
-    /// ScriptableObject database for storing and managing equipment items
+    /// ScriptableObject database for storing and managing equipment asset references
     /// </summary>
     [CreateAssetMenu(fileName = "EquipmentDatabase", menuName = "Turn-Based Strategy/Equipment Database")]
     public class EquipmentDatabase : ScriptableObject
     {
-        [SerializeField] private List<Equipment> weapons = new List<Equipment>();
-        [SerializeField] private List<Equipment> armor = new List<Equipment>();
-        [SerializeField] private List<Equipment> accessories = new List<Equipment>();
+        [SerializeField] private Equipment[] weapons = new Equipment[0];
+        [SerializeField] private Equipment[] armor = new Equipment[0];
+        [SerializeField] private Equipment[] accessories = new Equipment[0];
 
-        public List<Equipment> Weapons => weapons;
-        public List<Equipment> Armor => armor;
-        public List<Equipment> Accessories => accessories;
+        public Equipment[] Weapons => weapons;
+        public Equipment[] Armor => armor;
+        public Equipment[] Accessories => accessories;
 
         /// <summary>
         /// Gets all equipment of a specific slot type
@@ -51,32 +51,23 @@ namespace Sammoh.TurnBasedStrategy
         }
 
         /// <summary>
-        /// Adds equipment to the database
+        /// Adds equipment to the database (Editor only - use SetEquipmentArrays for runtime)
         /// </summary>
         /// <param name="equipment">The equipment to add</param>
         public void AddEquipment(Equipment equipment)
         {
             if (equipment == null) return;
 
-            switch (equipment.Slot)
+            var equipmentList = GetEquipmentBySlot(equipment.Slot);
+            if (!equipmentList.Contains(equipment))
             {
-                case EquipmentSlot.Weapon:
-                    if (!weapons.Contains(equipment))
-                        weapons.Add(equipment);
-                    break;
-                case EquipmentSlot.Armor:
-                    if (!armor.Contains(equipment))
-                        armor.Add(equipment);
-                    break;
-                case EquipmentSlot.Accessory:
-                    if (!accessories.Contains(equipment))
-                        accessories.Add(equipment);
-                    break;
+                equipmentList.Add(equipment);
+                SetEquipmentArrays(equipmentList, equipment.Slot);
             }
         }
 
         /// <summary>
-        /// Removes equipment from the database
+        /// Removes equipment from the database (Editor only - use SetEquipmentArrays for runtime)
         /// </summary>
         /// <param name="equipment">The equipment to remove</param>
         /// <returns>True if equipment was removed, false otherwise</returns>
@@ -84,16 +75,35 @@ namespace Sammoh.TurnBasedStrategy
         {
             if (equipment == null) return false;
 
-            switch (equipment.Slot)
+            var equipmentList = GetEquipmentBySlot(equipment.Slot);
+            bool removed = equipmentList.Remove(equipment);
+            
+            if (removed)
+            {
+                SetEquipmentArrays(equipmentList, equipment.Slot);
+            }
+            
+            return removed;
+        }
+
+        /// <summary>
+        /// Sets the equipment array for a specific slot type
+        /// </summary>
+        /// <param name="equipmentList">List of equipment to set</param>
+        /// <param name="slot">The slot type to update</param>
+        private void SetEquipmentArrays(List<Equipment> equipmentList, EquipmentSlot slot)
+        {
+            switch (slot)
             {
                 case EquipmentSlot.Weapon:
-                    return weapons.Remove(equipment);
+                    weapons = equipmentList.ToArray();
+                    break;
                 case EquipmentSlot.Armor:
-                    return armor.Remove(equipment);
+                    armor = equipmentList.ToArray();
+                    break;
                 case EquipmentSlot.Accessory:
-                    return accessories.Remove(equipment);
-                default:
-                    return false;
+                    accessories = equipmentList.ToArray();
+                    break;
             }
         }
 
@@ -111,80 +121,107 @@ namespace Sammoh.TurnBasedStrategy
         }
 
         /// <summary>
-        /// Creates default equipment for demonstration purposes
+        /// Creates default equipment for demonstration purposes (creates runtime instances, not asset files)
         /// </summary>
         [ContextMenu("Create Default Equipment")]
         public void CreateDefaultEquipment()
         {
             // Clear existing equipment
-            weapons.Clear();
-            armor.Clear();
-            accessories.Clear();
+            weapons = new Equipment[0];
+            armor = new Equipment[0];
+            accessories = new Equipment[0];
+
+            var weaponsList = new List<Equipment>();
+            var armorList = new List<Equipment>();
+            var accessoriesList = new List<Equipment>();
 
             // Create weapons
-            weapons.Add(new Equipment("Iron Sword", EquipmentSlot.Weapon,
+            var ironSword = ScriptableObject.CreateInstance<Equipment>();
+            ironSword.Initialize("Iron Sword", EquipmentSlot.Weapon,
                 new StatModifier[] {
                     new StatModifier(StatType.Attack, 5, ModifierType.Additive)
                 },
-                "A sturdy iron sword"));
+                "A sturdy iron sword");
+            weaponsList.Add(ironSword);
 
-            weapons.Add(new Equipment("Steel Blade", EquipmentSlot.Weapon,
+            var steelBlade = ScriptableObject.CreateInstance<Equipment>();
+            steelBlade.Initialize("Steel Blade", EquipmentSlot.Weapon,
                 new StatModifier[] {
                     new StatModifier(StatType.Attack, 8, ModifierType.Additive),
                     new StatModifier(StatType.Speed, 2, ModifierType.Additive)
                 },
-                "A sharp steel blade"));
+                "A sharp steel blade");
+            weaponsList.Add(steelBlade);
 
-            weapons.Add(new Equipment("Flame Sword", EquipmentSlot.Weapon,
+            var flameSword = ScriptableObject.CreateInstance<Equipment>();
+            flameSword.Initialize("Flame Sword", EquipmentSlot.Weapon,
                 new StatModifier[] {
                     new StatModifier(StatType.Attack, 12, ModifierType.Additive),
                     new StatModifier(StatType.Mana, -5, ModifierType.Additive)
                 },
-                "A magical sword wreathed in flames"));
+                "A magical sword wreathed in flames");
+            weaponsList.Add(flameSword);
 
             // Create armor
-            armor.Add(new Equipment("Leather Armor", EquipmentSlot.Armor,
+            var leatherArmor = ScriptableObject.CreateInstance<Equipment>();
+            leatherArmor.Initialize("Leather Armor", EquipmentSlot.Armor,
                 new StatModifier[] {
                     new StatModifier(StatType.Defense, 3, ModifierType.Additive),
                     new StatModifier(StatType.MaxHealth, 10, ModifierType.Additive)
                 },
-                "Light and flexible leather armor"));
+                "Light and flexible leather armor");
+            armorList.Add(leatherArmor);
 
-            armor.Add(new Equipment("Chain Mail", EquipmentSlot.Armor,
+            var chainMail = ScriptableObject.CreateInstance<Equipment>();
+            chainMail.Initialize("Chain Mail", EquipmentSlot.Armor,
                 new StatModifier[] {
                     new StatModifier(StatType.Defense, 6, ModifierType.Additive),
                     new StatModifier(StatType.MaxHealth, 15, ModifierType.Additive),
                     new StatModifier(StatType.Speed, -2, ModifierType.Additive)
                 },
-                "Heavy chain mail armor"));
+                "Heavy chain mail armor");
+            armorList.Add(chainMail);
 
-            armor.Add(new Equipment("Mage Robes", EquipmentSlot.Armor,
+            var mageRobes = ScriptableObject.CreateInstance<Equipment>();
+            mageRobes.Initialize("Mage Robes", EquipmentSlot.Armor,
                 new StatModifier[] {
                     new StatModifier(StatType.Mana, 20, ModifierType.Additive),
                     new StatModifier(StatType.Defense, -2, ModifierType.Additive)
                 },
-                "Enchanted robes that enhance magical power"));
+                "Enchanted robes that enhance magical power");
+            armorList.Add(mageRobes);
 
             // Create accessories
-            accessories.Add(new Equipment("Power Ring", EquipmentSlot.Accessory,
+            var powerRing = ScriptableObject.CreateInstance<Equipment>();
+            powerRing.Initialize("Power Ring", EquipmentSlot.Accessory,
                 new StatModifier[] {
                     new StatModifier(StatType.Attack, 20, ModifierType.Multiplicative)
                 },
-                "A ring that amplifies physical strength"));
+                "A ring that amplifies physical strength");
+            accessoriesList.Add(powerRing);
 
-            accessories.Add(new Equipment("Health Amulet", EquipmentSlot.Accessory,
+            var healthAmulet = ScriptableObject.CreateInstance<Equipment>();
+            healthAmulet.Initialize("Health Amulet", EquipmentSlot.Accessory,
                 new StatModifier[] {
                     new StatModifier(StatType.MaxHealth, 30, ModifierType.Additive)
                 },
-                "An amulet that grants additional vitality"));
+                "An amulet that grants additional vitality");
+            accessoriesList.Add(healthAmulet);
 
-            accessories.Add(new Equipment("Speed Boots", EquipmentSlot.Accessory,
+            var speedBoots = ScriptableObject.CreateInstance<Equipment>();
+            speedBoots.Initialize("Speed Boots", EquipmentSlot.Accessory,
                 new StatModifier[] {
                     new StatModifier(StatType.Speed, 5, ModifierType.Additive)
                 },
-                "Boots that enhance movement speed"));
+                "Boots that enhance movement speed");
+            accessoriesList.Add(speedBoots);
 
-            Debug.Log($"Created default equipment: {weapons.Count} weapons, {armor.Count} armor pieces, {accessories.Count} accessories");
+            // Set arrays
+            weapons = weaponsList.ToArray();
+            armor = armorList.ToArray();
+            accessories = accessoriesList.ToArray();
+
+            Debug.Log($"Created default equipment: {weapons.Length} weapons, {armor.Length} armor pieces, {accessories.Length} accessories");
         }
     }
 }

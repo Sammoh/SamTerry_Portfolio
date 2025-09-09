@@ -12,28 +12,40 @@ public class EquipmentTests
     [SetUp]
     public void Setup()
     {
-        // Create test equipment
-        testWeapon = new Equipment("Test Sword", EquipmentSlot.Weapon,
+        // Create test equipment using ScriptableObject.CreateInstance
+        testWeapon = ScriptableObject.CreateInstance<Equipment>();
+        testWeapon.Initialize("Test Sword", EquipmentSlot.Weapon,
             new StatModifier[] {
                 new StatModifier(StatType.Attack, 10, ModifierType.Additive),
                 new StatModifier(StatType.Speed, 5, ModifierType.Additive)
             },
             "A test weapon");
 
-        testArmor = new Equipment("Test Armor", EquipmentSlot.Armor,
+        testArmor = ScriptableObject.CreateInstance<Equipment>();
+        testArmor.Initialize("Test Armor", EquipmentSlot.Armor,
             new StatModifier[] {
                 new StatModifier(StatType.Defense, 5, ModifierType.Additive),
                 new StatModifier(StatType.MaxHealth, 20, ModifierType.Multiplicative)
             },
             "Test armor piece");
 
-        testAccessory = new Equipment("Test Ring", EquipmentSlot.Accessory,
+        testAccessory = ScriptableObject.CreateInstance<Equipment>();
+        testAccessory.Initialize("Test Ring", EquipmentSlot.Accessory,
             new StatModifier[] {
                 new StatModifier(StatType.Attack, 15, ModifierType.Multiplicative)
             },
             "A magical test ring");
 
         equipmentManager = new EquipmentManager();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        // Clean up ScriptableObject instances
+        if (testWeapon != null) Object.DestroyImmediate(testWeapon);
+        if (testArmor != null) Object.DestroyImmediate(testArmor);
+        if (testAccessory != null) Object.DestroyImmediate(testAccessory);
     }
 
     [Test]
@@ -62,7 +74,8 @@ public class EquipmentTests
     [Test]
     public void Equipment_GetModifiedValue_CombinesAdditiveAndMultiplicative()
     {
-        var combinedEquipment = new Equipment("Combined", EquipmentSlot.Weapon,
+        var combinedEquipment = ScriptableObject.CreateInstance<Equipment>();
+        combinedEquipment.Initialize("Combined", EquipmentSlot.Weapon,
             new StatModifier[] {
                 new StatModifier(StatType.Attack, 5, ModifierType.Additive),
                 new StatModifier(StatType.Attack, 10, ModifierType.Multiplicative)
@@ -97,7 +110,8 @@ public class EquipmentTests
     public void EquipmentManager_EquipItem_ReturnsReplacedItem()
     {
         var firstWeapon = testWeapon;
-        var secondWeapon = new Equipment("Second Sword", EquipmentSlot.Weapon,
+        var secondWeapon = ScriptableObject.CreateInstance<Equipment>();
+        secondWeapon.Initialize("Second Sword", EquipmentSlot.Weapon,
             new StatModifier[0], "Another weapon");
 
         equipmentManager.EquipItem(firstWeapon);

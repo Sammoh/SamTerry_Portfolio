@@ -6,8 +6,8 @@ namespace Sammoh.TurnBasedStrategy
     /// <summary>
     /// Represents an equipment item that can be equipped by characters
     /// </summary>
-    [Serializable]
-    public class Equipment
+    [CreateAssetMenu(fileName = "New Equipment", menuName = "Turn-Based Strategy/Equipment")]
+    public class Equipment : ScriptableObject
     {
         [SerializeField] private string equipmentName;
         [SerializeField] private EquipmentSlot slot;
@@ -19,7 +19,14 @@ namespace Sammoh.TurnBasedStrategy
         public StatModifier[] StatModifiers => statModifiers;
         public string Description => description;
 
-        public Equipment(string name, EquipmentSlot slot, StatModifier[] modifiers, string description)
+        /// <summary>
+        /// Initializes the equipment with the specified properties
+        /// </summary>
+        /// <param name="name">The equipment name</param>
+        /// <param name="slot">The equipment slot</param>
+        /// <param name="modifiers">Array of stat modifiers</param>
+        /// <param name="description">Equipment description</param>
+        public void Initialize(string name, EquipmentSlot slot, StatModifier[] modifiers, string description)
         {
             this.equipmentName = name;
             this.slot = slot;
