@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e734b1929c409408969b459437d167, type: 3}
+  m_Name: Rare_Necklace_Enchanted_Band
+  m_EditorClassIdentifier: 
+  equipmentName: 
+  description: 
+  icon: {fileID: 0}
+  level: 1
+  weight: 1.2
+  value: 250
+  rarity: 2
+  accessoryType: 1
+  statModifiers:
+  - statType: 1
+    value: 50
+    modifierType: 0
+  - statType: 1
+    value: 50
+    modifierType: 0
+  - statType: 3
+    value: 7.5
+    modifierType: 1
+  isStackable: 0
+  maxStackSize: 1
