@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace Sammoh.Two
+namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
     /// Handles the generation and management of equipment assets.

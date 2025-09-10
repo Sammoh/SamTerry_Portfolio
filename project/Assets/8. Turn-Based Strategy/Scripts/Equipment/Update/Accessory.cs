@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sammoh.Two
+namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
     /// ScriptableObject representing an accessory equipment type.

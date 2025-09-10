@@ -6,7 +6,7 @@ namespace Sammoh.TurnBasedStrategy
     /// ScriptableObject representing a weapon equipment type.
     /// </summary>
     [CreateAssetMenu(fileName = "New_Weapon", menuName = "Equipment/Weapon", order = 1)]
-    public class Weapon : Equipment
+    public class WeaponSO : EquipmentSO
     {
         [Header("Weapon Properties")]
         [SerializeField] private WeaponType weaponType = WeaponType.Sword;
@@ -85,6 +85,9 @@ namespace Sammoh.TurnBasedStrategy
         public override void GenerateDefaultValues()
         {
             base.GenerateDefaultValues();
+            
+            // Ensure weapon goes in weapon slot
+            slot = EquipmentSlot.Weapon;
             
             // Adjust weapon stats based on rarity and type
             float rarityMultiplier = GetRarityMultiplier(rarity);

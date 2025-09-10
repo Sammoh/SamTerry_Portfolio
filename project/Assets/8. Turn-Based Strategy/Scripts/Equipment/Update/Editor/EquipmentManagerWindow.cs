@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Sammoh.Two
+namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
     /// Equipment Manager with StatModifiers authoring & batch tools (aligned to Sammoh.Two model).

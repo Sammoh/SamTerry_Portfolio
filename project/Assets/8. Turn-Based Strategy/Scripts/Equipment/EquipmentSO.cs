@@ -4,14 +4,15 @@ using UnityEngine;
 namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
-    /// ScriptableObject base for all equipment assets in the "Two" module,
-    /// aligned with Sammoh.TurnBasedStrategy's Equipment stat modifier model.
-    ///
-    /// - Keeps authoring-centric fields (icon, rarity, value, weight, etc.)
-    /// - Adds Slot + StatModifiers (shared with TBS)
-    /// - Mirrors TBS evaluation order: additive, then multiplicative (percent)
+    /// ScriptableObject base for all equipment assets, providing enhanced authoring capabilities
+    /// while maintaining compatibility with the existing Equipment system.
+    /// 
+    /// This class provides:
+    /// - Icon, rarity, value, weight for rich authoring
+    /// - Slot + StatModifiers for TBS compatibility
+    /// - Procedural generation and editor tools
     /// </summary>
-    public abstract class Equipment : ScriptableObject
+    public abstract class EquipmentSO : ScriptableObject
     {
         [Header("Basic Information")]
         [SerializeField] protected string equipmentName;
@@ -28,11 +29,11 @@ namespace Sammoh.TurnBasedStrategy
         [SerializeField] protected int value = 100;
         [SerializeField] protected EquipmentRarity rarity = EquipmentRarity.Common;
 
-        [Header("TBS Alignment")]
-        [Tooltip("Which slot this equipment occupies (shared with Sammoh.TurnBasedStrategy)")]
+        [Header("Equipment Stats")]
+        [Tooltip("Which slot this equipment occupies")]
         [SerializeField] protected EquipmentSlot slot;
 
-        [Tooltip("Stat modifiers evaluated in additive -> multiplicative order (shared with Sammoh.TurnBasedStrategy)")]
+        [Tooltip("Stat modifiers evaluated in additive -> multiplicative order")]
         [SerializeField] protected StatModifier[] statModifiers = Array.Empty<StatModifier>();
 
         /// <summary>
@@ -89,28 +90,36 @@ namespace Sammoh.TurnBasedStrategy
             set => rarity = value;
         }
 
-        /// <summary>Category for authoring & filtering inside the Two module.</summary>
+        /// <summary>Category for authoring & filtering.</summary>
         public abstract EquipmentType Type { get; }
 
-        /// <summary>Slot compatibility (shared with TBS).</summary>
+        /// <summary>Slot compatibility.</summary>
         public EquipmentSlot Slot
         {
             get => slot;
             set => slot = value;
         }
 
-        /// <summary>Full set of stat modifiers (shared with TBS).</summary>
+        /// <summary>Full set of stat modifiers.</summary>
         public StatModifier[] StatModifiers
         {
             get => statModifiers ?? Array.Empty<StatModifier>();
             set => statModifiers = value ?? Array.Empty<StatModifier>();
         }
 
-        #region TBS-Compatible Logic
+        #region Compatibility with Legacy Equipment System
 
         /// <summary>
-        /// TBS-aligned evaluation: apply additive first, then multiplicative (percent).
-        /// Mirrors Sammoh.TurnBasedStrategy.Equipment.GetModifiedValue.
+        /// Creates a LegacyEquipment instance from this ScriptableObject for backward compatibility.
+        /// </summary>
+        /// <returns>A LegacyEquipment instance with equivalent data.</returns>
+        public LegacyEquipment ToLegacyEquipment()
+        {
+            return new LegacyEquipment(EquipmentName, Slot, StatModifiers, Description);
+        }
+
+        /// <summary>
+        /// Gets the total modifier for a specific stat type, matching the legacy system behavior.
         /// </summary>
         /// <param name="statType">Target stat type.</param>
         /// <param name="baseValue">Unmodified base value.</param>
@@ -119,7 +128,7 @@ namespace Sammoh.TurnBasedStrategy
         {
             float result = baseValue;
 
-            // 1) Additive
+            // Apply additive modifiers first
             var mods = StatModifiers;
             for (int i = 0; i < mods.Length; i++)
             {
@@ -128,7 +137,7 @@ namespace Sammoh.TurnBasedStrategy
                     result += m.Value;
             }
 
-            // 2) Multiplicative (percent as 100 = +100%)
+            // Then apply multiplicative modifiers (percent as 100 = +100%)
             for (int i = 0; i < mods.Length; i++)
             {
                 ref readonly var m = ref mods[i];
@@ -207,23 +216,5 @@ namespace Sammoh.TurnBasedStrategy
         }
 
         #endregion
-    }
-
-    /// <summary>Local authoring category for Two's filtering/UX.</summary>
-    public enum EquipmentType
-    {
-        Weapon,
-        Accessory,
-        Armor
-    }
-
-    /// <summary>Rarity buckets for economic/scaling helpers.</summary>
-    public enum EquipmentRarity
-    {
-        Common,
-        Uncommon,
-        Rare,
-        Epic,
-        Legendary
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Sammoh.Two
+namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
     /// Demonstration script showing how to use the Equipment system.

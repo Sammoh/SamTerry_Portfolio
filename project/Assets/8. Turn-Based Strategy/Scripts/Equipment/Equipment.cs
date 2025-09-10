@@ -4,10 +4,11 @@ using UnityEngine;
 namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
+    /// Legacy equipment data structure - now replaced by ScriptableObject-based Equipment system
     /// Represents an equipment item that can be equipped by characters
     /// </summary>
     [Serializable]
-    public class Equipment
+    public class LegacyEquipment
     {
         [SerializeField] private string equipmentName;
         [SerializeField] private EquipmentSlot slot;
@@ -19,7 +20,7 @@ namespace Sammoh.TurnBasedStrategy
         public StatModifier[] StatModifiers => statModifiers;
         public string Description => description;
 
-        public Equipment(string name, EquipmentSlot slot, StatModifier[] modifiers, string description)
+        public LegacyEquipment(string name, EquipmentSlot slot, StatModifier[] modifiers, string description)
         {
             this.equipmentName = name;
             this.slot = slot;

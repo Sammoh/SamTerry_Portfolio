@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Sammoh.Two
+namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
     /// ScriptableObject that serves as a centralized database for all equipment assets.

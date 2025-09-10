@@ -4,30 +4,30 @@ using Sammoh.TurnBasedStrategy;
 
 public class EquipmentTests
 {
-    private Equipment testWeapon;
-    private Equipment testArmor;
-    private Equipment testAccessory;
+    private LegacyEquipment testWeapon;
+    private LegacyEquipment testArmor;
+    private LegacyEquipment testAccessory;
     private EquipmentManager equipmentManager;
 
     [SetUp]
     public void Setup()
     {
         // Create test equipment
-        testWeapon = new Equipment("Test Sword", EquipmentSlot.Weapon,
+        testWeapon = new LegacyEquipment("Test Sword", EquipmentSlot.Weapon,
             new StatModifier[] {
                 new StatModifier(StatType.Attack, 10, ModifierType.Additive),
                 new StatModifier(StatType.Speed, 5, ModifierType.Additive)
             },
             "A test weapon");
 
-        testArmor = new Equipment("Test Armor", EquipmentSlot.Armor,
+        testArmor = new LegacyEquipment("Test Armor", EquipmentSlot.Armor,
             new StatModifier[] {
                 new StatModifier(StatType.Defense, 5, ModifierType.Additive),
                 new StatModifier(StatType.MaxHealth, 20, ModifierType.Multiplicative)
             },
             "Test armor piece");
 
-        testAccessory = new Equipment("Test Ring", EquipmentSlot.Accessory,
+        testAccessory = new LegacyEquipment("Test Ring", EquipmentSlot.Accessory,
             new StatModifier[] {
                 new StatModifier(StatType.Attack, 15, ModifierType.Multiplicative)
             },
@@ -62,7 +62,7 @@ public class EquipmentTests
     [Test]
     public void Equipment_GetModifiedValue_CombinesAdditiveAndMultiplicative()
     {
-        var combinedEquipment = new Equipment("Combined", EquipmentSlot.Weapon,
+        var combinedEquipment = new LegacyEquipment("Combined", EquipmentSlot.Weapon,
             new StatModifier[] {
                 new StatModifier(StatType.Attack, 5, ModifierType.Additive),
                 new StatModifier(StatType.Attack, 10, ModifierType.Multiplicative)
@@ -97,7 +97,7 @@ public class EquipmentTests
     public void EquipmentManager_EquipItem_ReturnsReplacedItem()
     {
         var firstWeapon = testWeapon;
-        var secondWeapon = new Equipment("Second Sword", EquipmentSlot.Weapon,
+        var secondWeapon = new LegacyEquipment("Second Sword", EquipmentSlot.Weapon,
             new StatModifier[0], "Another weapon");
 
         equipmentManager.EquipItem(firstWeapon);
