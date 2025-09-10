@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Sammoh.TurnBasedStrategy
 {
@@ -99,8 +100,77 @@ namespace Sammoh.TurnBasedStrategy
         {
             // Create temporary equipment for demo
             equipmentDatabase = ScriptableObject.CreateInstance<EquipmentDatabase>();
-            equipmentDatabase.CreateDefaultEquipment();
+            
+            // Instead of using CreateDefaultEquipment which creates asset instances,
+            // create runtime equipment instances manually
+            CreateRuntimeEquipmentForDemo();
+            
             Debug.Log("Created temporary equipment database for demo");
+        }
+
+        /// <summary>
+        /// Creates runtime equipment instances suitable for testing/demo purposes
+        /// </summary>
+        private void CreateRuntimeEquipmentForDemo()
+        {
+            var weaponsList = new List<Equipment>();
+            var armorList = new List<Equipment>();
+            var accessoriesList = new List<Equipment>();
+
+            // Create weapons (runtime instances)
+            var ironSword = CreateRuntimeEquipment("Iron Sword", EquipmentSlot.Weapon,
+                new StatModifier[] {
+                    new StatModifier(StatType.Attack, 5, ModifierType.Additive)
+                },
+                "A sturdy iron sword");
+            weaponsList.Add(ironSword);
+
+            var steelBlade = CreateRuntimeEquipment("Steel Blade", EquipmentSlot.Weapon,
+                new StatModifier[] {
+                    new StatModifier(StatType.Attack, 8, ModifierType.Additive),
+                    new StatModifier(StatType.Speed, 2, ModifierType.Additive)
+                },
+                "A sharp steel blade");
+            weaponsList.Add(steelBlade);
+
+            // Create armor (runtime instances)
+            var leatherArmor = CreateRuntimeEquipment("Leather Armor", EquipmentSlot.Armor,
+                new StatModifier[] {
+                    new StatModifier(StatType.Defense, 3, ModifierType.Additive),
+                    new StatModifier(StatType.MaxHealth, 10, ModifierType.Additive)
+                },
+                "Light and flexible leather armor");
+            armorList.Add(leatherArmor);
+
+            // Create accessories (runtime instances)
+            var powerRing = CreateRuntimeEquipment("Power Ring", EquipmentSlot.Accessory,
+                new StatModifier[] {
+                    new StatModifier(StatType.Attack, 20, ModifierType.Multiplicative)
+                },
+                "A ring that amplifies physical strength");
+            accessoriesList.Add(powerRing);
+
+            // Use reflection to set private arrays since we can't modify ScriptableObject at runtime normally
+            var weaponsField = typeof(EquipmentDatabase).GetField("weapons", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var armorField = typeof(EquipmentDatabase).GetField("armor", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var accessoriesField = typeof(EquipmentDatabase).GetField("accessories", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            weaponsField?.SetValue(equipmentDatabase, weaponsList.ToArray());
+            armorField?.SetValue(equipmentDatabase, armorList.ToArray());
+            accessoriesField?.SetValue(equipmentDatabase, accessoriesList.ToArray());
+        }
+
+        /// <summary>
+        /// Creates a runtime equipment instance for demonstration purposes
+        /// </summary>
+        private Equipment CreateRuntimeEquipment(string name, EquipmentSlot slot, StatModifier[] modifiers, string description)
+        {
+            var equipment = ScriptableObject.CreateInstance<Equipment>();
+            equipment.Initialize(name, slot, modifiers, description);
+            return equipment;
         }
 
         private void DemonstrateBasicEquipment()

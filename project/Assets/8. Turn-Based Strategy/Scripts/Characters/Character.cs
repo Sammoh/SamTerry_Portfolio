@@ -82,18 +82,29 @@ namespace Sammoh.TurnBasedStrategy
             }
             
             // Initialize equipment manager connection to stats
-            if (stats != null && equipmentManager != null)
-            {
-                stats.SetEquipmentManager(equipmentManager);
-            }
+            EnsureEquipmentManagerInitialized();
         }
 
         private void Awake()
         {
             // Ensure equipment manager is initialized
+            EnsureEquipmentManagerInitialized();
+        }
+
+        /// <summary>
+        /// Ensures the equipment manager is properly initialized and connected to stats
+        /// </summary>
+        private void EnsureEquipmentManagerInitialized()
+        {
             if (equipmentManager == null)
             {
                 equipmentManager = new EquipmentManager();
+            }
+
+            // Connect equipment manager to stats if we have stats
+            if (stats != null)
+            {
+                stats.SetEquipmentManager(equipmentManager);
             }
         }
     }

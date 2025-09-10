@@ -16,6 +16,13 @@ namespace Sammoh.TurnBasedStrategy
 
         // Equipment manager reference for calculating effective stats
         private EquipmentManager equipmentManager;
+        
+        // Cached effective stats to improve performance
+        private int? cachedMaxHealth;
+        private int? cachedAttack;
+        private int? cachedDefense;
+        private int? cachedSpeed;
+        private int? cachedMana;
 
         // Base stats (equipment-free values)
         public int BaseMaxHealth => maxHealth;
@@ -24,18 +31,13 @@ namespace Sammoh.TurnBasedStrategy
         public int BaseSpeed => speed;
         public int BaseMana => mana;
 
-        // Effective stats (base stats + equipment bonuses)
-        public int MaxHealth => equipmentManager != null ? 
-            Mathf.RoundToInt(equipmentManager.CalculateModifiedStat(StatType.MaxHealth, maxHealth)) : maxHealth;
+        // Effective stats (base stats + equipment bonuses) with caching
+        public int MaxHealth => cachedMaxHealth ?? (cachedMaxHealth = CalculateEffectiveStat(StatType.MaxHealth, maxHealth)).Value;
         public int CurrentHealth => currentHealth;
-        public int Attack => equipmentManager != null ? 
-            Mathf.RoundToInt(equipmentManager.CalculateModifiedStat(StatType.Attack, attack)) : attack;
-        public int Defense => equipmentManager != null ? 
-            Mathf.RoundToInt(equipmentManager.CalculateModifiedStat(StatType.Defense, defense)) : defense;
-        public int Speed => equipmentManager != null ? 
-            Mathf.RoundToInt(equipmentManager.CalculateModifiedStat(StatType.Speed, speed)) : speed;
-        public int Mana => equipmentManager != null ? 
-            Mathf.RoundToInt(equipmentManager.CalculateModifiedStat(StatType.Mana, mana)) : mana;
+        public int Attack => cachedAttack ?? (cachedAttack = CalculateEffectiveStat(StatType.Attack, attack)).Value;
+        public int Defense => cachedDefense ?? (cachedDefense = CalculateEffectiveStat(StatType.Defense, defense)).Value;
+        public int Speed => cachedSpeed ?? (cachedSpeed = CalculateEffectiveStat(StatType.Speed, speed)).Value;
+        public int Mana => cachedMana ?? (cachedMana = CalculateEffectiveStat(StatType.Mana, mana)).Value;
         public int CurrentMana => currentMana;
 
         public bool IsAlive => currentHealth > 0;
@@ -57,7 +59,22 @@ namespace Sammoh.TurnBasedStrategy
         /// <param name="equipmentManager">The equipment manager to use</param>
         public void SetEquipmentManager(EquipmentManager equipmentManager)
         {
+            // Unsubscribe from old equipment manager events
+            if (this.equipmentManager != null)
+            {
+                this.equipmentManager.OnEquipmentChanged -= InvalidateStatCache;
+            }
+
             this.equipmentManager = equipmentManager;
+
+            // Subscribe to new equipment manager events
+            if (this.equipmentManager != null)
+            {
+                this.equipmentManager.OnEquipmentChanged += InvalidateStatCache;
+            }
+
+            // Invalidate cache when equipment manager changes
+            InvalidateStatCache();
         }
 
         public void TakeDamage(int damage)
@@ -94,6 +111,32 @@ namespace Sammoh.TurnBasedStrategy
             // Use effective max values for full restore
             currentHealth = MaxHealth;
             currentMana = Mana;
+        }
+
+        /// <summary>
+        /// Calculates the effective stat value including equipment bonuses
+        /// </summary>
+        /// <param name="statType">The type of stat to calculate</param>
+        /// <param name="baseValue">The base stat value</param>
+        /// <returns>The effective stat value including equipment modifications</returns>
+        private int CalculateEffectiveStat(StatType statType, int baseValue)
+        {
+            if (equipmentManager == null)
+                return baseValue;
+
+            return Mathf.RoundToInt(equipmentManager.CalculateModifiedStat(statType, baseValue));
+        }
+
+        /// <summary>
+        /// Invalidates the cached stat values, forcing recalculation on next access
+        /// </summary>
+        private void InvalidateStatCache()
+        {
+            cachedMaxHealth = null;
+            cachedAttack = null;
+            cachedDefense = null;
+            cachedSpeed = null;
+            cachedMana = null;
         }
     }
 }

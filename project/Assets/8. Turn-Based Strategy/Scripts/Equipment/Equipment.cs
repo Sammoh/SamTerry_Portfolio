@@ -35,11 +35,12 @@ namespace Sammoh.TurnBasedStrategy
         }
 
         /// <summary>
-        /// Gets the total modifier for a specific stat type
+        /// Gets the total modifier for a specific stat type from this equipment
+        /// Note: For complex calculations, use EquipmentManager.CalculateModifiedStat instead
         /// </summary>
         /// <param name="statType">The stat type to get modifiers for</param>
         /// <param name="baseValue">The base value of the stat</param>
-        /// <returns>The modified value after applying all relevant modifiers</returns>
+        /// <returns>The modified value after applying this equipment's modifiers</returns>
         public float GetModifiedValue(StatType statType, float baseValue)
         {
             float result = baseValue;
