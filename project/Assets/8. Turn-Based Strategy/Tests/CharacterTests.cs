@@ -316,4 +316,31 @@ public class CharacterEquipmentIntegrationTests
         Assert.AreEqual(10, manualStats.Defense);
         Assert.AreEqual(100, manualStats.MaxHealth);
     }
+
+    [Test]
+    public void Character_EquipmentChange_AutomaticallyAdjustsCurrentStats()
+    {
+        // Create armor that reduces max health
+        var lightArmor = ScriptableObject.CreateInstance<Equipment>();
+        lightArmor.Initialize("Light Armor", EquipmentSlot.Armor,
+            new StatModifier[] {
+                new StatModifier(StatType.MaxHealth, -20, ModifierType.Additive)
+            },
+            "Light protective gear");
+
+        // Set character to max health
+        character.RestoreToFull();
+        int initialHealth = character.Stats.CurrentHealth;
+        
+        // Equip armor that reduces max health
+        character.EquipItem(lightArmor);
+        
+        // Current health should be adjusted to not exceed new max health
+        Assert.LessOrEqual(character.Stats.CurrentHealth, character.Stats.MaxHealth);
+        Assert.AreEqual(80, character.Stats.MaxHealth); // 100 - 20
+        Assert.AreEqual(80, character.Stats.CurrentHealth); // Should be capped at new max
+
+        // Cleanup
+        Object.DestroyImmediate(lightArmor);
+    }
 }

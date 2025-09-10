@@ -96,5 +96,14 @@ namespace Sammoh.TurnBasedStrategy
                 equipmentManager = new EquipmentManager();
             }
         }
+
+        private void OnDestroy()
+        {
+            // Cleanup event subscriptions
+            if (stats != null)
+            {
+                stats.Cleanup();
+            }
+        }
     }
 }

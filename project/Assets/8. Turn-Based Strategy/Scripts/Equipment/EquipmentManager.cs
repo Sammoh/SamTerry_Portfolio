@@ -51,7 +51,10 @@ namespace Sammoh.TurnBasedStrategy
         public Equipment EquipItem(Equipment equipment)
         {
             if (equipment == null)
+            {
+                Debug.LogWarning("Attempted to equip null equipment");
                 return null;
+            }
 
             Equipment previousItem = GetEquippedItem(equipment.Slot);
 
@@ -66,6 +69,9 @@ namespace Sammoh.TurnBasedStrategy
                 case EquipmentSlot.Accessory:
                     accessory = equipment;
                     break;
+                default:
+                    Debug.LogWarning($"Unknown equipment slot: {equipment.Slot}");
+                    return null;
             }
 
             OnEquipmentChanged?.Invoke();

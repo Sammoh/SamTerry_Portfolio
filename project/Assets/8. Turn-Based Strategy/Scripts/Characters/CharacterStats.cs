@@ -57,7 +57,37 @@ namespace Sammoh.TurnBasedStrategy
         /// <param name="equipmentManager">The equipment manager to use</param>
         public void SetEquipmentManager(EquipmentManager equipmentManager)
         {
+            // Unsubscribe from previous equipment manager if exists
+            if (this.equipmentManager != null)
+            {
+                this.equipmentManager.OnEquipmentChanged -= OnEquipmentChanged;
+            }
+
             this.equipmentManager = equipmentManager;
+
+            // Subscribe to equipment changes for automatic stat updates
+            if (this.equipmentManager != null)
+            {
+                this.equipmentManager.OnEquipmentChanged += OnEquipmentChanged;
+            }
+        }
+
+        /// <summary>
+        /// Called when equipment changes to handle stat-dependent updates
+        /// </summary>
+        private void OnEquipmentChanged()
+        {
+            // Ensure current health doesn't exceed new max health when equipment changes
+            if (currentHealth > MaxHealth)
+            {
+                currentHealth = MaxHealth;
+            }
+
+            // Ensure current mana doesn't exceed new max mana when equipment changes
+            if (currentMana > Mana)
+            {
+                currentMana = Mana;
+            }
         }
 
         public void TakeDamage(int damage)
@@ -94,6 +124,17 @@ namespace Sammoh.TurnBasedStrategy
             // Use effective max values for full restore
             currentHealth = MaxHealth;
             currentMana = Mana;
+        }
+
+        /// <summary>
+        /// Cleanup method to unsubscribe from events
+        /// </summary>
+        public void Cleanup()
+        {
+            if (equipmentManager != null)
+            {
+                equipmentManager.OnEquipmentChanged -= OnEquipmentChanged;
+            }
         }
     }
 }
