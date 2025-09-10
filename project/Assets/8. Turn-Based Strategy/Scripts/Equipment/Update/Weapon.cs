@@ -87,7 +87,7 @@ namespace Sammoh.Two
             base.GenerateDefaultValues();
             
             // Adjust weapon stats based on rarity and type
-            float rarityMultiplier = GetRarityMultiplier();
+            float rarityMultiplier = GetRarityMultiplier(rarity);
             damage = Mathf.RoundToInt(damage * rarityMultiplier);
             
             // Weapon type specific adjustments

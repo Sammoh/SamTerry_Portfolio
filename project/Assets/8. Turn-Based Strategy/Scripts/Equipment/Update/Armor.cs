@@ -127,7 +127,7 @@ namespace Sammoh.Two
             base.GenerateDefaultValues();
             
             // Adjust armor stats based on rarity, type, and material
-            float rarityMultiplier = GetRarityMultiplier();
+            float rarityMultiplier = GetRarityMultiplier(rarity);
             float materialMultiplier = GetMaterialDefenseMultiplier();
             
             defense = Mathf.RoundToInt(defense * rarityMultiplier);

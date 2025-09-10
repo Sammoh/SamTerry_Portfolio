@@ -81,7 +81,7 @@ namespace Sammoh.Two
             {
                 StatType randomStat = GetRandomStatForAccessoryType();
                 float baseValue = GetBaseStatValue(randomStat);
-                float rarityMultiplier = GetRarityMultiplier();
+                float rarityMultiplier = GetRarityMultiplier(rarity);
                 float finalValue = baseValue * rarityMultiplier;
                 
                 ModifierType modifierType = randomStat == StatType.Health || randomStat == StatType.Mana 
