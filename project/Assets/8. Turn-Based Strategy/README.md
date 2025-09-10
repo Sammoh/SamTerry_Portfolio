@@ -1,23 +1,36 @@
 # Turn-Based Strategy Game System
 
-A comprehensive turn-based strategy game system built using Unity3D and C#, featuring a factory pattern for character creation, strategic combat mechanics, and complete game state management.
+A comprehensive turn-based strategy game system built using Unity3D and C#, featuring a factory pattern for character creation, strategic combat mechanics, complete game state management, and an integrated equipment system that enhances character capabilities.
 
 ## Features
 
 ### Core Systems
-- **Factory Pattern**: Character creation through `CharacterFactory` with support for multiple character classes
+- **Factory Pattern**: Character creation through `CharacterFactory` with support for multiple character classes and automatic equipment assignment
 - **Turn-Based Combat**: Speed-based turn ordering with strategic ability usage
-- **Character Stats**: Health, Mana, Attack, Defense, Speed system with damage calculation
+- **Character Stats**: Health, Mana, Attack, Defense, Speed system with damage calculation enhanced by equipment bonuses
 - **Ability System**: Multiple ability types (Attack, Heal, Defend, Special) with mana costs
+- **Equipment System**: Comprehensive equipment management with stat modifications, multiple equipment slots, and rarity tiers
 - **Game State Management**: Complete state tracking with win/loss conditions
 - **AI System**: Intelligent enemy decision-making
 - **UI Integration**: Button-based interface for ability selection and target choosing
 
+### Equipment System
+The equipment system provides deep character customization through:
+- **Equipment Slots**: Weapon, Armor, and Accessory slots
+- **Stat Modifications**: Equipment provides bonuses/penalties to all character stats
+- **Equipment Rarity**: Common, Uncommon, Rare, Epic, and Legendary tiers
+- **Class Integration**: Equipment restrictions and bonuses tailored to character classes
+- **Dynamic Updates**: Real-time stat recalculation when equipment changes
+
 ### Character Classes
 1. **Warrior**: High health and attack, strong defense, lower speed and mana
+   - Default Equipment: Iron Sword (+5 attack), Leather Armor (+15 health, +8 defense, -1 speed)
 2. **Mage**: High mana and magical damage, lower health and defense
+   - Default Equipment: Oak Staff (+2 attack, +10 mana), Mage Robes (+5 health, +2 defense, +1 speed, +15 mana)
 3. **Rogue**: High speed and critical damage, moderate stats overall
+   - Default Equipment: Steel Dagger (+4 attack, +2 speed), Studded Leather (+8 health, +4 defense, +3 speed)
 4. **Healer**: Balanced stats with powerful healing abilities
+   - Default Equipment: Healing Rod (+5 health, +1 attack, +2 defense, +8 mana), Blessed Garments (+10 health, +5 defense, +10 mana)
 
 ### Self-Contained Design
 - Complete cleanup and restart functionality
@@ -64,11 +77,13 @@ demo.StartDemoGame();
 TurnBasedStrategy/
 ├── Characters/
 │   ├── ICharacter.cs - Character interface
-│   ├── Character.cs - Main character implementation
-│   ├── CharacterStats.cs - Stats and health/mana management
-│   └── CharacterAbility.cs - Ability system
+│   ├── Character.cs - Main character implementation with equipment integration
+│   ├── CharacterStats.cs - Stats and health/mana management with equipment bonuses
+│   ├── CharacterAbility.cs - Ability system
+│   ├── Equipment.cs - Equipment data structures and item definitions
+│   └── EquipmentManager.cs - Equipment slot management and stat calculation
 ├── Factory/
-│   └── CharacterFactory.cs - Factory pattern for character creation
+│   └── CharacterFactory.cs - Factory pattern for character creation with default equipment
 ├── Game/
 │   ├── TurnBasedGameManager.cs - Main game controller
 │   ├── TurnManager.cs - Turn order and management
@@ -94,7 +109,8 @@ public Character CreateCharacter(CharacterClass characterClass, string name, boo
 Comprehensive test suite covers all major systems:
 - **CharacterTests**: Character behavior and state management
 - **CharacterAbilityTests**: Ability execution and validation
-- **FactoryTests**: Character creation and factory pattern
+- **EquipmentTests**: Equipment system functionality, stat modifications, and equipment management
+- **FactoryTests**: Character creation, factory pattern, and default equipment assignment
 - **GameManagerTests**: Game flow and state management
 - **TurnManagerTests**: Turn order and management
 
@@ -106,6 +122,7 @@ Run tests through Unity Test Runner or programmatically validate the system.
 1. Add new enum value to `CharacterClass`
 2. Update `CreateStatsForClass()` in `CharacterFactory`
 3. Update `CreateAbilitiesForClass()` in `CharacterFactory`
+4. Add default equipment in `CreateDefaultWeapon()` and `CreateDefaultArmor()`
 
 ### Creating Custom Abilities
 ```csharp
@@ -116,6 +133,32 @@ var customAbility = new CharacterAbility(
     20, // mana cost
     "Devastating lightning attack"
 );
+```
+
+### Creating Custom Equipment
+```csharp
+var customWeapon = new Equipment(
+    "Flaming Sword",
+    "A sword wreathed in flames",
+    EquipmentSlot.Weapon,
+    EquipmentRarity.Epic,
+    new EquipmentStats(0, 25, 0, -2, 0) // +25 attack, -2 speed
+);
+
+// Equip to character
+character.EquipItem(customWeapon);
+```
+
+### Equipment Management
+```csharp
+// Get equipped item
+Equipment currentWeapon = character.GetEquippedItem(EquipmentSlot.Weapon);
+
+// Unequip item
+Equipment removedArmor = character.UnequipItem(EquipmentSlot.Armor);
+
+// Check if character has any equipment
+bool hasEquipment = character.Equipment.HasEquipment();
 ```
 
 ### Extending Game Rules

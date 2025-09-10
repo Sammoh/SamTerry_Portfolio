@@ -28,12 +28,19 @@ public class FactoryTests
         
         Assert.IsNotNull(character);
         Assert.AreEqual("TestWarrior", character.CharacterName);
-        Assert.AreEqual(120, character.Stats.MaxHealth);
-        Assert.AreEqual(20, character.Stats.Attack);
-        Assert.AreEqual(15, character.Stats.Defense);
-        Assert.AreEqual(8, character.Stats.Speed);
+        Assert.AreEqual(CharacterClass.Warrior, character.CharacterClass);
+        
+        // Base stats + equipment bonuses (Iron Sword: +5 attack, Leather Armor: +15 health, +8 defense, -1 speed)
+        Assert.AreEqual(135, character.Stats.MaxHealth); // 120 + 15
+        Assert.AreEqual(25, character.Stats.Attack); // 20 + 5
+        Assert.AreEqual(23, character.Stats.Defense); // 15 + 8
+        Assert.AreEqual(7, character.Stats.Speed); // 8 - 1
         Assert.AreEqual(30, character.Stats.Mana);
         Assert.IsTrue(character.IsPlayerControlled);
+        
+        // Verify equipment is equipped
+        Assert.IsNotNull(character.GetEquippedItem(EquipmentSlot.Weapon));
+        Assert.IsNotNull(character.GetEquippedItem(EquipmentSlot.Armor));
         
         // Clean up
         Object.DestroyImmediate(character.gameObject);
@@ -46,11 +53,14 @@ public class FactoryTests
         
         Assert.IsNotNull(character);
         Assert.AreEqual("TestMage", character.CharacterName);
-        Assert.AreEqual(80, character.Stats.MaxHealth);
-        Assert.AreEqual(10, character.Stats.Attack);
-        Assert.AreEqual(5, character.Stats.Defense);
-        Assert.AreEqual(10, character.Stats.Speed);
-        Assert.AreEqual(80, character.Stats.Mana);
+        Assert.AreEqual(CharacterClass.Mage, character.CharacterClass);
+        
+        // Base stats + equipment bonuses (Oak Staff: +2 attack, +10 mana; Mage Robes: +5 health, +2 defense, +1 speed, +15 mana)
+        Assert.AreEqual(85, character.Stats.MaxHealth); // 80 + 5
+        Assert.AreEqual(12, character.Stats.Attack); // 10 + 2
+        Assert.AreEqual(7, character.Stats.Defense); // 5 + 2
+        Assert.AreEqual(11, character.Stats.Speed); // 10 + 1
+        Assert.AreEqual(105, character.Stats.Mana); // 80 + 10 + 15
         Assert.IsFalse(character.IsPlayerControlled);
         
         // Clean up
@@ -64,10 +74,13 @@ public class FactoryTests
         
         Assert.IsNotNull(character);
         Assert.AreEqual("TestRogue", character.CharacterName);
-        Assert.AreEqual(90, character.Stats.MaxHealth);
-        Assert.AreEqual(18, character.Stats.Attack);
-        Assert.AreEqual(8, character.Stats.Defense);
-        Assert.AreEqual(16, character.Stats.Speed);
+        Assert.AreEqual(CharacterClass.Rogue, character.CharacterClass);
+        
+        // Base stats + equipment bonuses (Steel Dagger: +4 attack, +2 speed; Studded Leather: +8 health, +4 defense, +3 speed)
+        Assert.AreEqual(98, character.Stats.MaxHealth); // 90 + 8
+        Assert.AreEqual(22, character.Stats.Attack); // 18 + 4
+        Assert.AreEqual(12, character.Stats.Defense); // 8 + 4
+        Assert.AreEqual(21, character.Stats.Speed); // 16 + 2 + 3
         Assert.AreEqual(40, character.Stats.Mana);
         
         // Clean up
@@ -81,11 +94,14 @@ public class FactoryTests
         
         Assert.IsNotNull(character);
         Assert.AreEqual("TestHealer", character.CharacterName);
-        Assert.AreEqual(100, character.Stats.MaxHealth);
-        Assert.AreEqual(8, character.Stats.Attack);
-        Assert.AreEqual(12, character.Stats.Defense);
+        Assert.AreEqual(CharacterClass.Healer, character.CharacterClass);
+        
+        // Base stats + equipment bonuses (Healing Rod: +5 health, +1 attack, +2 defense, +8 mana; Blessed Garments: +10 health, +5 defense, +10 mana)
+        Assert.AreEqual(115, character.Stats.MaxHealth); // 100 + 5 + 10
+        Assert.AreEqual(9, character.Stats.Attack); // 8 + 1
+        Assert.AreEqual(19, character.Stats.Defense); // 12 + 2 + 5
         Assert.AreEqual(12, character.Stats.Speed);
-        Assert.AreEqual(70, character.Stats.Mana);
+        Assert.AreEqual(88, character.Stats.Mana); // 70 + 8 + 10
         
         // Clean up
         Object.DestroyImmediate(character.gameObject);
@@ -146,6 +162,26 @@ public class FactoryTests
         Character character = factory.CreateCharacter(CharacterClass.Rogue, "NamedRogue");
         
         Assert.AreEqual("NamedRogue", character.gameObject.name);
+        
+        // Clean up
+        Object.DestroyImmediate(character.gameObject);
+    }
+
+    [Test]
+    public void CharacterFactory_CreateCharacter_EquipsDefaultEquipment()
+    {
+        Character character = factory.CreateCharacter(CharacterClass.Warrior, "TestWarrior");
+        
+        // Verify default equipment is equipped
+        Equipment weapon = character.GetEquippedItem(EquipmentSlot.Weapon);
+        Equipment armor = character.GetEquippedItem(EquipmentSlot.Armor);
+        
+        Assert.IsNotNull(weapon);
+        Assert.IsNotNull(armor);
+        Assert.AreEqual("Iron Sword", weapon.EquipmentName);
+        Assert.AreEqual("Leather Armor", armor.EquipmentName);
+        Assert.AreEqual(EquipmentSlot.Weapon, weapon.Slot);
+        Assert.AreEqual(EquipmentSlot.Armor, armor.Slot);
         
         // Clean up
         Object.DestroyImmediate(character.gameObject);

@@ -34,8 +34,11 @@ namespace Sammoh.TurnBasedStrategy
             CharacterAbility[] abilities = CreateAbilitiesForClass(characterClass);
 
             // Initialize the character
-            character.Initialize(name, stats, abilities, isPlayerControlled);
+            character.Initialize(name, stats, abilities, isPlayerControlled, characterClass);
             characterObj.name = name;
+
+            // Equip default equipment based on class
+            EquipDefaultEquipment(character, characterClass);
 
             return character;
         }
@@ -103,6 +106,108 @@ namespace Sammoh.TurnBasedStrategy
                         new CharacterAbility("Basic Attack", AbilityType.Attack, 10, 0, "Simple attack"),
                         new CharacterAbility("Rest", AbilityType.Heal, 5, 0, "Recover small amount of health")
                     };
+            }
+        }
+
+        private void EquipDefaultEquipment(Character character, CharacterClass characterClass)
+        {
+            Equipment defaultWeapon = CreateDefaultWeapon(characterClass);
+            Equipment defaultArmor = CreateDefaultArmor(characterClass);
+            
+            if (defaultWeapon != null)
+                character.EquipItem(defaultWeapon);
+                
+            if (defaultArmor != null)
+                character.EquipItem(defaultArmor);
+        }
+
+        private Equipment CreateDefaultWeapon(CharacterClass characterClass)
+        {
+            switch (characterClass)
+            {
+                case CharacterClass.Warrior:
+                    return new Equipment(
+                        "Iron Sword", 
+                        "A sturdy iron sword", 
+                        EquipmentSlot.Weapon, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(0, 5, 0, 0, 0)
+                    );
+
+                case CharacterClass.Mage:
+                    return new Equipment(
+                        "Oak Staff", 
+                        "A magical oak staff", 
+                        EquipmentSlot.Weapon, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(0, 2, 0, 0, 10)
+                    );
+
+                case CharacterClass.Rogue:
+                    return new Equipment(
+                        "Steel Dagger", 
+                        "A sharp steel dagger", 
+                        EquipmentSlot.Weapon, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(0, 4, 0, 2, 0)
+                    );
+
+                case CharacterClass.Healer:
+                    return new Equipment(
+                        "Healing Rod", 
+                        "A rod imbued with healing magic", 
+                        EquipmentSlot.Weapon, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(5, 1, 2, 0, 8)
+                    );
+
+                default:
+                    return null;
+            }
+        }
+
+        private Equipment CreateDefaultArmor(CharacterClass characterClass)
+        {
+            switch (characterClass)
+            {
+                case CharacterClass.Warrior:
+                    return new Equipment(
+                        "Leather Armor", 
+                        "Basic leather protection", 
+                        EquipmentSlot.Armor, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(15, 0, 8, -1, 0)
+                    );
+
+                case CharacterClass.Mage:
+                    return new Equipment(
+                        "Mage Robes", 
+                        "Robes that enhance magical power", 
+                        EquipmentSlot.Armor, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(5, 0, 2, 1, 15)
+                    );
+
+                case CharacterClass.Rogue:
+                    return new Equipment(
+                        "Studded Leather", 
+                        "Light armor for mobility", 
+                        EquipmentSlot.Armor, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(8, 0, 4, 3, 0)
+                    );
+
+                case CharacterClass.Healer:
+                    return new Equipment(
+                        "Blessed Garments", 
+                        "Garments blessed by divine power", 
+                        EquipmentSlot.Armor, 
+                        EquipmentRarity.Common,
+                        new EquipmentStats(10, 0, 5, 0, 10)
+                    );
+
+                default:
+                    return null;
             }
         }
     }

@@ -6,44 +6,47 @@ namespace Sammoh.TurnBasedStrategy
     [Serializable]
     public class CharacterStats
     {
-        [SerializeField] private int maxHealth = 100;
+        [SerializeField] private int baseMaxHealth = 100;
         [SerializeField] private int currentHealth = 100;
-        [SerializeField] private int attack = 15;
-        [SerializeField] private int defense = 10;
-        [SerializeField] private int speed = 12;
-        [SerializeField] private int mana = 50;
+        [SerializeField] private int baseAttack = 15;
+        [SerializeField] private int baseDefense = 10;
+        [SerializeField] private int baseSpeed = 12;
+        [SerializeField] private int baseMana = 50;
         [SerializeField] private int currentMana = 50;
 
-        public int MaxHealth => maxHealth;
+        private EquipmentStats equipmentBonus;
+
+        public int MaxHealth => baseMaxHealth + (equipmentBonus?.HealthBonus ?? 0);
         public int CurrentHealth => currentHealth;
-        public int Attack => attack;
-        public int Defense => defense;
-        public int Speed => speed;
-        public int Mana => mana;
+        public int Attack => baseAttack + (equipmentBonus?.AttackBonus ?? 0);
+        public int Defense => baseDefense + (equipmentBonus?.DefenseBonus ?? 0);
+        public int Speed => baseSpeed + (equipmentBonus?.SpeedBonus ?? 0);
+        public int Mana => baseMana + (equipmentBonus?.ManaBonus ?? 0);
         public int CurrentMana => currentMana;
 
         public bool IsAlive => currentHealth > 0;
 
         public CharacterStats(int health, int attack, int defense, int speed, int mana)
         {
-            this.maxHealth = health;
+            this.baseMaxHealth = health;
             this.currentHealth = health;
-            this.attack = attack;
-            this.defense = defense;
-            this.speed = speed;
-            this.mana = mana;
+            this.baseAttack = attack;
+            this.baseDefense = defense;
+            this.baseSpeed = speed;
+            this.baseMana = mana;
             this.currentMana = mana;
+            this.equipmentBonus = null;
         }
 
         public void TakeDamage(int damage)
         {
-            int finalDamage = Mathf.Max(1, damage - defense);
+            int finalDamage = Mathf.Max(1, damage - Defense);
             currentHealth = Mathf.Max(0, currentHealth - finalDamage);
         }
 
         public void Heal(int amount)
         {
-            currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+            currentHealth = Mathf.Min(MaxHealth, currentHealth + amount);
         }
 
         public bool UseMana(int amount)
@@ -58,13 +61,45 @@ namespace Sammoh.TurnBasedStrategy
 
         public void RestoreMana(int amount)
         {
-            currentMana = Mathf.Min(mana, currentMana + amount);
+            currentMana = Mathf.Min(Mana, currentMana + amount);
         }
 
         public void FullRestore()
         {
-            currentHealth = maxHealth;
-            currentMana = mana;
+            currentHealth = MaxHealth;
+            currentMana = Mana;
+        }
+
+        public void UpdateEquipmentBonus(EquipmentStats newBonus)
+        {
+            int healthDifference = 0;
+            int manaDifference = 0;
+
+            // Calculate the difference in max stats
+            if (equipmentBonus != null)
+            {
+                healthDifference = (newBonus?.HealthBonus ?? 0) - equipmentBonus.HealthBonus;
+                manaDifference = (newBonus?.ManaBonus ?? 0) - equipmentBonus.ManaBonus;
+            }
+            else
+            {
+                healthDifference = newBonus?.HealthBonus ?? 0;
+                manaDifference = newBonus?.ManaBonus ?? 0;
+            }
+
+            // Update equipment bonus
+            equipmentBonus = newBonus;
+
+            // Adjust current health and mana to maintain proportional values
+            if (healthDifference != 0)
+            {
+                currentHealth = Mathf.Min(MaxHealth, currentHealth + healthDifference);
+            }
+
+            if (manaDifference != 0)
+            {
+                currentMana = Mathf.Min(Mana, currentMana + manaDifference);
+            }
         }
     }
 }
