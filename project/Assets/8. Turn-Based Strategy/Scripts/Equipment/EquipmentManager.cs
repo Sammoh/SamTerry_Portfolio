@@ -51,7 +51,10 @@ namespace Sammoh.TurnBasedStrategy
         public Equipment EquipItem(Equipment equipment)
         {
             if (equipment == null)
+            {
+                Debug.LogWarning("Attempted to equip null equipment");
                 return null;
+            }
 
             Equipment previousItem = GetEquippedItem(equipment.Slot);
 
@@ -66,6 +69,9 @@ namespace Sammoh.TurnBasedStrategy
                 case EquipmentSlot.Accessory:
                     accessory = equipment;
                     break;
+                default:
+                    Debug.LogError($"Unknown equipment slot: {equipment.Slot}");
+                    return null;
             }
 
             OnEquipmentChanged?.Invoke();
@@ -106,6 +112,11 @@ namespace Sammoh.TurnBasedStrategy
         /// <returns>The modified value after applying all equipment bonuses</returns>
         public float CalculateModifiedStat(StatType statType, float baseValue)
         {
+            if (baseValue < 0)
+            {
+                Debug.LogWarning($"Base value for {statType} is negative: {baseValue}");
+            }
+
             float result = baseValue;
 
             // Apply additive modifiers from all equipment first
@@ -115,7 +126,39 @@ namespace Sammoh.TurnBasedStrategy
             float multiplicativeModifier = GetMultiplicativeModifier(statType);
             result *= (1 + multiplicativeModifier / 100f);
 
+            // Ensure certain stats don't go below minimum values
+            result = ApplyStatLimits(statType, result);
+
             return result;
+        }
+
+        /// <summary>
+        /// Applies minimum/maximum limits to stats to prevent invalid values
+        /// </summary>
+        /// <param name="statType">The stat type</param>
+        /// <param name="value">The calculated stat value</param>
+        /// <returns>The stat value clamped to valid limits</returns>
+        private float ApplyStatLimits(StatType statType, float value)
+        {
+            switch (statType)
+            {
+                case StatType.MaxHealth:
+                case StatType.Mana:
+                    // Health and Mana cannot be negative
+                    return Mathf.Max(1, value);
+                
+                case StatType.Attack:
+                case StatType.Defense:
+                    // Attack and Defense can be 0 but not negative
+                    return Mathf.Max(0, value);
+                
+                case StatType.Speed:
+                    // Speed cannot be negative
+                    return Mathf.Max(1, value);
+                
+                default:
+                    return value;
+            }
         }
 
         /// <summary>

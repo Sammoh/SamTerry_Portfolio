@@ -195,4 +195,78 @@ public class EquipmentIntegrationTests
         // Should be capped at effective max health (120, not 100)
         Assert.AreEqual(120, testCharacter.Stats.CurrentHealth);
     }
+
+    [Test]
+    public void EquipmentManager_NullEquipment_HandledGracefully()
+    {
+        // Try to equip null equipment
+        var previousItem = testCharacter.EquipmentManager.EquipItem(null);
+        
+        Assert.IsNull(previousItem);
+        Assert.IsNull(testCharacter.EquipmentManager.Weapon);
+    }
+
+    [Test]
+    public void EquipmentManager_StatLimits_PreventNegativeValues()
+    {
+        // Create equipment with extreme negative modifiers
+        var cursedItem = ScriptableObject.CreateInstance<Equipment>();
+        cursedItem.Initialize("Cursed Item", EquipmentSlot.Weapon,
+            new StatModifier[] {
+                new StatModifier(StatType.Attack, -200, ModifierType.Multiplicative), // -200%
+                new StatModifier(StatType.MaxHealth, -150, ModifierType.Multiplicative) // -150%
+            },
+            "A cursed item that weakens the user");
+
+        // Equip the cursed item
+        testCharacter.EquipItem(cursedItem);
+
+        // Stats should be limited to minimum values
+        Assert.GreaterOrEqual(testCharacter.Stats.Attack, 0, "Attack should not be negative");
+        Assert.GreaterOrEqual(testCharacter.Stats.MaxHealth, 1, "MaxHealth should be at least 1");
+
+        // Clean up
+        Object.DestroyImmediate(cursedItem);
+    }
+
+    [Test]
+    public void Equipment_Validation_WarnsAboutProblematicModifiers()
+    {
+        // This test ensures the validation doesn't crash - warning messages are logged to console
+        var problematicItem = ScriptableObject.CreateInstance<Equipment>();
+        
+        // This should log a warning but not crash
+        problematicItem.Initialize("Problematic Item", EquipmentSlot.Accessory,
+            new StatModifier[] {
+                new StatModifier(StatType.Speed, -150, ModifierType.Multiplicative) // More than -100%
+            },
+            "Item with problematic modifiers");
+
+        // Should still be created successfully
+        Assert.IsNotNull(problematicItem);
+        Assert.AreEqual("Problematic Item", problematicItem.EquipmentName);
+
+        Object.DestroyImmediate(problematicItem);
+    }
+
+    [Test]
+    public void CharacterStats_CacheInvalidation_WorksWithMultipleChanges()
+    {
+        // Access stats to cache them
+        int initialAttack = testCharacter.Stats.Attack;
+        
+        // Make multiple equipment changes
+        testCharacter.EquipItem(testWeapon);
+        testCharacter.EquipItem(testArmor);
+        
+        // Stats should be updated
+        Assert.AreNotEqual(initialAttack, testCharacter.Stats.Attack);
+        
+        // Unequip an item
+        testCharacter.UnequipItem(EquipmentSlot.Weapon);
+        
+        // Stats should be updated again
+        Assert.AreEqual(15, testCharacter.Stats.Attack); // Back to base
+        Assert.AreEqual(120, testCharacter.Stats.MaxHealth); // Armor still equipped
+    }
 }

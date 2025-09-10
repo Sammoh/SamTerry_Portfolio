@@ -28,10 +28,41 @@ namespace Sammoh.TurnBasedStrategy
         /// <param name="description">Equipment description</param>
         public void Initialize(string name, EquipmentSlot slot, StatModifier[] modifiers, string description)
         {
-            this.equipmentName = name;
+            this.equipmentName = name ?? "Unnamed Equipment";
             this.slot = slot;
             this.statModifiers = modifiers ?? new StatModifier[0];
             this.description = description ?? "";
+
+            // Validate modifiers
+            ValidateModifiers();
+        }
+
+        /// <summary>
+        /// Validates that all stat modifiers are properly configured
+        /// </summary>
+        private void ValidateModifiers()
+        {
+            if (statModifiers == null) return;
+
+            for (int i = 0; i < statModifiers.Length; i++)
+            {
+                var modifier = statModifiers[i];
+                if (modifier == null)
+                {
+                    Debug.LogWarning($"Equipment '{equipmentName}' has null modifier at index {i}");
+                    continue;
+                }
+
+                // Warn about potentially problematic modifiers
+                if (modifier.ModifierType == ModifierType.Multiplicative)
+                {
+                    if (modifier.Value < -100f)
+                    {
+                        Debug.LogWarning($"Equipment '{equipmentName}' has multiplicative modifier for {modifier.StatType} " +
+                                       $"that reduces stat by more than 100% ({modifier.Value}%). This will result in negative values.");
+                    }
+                }
+            }
         }
 
         /// <summary>
