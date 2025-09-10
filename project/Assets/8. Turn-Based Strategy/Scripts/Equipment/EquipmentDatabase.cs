@@ -13,8 +13,8 @@ namespace Sammoh.TurnBasedStrategy
     {
         [Header("Equipment Collections")]
         [SerializeField] private List<WeaponSO> weapons = new List<WeaponSO>();
-        [SerializeField] private List<EquipmentSO> accessories = new List<EquipmentSO>();
-        [SerializeField] private List<EquipmentSO> armors = new List<EquipmentSO>();
+        [SerializeField] private List<AccessorySO> accessories = new List<AccessorySO>();
+        [SerializeField] private List<ArmorSO> armors = new List<ArmorSO>();
         
         [Header("Database Info")]
         [SerializeField] private int totalEquipmentCount;
@@ -33,12 +33,12 @@ namespace Sammoh.TurnBasedStrategy
         /// <summary>
         /// Gets all accessories in the database.
         /// </summary>
-        public IReadOnlyList<EquipmentSO> Accessories => accessories;
+        public IReadOnlyList<AccessorySO> Accessories => accessories;
         
         /// <summary>
         /// Gets all armor pieces in the database.
         /// </summary>
-        public IReadOnlyList<EquipmentSO> Armors => armors;
+        public IReadOnlyList<ArmorSO> Armors => armors;
         
         /// <summary>
         /// Gets the total number of equipment items in the database.
@@ -143,12 +143,12 @@ namespace Sammoh.TurnBasedStrategy
                         weapons.Add(weapon);
                     break;
                 case EquipmentType.Accessory:
-                    if (!accessories.Contains(equipment))
-                        accessories.Add(equipment);
+                    if (equipment is AccessorySO accessory && !accessories.Contains(accessory))
+                        accessories.Add(accessory);
                     break;
                 case EquipmentType.Armor:
-                    if (!armors.Contains(equipment))
-                        armors.Add(equipment);
+                    if (equipment is ArmorSO armor && !armors.Contains(armor))
+                        armors.Add(armor);
                     break;
             }
 
@@ -176,10 +176,12 @@ namespace Sammoh.TurnBasedStrategy
                         removed = weapons.Remove(weapon);
                     break;
                 case EquipmentType.Accessory:
-                    removed = accessories.Remove(equipment);
+                    if (equipment is AccessorySO accessory)
+                        removed = accessories.Remove(accessory);
                     break;
                 case EquipmentType.Armor:
-                    removed = armors.Remove(equipment);
+                    if (equipment is ArmorSO armor)
+                        removed = armors.Remove(armor);
                     break;
             }
 
@@ -247,12 +249,12 @@ namespace Sammoh.TurnBasedStrategy
 
             // Load all equipment from Resources folder
             var allWeapons = Resources.LoadAll<WeaponSO>("Equipment/Weapons");
-            var allAccessories = Resources.LoadAll<EquipmentSO>("Equipment/Accessories");
-            var allArmors = Resources.LoadAll<EquipmentSO>("Equipment/Armor");
+            var allAccessories = Resources.LoadAll<AccessorySO>("Equipment/Accessories");
+            var allArmors = Resources.LoadAll<ArmorSO>("Equipment/Armor");
 
             weapons.AddRange(allWeapons);
-            accessories.AddRange(allAccessories.Where(eq => eq.Type == EquipmentType.Accessory));
-            armors.AddRange(allArmors.Where(eq => eq.Type == EquipmentType.Armor));
+            accessories.AddRange(allAccessories);
+            armors.AddRange(allArmors);
 
             InitializeLookupTables();
 

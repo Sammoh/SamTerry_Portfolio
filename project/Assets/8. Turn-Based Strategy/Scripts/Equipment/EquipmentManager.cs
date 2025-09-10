@@ -16,9 +16,9 @@ namespace Sammoh.TurnBasedStrategy
         [SerializeField] private LegacyEquipment accessory;
 
         // Support for new ScriptableObject equipment
-        [SerializeField] private EquipmentSO weaponSO;
-        [SerializeField] private EquipmentSO armorSO;
-        [SerializeField] private EquipmentSO accessorySO;
+        [SerializeField] private WeaponSO weaponSO;
+        [SerializeField] private ArmorSO armorSO;
+        [SerializeField] private AccessorySO accessorySO;
 
         /// <summary>
         /// Event fired when equipment changes
@@ -30,9 +30,9 @@ namespace Sammoh.TurnBasedStrategy
         public LegacyEquipment Accessory => accessory;
 
         // New ScriptableObject accessors
-        public EquipmentSO WeaponSO => weaponSO;
-        public EquipmentSO ArmorSO => armorSO;
-        public EquipmentSO AccessorySO => accessorySO;
+        public WeaponSO WeaponSO => weaponSO;
+        public ArmorSO ArmorSO => armorSO;
+        public AccessorySO AccessorySO => accessorySO;
 
         /// <summary>
         /// Gets the legacy equipment in the specified slot
@@ -72,6 +72,42 @@ namespace Sammoh.TurnBasedStrategy
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// Equips a weapon ScriptableObject
+        /// </summary>
+        public WeaponSO EquipWeapon(WeaponSO weapon)
+        {
+            var previous = weaponSO;
+            weaponSO = weapon;
+            this.weapon = null; // Clear legacy
+            OnEquipmentChanged?.Invoke();
+            return previous;
+        }
+
+        /// <summary>
+        /// Equips an armor ScriptableObject
+        /// </summary>
+        public ArmorSO EquipArmor(ArmorSO armor)
+        {
+            var previous = armorSO;
+            armorSO = armor;
+            this.armor = null; // Clear legacy
+            OnEquipmentChanged?.Invoke();
+            return previous;
+        }
+
+        /// <summary>
+        /// Equips an accessory ScriptableObject
+        /// </summary>
+        public AccessorySO EquipAccessory(AccessorySO accessory)
+        {
+            var previous = accessorySO;
+            accessorySO = accessory;
+            this.accessory = null; // Clear legacy
+            OnEquipmentChanged?.Invoke();
+            return previous;
         }
 
         /// <summary>

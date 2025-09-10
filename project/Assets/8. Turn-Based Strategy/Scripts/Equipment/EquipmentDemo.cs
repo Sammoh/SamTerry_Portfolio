@@ -3,18 +3,28 @@ using UnityEngine;
 namespace Sammoh.TurnBasedStrategy
 {
     /// <summary>
-    /// Demonstrates the equipment system functionality
+    /// Demonstrates the equipment system functionality with both legacy and new ScriptableObject systems
     /// </summary>
     public class EquipmentDemo : MonoBehaviour
     {
         [Header("Demo Settings")]
         [SerializeField] private bool autoRunOnStart = false;
+        
+        [Header("Legacy System")]
+        [SerializeField] private LegacyEquipmentDatabase legacyDatabase;
+        
+        [Header("New ScriptableObject System")]
         [SerializeField] private EquipmentDatabase equipmentDatabase;
+        [SerializeField] private WeaponSO demoWeapon;
+        [SerializeField] private ArmorSO demoArmor;
+        [SerializeField] private AccessorySO demoAccessory;
 
-        private Character demoCharacter;
+        private EquipmentManager equipmentManager;
 
         private void Start()
         {
+            equipmentManager = new EquipmentManager();
+            
             if (autoRunOnStart)
             {
                 RunEquipmentDemo();
@@ -28,6 +38,99 @@ namespace Sammoh.TurnBasedStrategy
         public void RunEquipmentDemo()
         {
             Debug.Log("=== Equipment System Demo ===");
+            
+            DemonstrateNewSystem();
+            DemonstrateLegacyCompatibility();
+            DemonstrateDatabase();
+        }
+
+        private void DemonstrateNewSystem()
+        {
+            Debug.Log("\n--- New ScriptableObject System ---");
+            
+            if (demoWeapon != null)
+            {
+                Debug.Log($"Equipping weapon: {demoWeapon.EquipmentName}");
+                if (demoWeapon is WeaponSO weapon)
+                {
+                    Debug.Log($"  Damage: {weapon.Damage}, DPS: {weapon.CalculateDPS():F2}");
+                }
+                
+                equipmentManager.EquipWeapon(demoWeapon);
+            }
+            
+            if (demoArmor != null)
+            {
+                Debug.Log($"Equipping armor: {demoArmor.EquipmentName}");
+                Debug.Log($"  Defense: {demoArmor.Defense}, Magic Res: {demoArmor.MagicResistance}");
+                
+                equipmentManager.EquipArmor(demoArmor);
+            }
+            
+            if (demoAccessory != null)
+            {
+                Debug.Log($"Equipping accessory: {demoAccessory.EquipmentName}");
+                Debug.Log($"  Stackable: {demoAccessory.IsStackable}, Max Stack: {demoAccessory.MaxStackSize}");
+                
+                equipmentManager.EquipAccessory(demoAccessory);
+            }
+            
+            // Calculate modified stats
+            float baseAttack = 10f;
+            float modifiedAttack = equipmentManager.CalculateModifiedStat(StatType.Attack, baseAttack);
+            Debug.Log($"Base Attack: {baseAttack}, Modified Attack: {modifiedAttack}");
+            
+            var equippedItems = equipmentManager.GetAllEquippedItemsSO();
+            Debug.Log($"Total equipped ScriptableObject items: {equippedItems.Count}");
+        }
+
+        private void DemonstrateLegacyCompatibility()
+        {
+            Debug.Log("\n--- Legacy System Compatibility ---");
+            
+            if (legacyDatabase != null)
+            {
+                var legacyWeapons = legacyDatabase.Weapons;
+                if (legacyWeapons.Count > 0)
+                {
+                    var legacyWeapon = legacyWeapons[0];
+                    Debug.Log($"Equipping legacy weapon: {legacyWeapon.EquipmentName}");
+                    
+                    var manager = new EquipmentManager();
+                    manager.EquipItem(legacyWeapon);
+                    
+                    float baseDefense = 5f;
+                    float modifiedDefense = manager.CalculateModifiedStat(StatType.Defense, baseDefense);
+                    Debug.Log($"Legacy system - Base Defense: {baseDefense}, Modified: {modifiedDefense}");
+                }
+            }
+        }
+
+        private void DemonstrateDatabase()
+        {
+            Debug.Log("\n--- Equipment Database ---");
+            
+            if (equipmentDatabase != null)
+            {
+                equipmentDatabase.InitializeLookupTables();
+                
+                var stats = equipmentDatabase.GetStatistics();
+                Debug.Log($"Database Statistics:");
+                Debug.Log($"  Total Items: {stats.TotalCount}");
+                Debug.Log($"  Weapons: {stats.WeaponCount}");
+                Debug.Log($"  Armor: {stats.ArmorCount}");
+                Debug.Log($"  Accessories: {stats.AccessoryCount}");
+                
+                // Demonstrate fast lookup
+                if (demoWeapon != null)
+                {
+                    var foundWeapon = equipmentDatabase.FindEquipmentById(demoWeapon.Id);
+                    Debug.Log($"Fast lookup found: {foundWeapon?.EquipmentName ?? "Not found"}");
+                }
+            }
+        }
+    }
+}
 
             // Create or find a demo character
             SetupDemoCharacter();
