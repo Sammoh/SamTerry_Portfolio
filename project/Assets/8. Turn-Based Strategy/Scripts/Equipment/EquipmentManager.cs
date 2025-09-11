@@ -212,5 +212,34 @@ namespace Sammoh.TurnBasedStrategy
             OnEquipmentChanged?.Invoke();
             return unequippedItems;
         }
+
+        /// <summary>
+        /// Gets all abilities from equipped items
+        /// </summary>
+        /// <returns>Array of all abilities from equipped items</returns>
+        public CharacterAbility[] GetEquipmentAbilities()
+        {
+            var abilityList = new List<CharacterAbility>();
+            
+            if (weapon != null && weapon.Abilities != null)
+                abilityList.AddRange(weapon.Abilities);
+            if (armor != null && armor.Abilities != null)
+                abilityList.AddRange(armor.Abilities);
+            if (accessory != null && accessory.Abilities != null)
+                abilityList.AddRange(accessory.Abilities);
+            
+            return abilityList.ToArray();
+        }
+
+        /// <summary>
+        /// Gets abilities from a specific equipment slot
+        /// </summary>
+        /// <param name="slot">The equipment slot to get abilities from</param>
+        /// <returns>Array of abilities from the specified slot, or empty array if no item equipped</returns>
+        public CharacterAbility[] GetAbilitiesFromSlot(EquipmentSlot slot)
+        {
+            var equipment = GetEquippedItem(slot);
+            return equipment?.Abilities ?? Array.Empty<CharacterAbility>();
+        }
     }
 }
