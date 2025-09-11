@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec13e8dce510e32489449851d471f921, type: 3}
+  m_Name: Rare_Chestplate_Defending_Wall
+  m_EditorClassIdentifier: 
+  equipmentName: 
+  description: 
+  icon: {fileID: 0}
+  level: 1
+  weight: 1.2
+  value: 250
+  rarity: 2
+  slot: 0
+  statModifiers: []
+  armorType: 1
+  defense: 18
+  magicResistance: 5
+  movementSpeedModifier: -0.1
+  damageResistances:
+  - damageType: 1
+    resistancePercentage: 5
+  armorMaterial: 0

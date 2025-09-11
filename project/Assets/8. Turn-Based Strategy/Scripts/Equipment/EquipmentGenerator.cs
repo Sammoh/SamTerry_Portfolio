@@ -15,7 +15,7 @@ namespace Sammoh.Two
     public static class EquipmentGenerator
     {
         // Resource paths for equipment assets
-        private const string EQUIPMENT_RESOURCES_PATH = "Assets/8. Turn-Based Strategy/Resources/Equipment Data";
+        private const string EQUIPMENT_RESOURCES_PATH = "Assets/8. Turn-Based Strategy/Resources/Equipment";
         private const string WEAPONS_PATH = EQUIPMENT_RESOURCES_PATH + "/Weapons";
         private const string ACCESSORIES_PATH = EQUIPMENT_RESOURCES_PATH + "/Accessories";
         private const string ARMOR_PATH = EQUIPMENT_RESOURCES_PATH + "/Armor";
@@ -202,7 +202,7 @@ namespace Sammoh.Two
         
         public static EquipmentDatabase GetOrCreateEquipmentDatabase()
         {
-            const string assetPath = "Assets/8. Turn-Based Strategy/Resources/Equipment Data/EquipmentDatabase.asset";
+            const string assetPath = "Assets/8. Turn-Based Strategy/Resources/Equipment/EquipmentDatabase.asset";
 
             var db = AssetDatabase.LoadAssetAtPath<EquipmentDatabase>(assetPath);
             if (db != null) return db;
