@@ -184,7 +184,7 @@ public class CharacterEquipmentIntegrationTests
         
         character.Initialize("TestCharacter", stats, abilities, true);
         
-        var testSword = ScriptableObject.CreateInstance<Equipment>();
+        var testSword = ScriptableObject.CreateInstance<Weapon>();
         testSword.name = "Test Sword";
         testSword.EquipmentName = "Test Sword";
         testSword.Slot = EquipmentSlot.Weapon;
@@ -194,7 +194,7 @@ public class CharacterEquipmentIntegrationTests
         testSword.Description = "A test weapon";
         testWeapon = testSword;
         
-        var testArmorSo = ScriptableObject.CreateInstance<Equipment>();
+        var testArmorSo = ScriptableObject.CreateInstance<Armor>();
         testArmorSo.name = "Test Armor";
         testArmorSo.EquipmentName = "Test Armor";
         testArmorSo.Slot = EquipmentSlot.Armor;

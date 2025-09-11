@@ -12,7 +12,7 @@ public class EquipmentTests
     [SetUp]
     public void Setup()
     {
-        var testSword = ScriptableObject.CreateInstance<Equipment>();
+        var testSword = ScriptableObject.CreateInstance<Weapon>();
         testSword.name = "Test Sword";
         testSword.EquipmentName = "Test Sword";
         testSword.Slot = EquipmentSlot.Weapon;
@@ -23,7 +23,7 @@ public class EquipmentTests
         testSword.Description = "A test weapon";
         testWeapon = testSword;
 
-        var testArmorSo = ScriptableObject.CreateInstance<Equipment>();
+        var testArmorSo = ScriptableObject.CreateInstance<Armor>();
         testArmorSo.name = "Test Armor";
         testArmorSo.EquipmentName = "Test Armor";
         testArmorSo.Slot = EquipmentSlot.Armor;
@@ -34,7 +34,7 @@ public class EquipmentTests
         testArmorSo.Description = "Test armor piece";
         testArmor = testArmorSo;
         
-        var testRing = ScriptableObject.CreateInstance<Equipment>();
+        var testRing = ScriptableObject.CreateInstance<Accessory>();
         testRing.name = "Test Ring";
         testRing.EquipmentName = "Test Ring";
         testRing.Slot = EquipmentSlot.Accessory;
@@ -73,7 +73,7 @@ public class EquipmentTests
     [Test]
     public void Equipment_GetModifiedValue_CombinesAdditiveAndMultiplicative()
     {
-        var combinedEquipment = ScriptableObject.CreateInstance<Equipment>();
+        var combinedEquipment = ScriptableObject.CreateInstance<Weapon>();
         combinedEquipment.name = "Combined";
         combinedEquipment.EquipmentName = "Combined";
         combinedEquipment.Slot = EquipmentSlot.Weapon;
@@ -111,7 +111,7 @@ public class EquipmentTests
     public void EquipmentManager_EquipItem_ReturnsReplacedItem()
     {
         var firstWeapon = testWeapon;
-        var secondWeapon = ScriptableObject.CreateInstance<Equipment>();
+        var secondWeapon = ScriptableObject.CreateInstance<Weapon>();
         secondWeapon.name = "Second Sword";
         secondWeapon.EquipmentName = "Second Sword";
         secondWeapon.Slot = EquipmentSlot.Weapon;
@@ -287,7 +287,7 @@ public class EquipmentTests
     [Test]
     public void Equipment_Abilities_DefaultsToEmpty()
     {
-        var newEquipment = ScriptableObject.CreateInstance<Equipment>();
+        var newEquipment = ScriptableObject.CreateInstance<Weapon>();
         Assert.IsNotNull(newEquipment.Abilities);
         Assert.AreEqual(0, newEquipment.Abilities.Length);
     }
