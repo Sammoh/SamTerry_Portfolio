@@ -1,59 +1,68 @@
 using System;
 using UnityEngine;
 
-namespace Sammoh.TurnBasedStrategy
+/// <summary>
+/// Represents a stat modification provided by equipment
+/// </summary>
+[Serializable]
+public class StatModifier
 {
-    /// <summary>
-    /// Represents a stat modification provided by equipment
-    /// </summary>
-    [Serializable]
-    public class StatModifier
+    [SerializeField] private StatType statType;
+    [SerializeField] private float value;
+    [SerializeField] private ModifierType modifierType;
+
+    public StatType StatType => statType;
+    public float Value => value;
+    public ModifierType ModifierType => modifierType;
+
+    public StatModifier(StatType statType, float value, ModifierType modifierType)
     {
-        [SerializeField] private StatType statType;
-        [SerializeField] private float value;
-        [SerializeField] private ModifierType modifierType;
+        this.statType = statType;
+        this.value = value;
+        this.modifierType = modifierType;
+    }
+    
+    public StatModifier(StatModifier other)
+    {
+        this.statType = other.statType;
+        this.value = other.value;
+        this.modifierType = other.modifierType;
+    }
 
-        public StatType StatType => statType;
-        public float Value => value;
-        public ModifierType ModifierType => modifierType;
-
-        public StatModifier(StatType statType, float value, ModifierType modifierType)
+    /// <summary>
+    /// Applies this modifier to a base stat value
+    /// </summary>
+    /// <param name="baseValue">The base stat value</param>
+    /// <returns>The modified stat value</returns>
+    public float ApplyModifier(float baseValue)
+    {
+        switch (modifierType)
         {
-            this.statType = statType;
-            this.value = value;
-            this.modifierType = modifierType;
+            case ModifierType.Flat:
+                return baseValue + value;
+            case ModifierType.Percentage:
+                return baseValue * (1 + value / 100f);
+            default:
+                return baseValue;
         }
-
-        /// <summary>
-        /// Applies this modifier to a base stat value
-        /// </summary>
-        /// <param name="baseValue">The base stat value</param>
-        /// <returns>The modified stat value</returns>
-        public float ApplyModifier(float baseValue)
+    }
+    
+    public void Validate()
+    {
+        value = Mathf.Max(0f, value);
+    }
+    
+    public override string ToString()
+    {
+        string sign = value >= 0 ? "+" : "";
+        switch (modifierType)
         {
-            switch (modifierType)
-            {
-                case ModifierType.Additive:
-                    return baseValue + value;
-                case ModifierType.Multiplicative:
-                    return baseValue * (1 + value / 100f);
-                default:
-                    return baseValue;
-            }
-        }
-
-        public override string ToString()
-        {
-            string sign = value >= 0 ? "+" : "";
-            switch (modifierType)
-            {
-                case ModifierType.Additive:
-                    return $"{sign}{value} {statType}";
-                case ModifierType.Multiplicative:
-                    return $"{sign}{value}% {statType}";
-                default:
-                    return $"{value} {statType}";
-            }
+            case ModifierType.Flat:
+                return $"{sign}{value} {statType}";
+            case ModifierType.Percentage:
+                return $"{sign}{value}% {statType}";
+            default:
+                return $"{value} {statType}";
         }
     }
 }

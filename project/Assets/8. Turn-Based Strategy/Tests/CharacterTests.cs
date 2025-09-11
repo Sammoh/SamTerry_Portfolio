@@ -183,20 +183,27 @@ public class CharacterEquipmentIntegrationTests
         };
         
         character.Initialize("TestCharacter", stats, abilities, true);
-
-        // Create test equipment
-        testWeapon = new Equipment("Test Sword", EquipmentSlot.Weapon,
-            new StatModifier[] {
-                new StatModifier(StatType.Attack, 5, ModifierType.Additive)
-            },
-            "A test weapon");
-
-        testArmor = new Equipment("Test Armor", EquipmentSlot.Armor,
-            new StatModifier[] {
-                new StatModifier(StatType.Defense, 3, ModifierType.Additive),
-                new StatModifier(StatType.MaxHealth, 20, ModifierType.Additive)
-            },
-            "Test armor");
+        
+        var testSword = ScriptableObject.CreateInstance<Equipment>();
+        testSword.name = "Test Sword";
+        testSword.EquipmentName = "Test Sword";
+        testSword.Slot = EquipmentSlot.Weapon;
+        testSword.StatModifiers = new StatModifier[] {
+            new StatModifier(StatType.Attack, 5, ModifierType.Flat)
+        };
+        testSword.Description = "A test weapon";
+        testWeapon = testSword;
+        
+        var testArmorSo = ScriptableObject.CreateInstance<Equipment>();
+        testArmorSo.name = "Test Armor";
+        testArmorSo.EquipmentName = "Test Armor";
+        testArmorSo.Slot = EquipmentSlot.Armor;
+        testArmorSo.StatModifiers = new StatModifier[] {
+            new StatModifier(StatType.Defense, 3, ModifierType.Flat),
+            new StatModifier(StatType.MaxHealth, 20, ModifierType.Flat)
+        };
+        testArmorSo.Description = "Test armor piece";
+        testArmor = testArmorSo;
     }
 
     [TearDown]

@@ -1,182 +1,289 @@
 using UnityEngine;
+using System.Collections.Generic;
+using Sammoh.TurnBasedStrategy;
+using UnityEngine.Serialization;
 
-namespace Sammoh.TurnBasedStrategy
+namespace Sammoh.Two
 {
     /// <summary>
-    /// Demonstrates the equipment system functionality
+    /// Demonstration script showing how to use the Equipment system.
+    /// This script would be attached to a GameObject in a Unity scene.
     /// </summary>
     public class EquipmentDemo : MonoBehaviour
     {
-        [Header("Demo Settings")]
-        [SerializeField] private bool autoRunOnStart = false;
+        [FormerlySerializedAs("equipmentDatabaseSo")]
+        [Header("Equipment Database")]
         [SerializeField] private EquipmentDatabase equipmentDatabase;
-
-        private Character demoCharacter;
-
+        
+        [Header("Demo Controls")]
+        [SerializeField] private bool initializeOnStart = true;
+        [SerializeField] private string testEquipmentId = "Common_Sword_Sharp_Blade";
+        
+        [Header("Display Info")]
+        [SerializeField] private int totalEquipmentCount;
+        [SerializeField] private int weaponCount;
+        [SerializeField] private int accessoryCount;
+        [SerializeField] private int armorCount;
+        
         private void Start()
         {
-            if (autoRunOnStart)
+            if (initializeOnStart)
             {
-                RunEquipmentDemo();
+                InitializeEquipmentSystem();
+                DemonstrateEquipmentUsage();
+                UpdateDisplayInfo();
             }
         }
-
+        
         /// <summary>
-        /// Demonstrates the equipment system
+        /// Initializes the equipment system and database.
         /// </summary>
-        [ContextMenu("Run Equipment Demo")]
-        public void RunEquipmentDemo()
+        public void InitializeEquipmentSystem()
         {
-            Debug.Log("=== Equipment System Demo ===");
-
-            // Create or find a demo character
-            SetupDemoCharacter();
-
-            if (demoCharacter == null)
+            Debug.Log("=== Equipment System Initialization ===");
+            
+            // Get or load the equipment database
+            if (equipmentDatabase == null)
             {
-                Debug.LogError("No demo character available for equipment demo");
+                equipmentDatabase = EquipmentGenerator.GetOrCreateEquipmentDatabase();
+            }
+            
+            if (equipmentDatabase == null)
+            {
+                Debug.LogError("Failed to load Equipment Database! Make sure to generate equipment assets first.");
                 return;
             }
-
-            // Create equipment database if not assigned
-            if (equipmentDatabase == null)
-            {
-                CreateTemporaryEquipmentDatabase();
-            }
-
-            // Demonstrate basic equipment functionality
-            DemonstrateBasicEquipment();
-
-            // Demonstrate stat calculations
-            DemonstrateStatCalculations();
-
-            // Demonstrate equipment swapping
-            DemonstrateEquipmentSwapping();
-
-            Debug.Log("=== Equipment Demo Complete ===");
+            
+            // Initialize lookup tables for fast access
+            equipmentDatabase.InitializeLookupTables();
+            
+            Debug.Log($"Equipment Database loaded successfully!");
+            Debug.Log($"Total Equipment: {equipmentDatabase.TotalEquipmentCount}");
+            Debug.Log($"Last Updated: {equipmentDatabase.LastUpdated}");
         }
-
+        
         /// <summary>
-        /// Resets the demo character to default state
+        /// Demonstrates various ways to use the equipment system.
         /// </summary>
-        [ContextMenu("Reset Character")]
-        public void ResetCharacter()
+        public void DemonstrateEquipmentUsage()
         {
-            if (demoCharacter != null)
-            {
-                // Unequip all items
-                demoCharacter.EquipmentManager.UnequipAll();
-                
-                // Restore character to full health/mana
-                demoCharacter.RestoreToFull();
-                
-                Debug.Log($"Reset {demoCharacter.CharacterName} to default state");
-                LogCharacterStats("After Reset");
-            }
-        }
-
-        private void SetupDemoCharacter()
-        {
-            // Try to find existing character component
-            demoCharacter = GetComponent<Character>();
-
-            if (demoCharacter == null)
-            {
-                // Create a new character for demo
-                demoCharacter = gameObject.AddComponent<Character>();
-                var stats = new CharacterStats(100, 15, 10, 12, 50);
-                var abilities = new CharacterAbility[]
-                {
-                    new CharacterAbility("Demo Attack", AbilityType.Attack, 10, 5, "Basic attack for demo")
-                };
-                demoCharacter.Initialize("Demo Character", stats, abilities, true);
-            }
-
-            Debug.Log($"Demo character: {demoCharacter.CharacterName}");
-        }
-
-        private void CreateTemporaryEquipmentDatabase()
-        {
-            // Create temporary equipment for demo
-            equipmentDatabase = ScriptableObject.CreateInstance<EquipmentDatabase>();
-            equipmentDatabase.CreateDefaultEquipment();
-            Debug.Log("Created temporary equipment database for demo");
-        }
-
-        private void DemonstrateBasicEquipment()
-        {
-            Debug.Log("--- Basic Equipment Demo ---");
-            
-            LogCharacterStats("Before Equipment");
-
-            // Equip a weapon
-            var weapon = equipmentDatabase.Weapons[0]; // Iron Sword
-            demoCharacter.EquipItem(weapon);
-            Debug.Log($"Equipped: {weapon.EquipmentName}");
-            LogCharacterStats("After Weapon");
-
-            // Equip armor
-            var armor = equipmentDatabase.Armor[0]; // Leather Armor
-            demoCharacter.EquipItem(armor);
-            Debug.Log($"Equipped: {armor.EquipmentName}");
-            LogCharacterStats("After Armor");
-
-            // Equip accessory
-            var accessory = equipmentDatabase.Accessories[0]; // Power Ring
-            demoCharacter.EquipItem(accessory);
-            Debug.Log($"Equipped: {accessory.EquipmentName}");
-            LogCharacterStats("After Accessory");
-        }
-
-        private void DemonstrateStatCalculations()
-        {
-            Debug.Log("--- Stat Calculation Demo ---");
-
-            var stats = demoCharacter.Stats;
-            
-            Debug.Log($"Base Attack: {stats.BaseAttack}, Effective Attack: {stats.Attack}");
-            Debug.Log($"Base Defense: {stats.BaseDefense}, Effective Defense: {stats.Defense}");
-            Debug.Log($"Base Max Health: {stats.BaseMaxHealth}, Effective Max Health: {stats.MaxHealth}");
-            Debug.Log($"Base Speed: {stats.BaseSpeed}, Effective Speed: {stats.Speed}");
-            Debug.Log($"Base Mana: {stats.BaseMana}, Effective Mana: {stats.Mana}");
-
-            // Show equipment bonuses
-            var equipmentManager = demoCharacter.EquipmentManager;
-            Debug.Log($"Attack Bonus: +{equipmentManager.GetAdditiveModifier(StatType.Attack)}, " +
-                     $"x{1 + equipmentManager.GetMultiplicativeModifier(StatType.Attack)/100f:F2}");
-        }
-
-        private void DemonstrateEquipmentSwapping()
-        {
-            Debug.Log("--- Equipment Swapping Demo ---");
-
-            // Swap to a better weapon
-            var betterWeapon = equipmentDatabase.Weapons[1]; // Steel Blade
-            var oldWeapon = demoCharacter.UnequipItem(EquipmentSlot.Weapon);
-            demoCharacter.EquipItem(betterWeapon);
-            
-            Debug.Log($"Swapped {oldWeapon?.EquipmentName} for {betterWeapon.EquipmentName}");
-            LogCharacterStats("After Weapon Swap");
-
-            // Test unequipping
-            var unequippedArmor = demoCharacter.UnequipItem(EquipmentSlot.Armor);
-            Debug.Log($"Unequipped: {unequippedArmor?.EquipmentName}");
-            LogCharacterStats("After Unequipping Armor");
-        }
-
-        private void LogCharacterStats(string context)
-        {
-            var stats = demoCharacter.Stats;
-            Debug.Log($"{context} - HP:{stats.MaxHealth} ATK:{stats.Attack} DEF:{stats.Defense} SPD:{stats.Speed} MP:{stats.Mana}");
-        }
-
-        private void OnValidate()
-        {
-            // Ensure we have an equipment database reference
             if (equipmentDatabase == null)
             {
-                // Try to find one in the project
-                equipmentDatabase = Resources.FindObjectsOfTypeAll<EquipmentDatabase>()[0];
+                Debug.LogError("Equipment database not initialized!");
+                return;
+            }
+            
+            Debug.Log("=== Equipment System Usage Demo ===");
+            
+            // 1. Find equipment by ID (file name)
+            DemonstrateEquipmentLookup();
+            
+            // 2. Get equipment by type
+            DemonstrateTypeFiltering();
+            
+            // 3. Get equipment by rarity
+            DemonstrateRarityFiltering();
+            
+            // 4. Show equipment statistics
+            DemonstrateStatistics();
+            
+            // 5. Demonstrate equipment-specific functionality
+            DemonstrateEquipmentFeatures();
+        }
+        
+        private void DemonstrateEquipmentLookup()
+        {
+            Debug.Log("--- Equipment Lookup Demo ---");
+            
+            Equipment found = equipmentDatabase.FindEquipmentById(testEquipmentId);
+            if (found != null)
+            {
+                Debug.Log($"Found equipment: {found.EquipmentName} (ID: {found.Id})");
+                Debug.Log($"Type: {found.Type}, Rarity: {found.Rarity}, Level: {found.Level}");
+            }
+            else
+            {
+                Debug.LogWarning($"Equipment with ID '{testEquipmentId}' not found. Generate equipment assets first!");
+            }
+        }
+        
+        private void DemonstrateTypeFiltering()
+        {
+            Debug.Log("--- Type Filtering Demo ---");
+            
+            var weapons = equipmentDatabase.GetEquipmentByType(EquipmentType.Weapon);
+            var accessories = equipmentDatabase.GetEquipmentByType(EquipmentType.Accessory);
+            var armor = equipmentDatabase.GetEquipmentByType(EquipmentType.Armor);
+            
+            Debug.Log($"Weapons: {weapons.Count}");
+            Debug.Log($"Accessories: {accessories.Count}");
+            Debug.Log($"Armor: {armor.Count}");
+            
+            // Show first weapon if available
+            if (weapons.Count > 0 && weapons[0] is Weapon weapon)
+            {
+                Debug.Log($"Sample Weapon: {weapon.EquipmentName} - Damage: {weapon.Damage}, DPS: {weapon.CalculateDPS():F2}");
+            }
+        }
+        
+        private void DemonstrateRarityFiltering()
+        {
+            Debug.Log("--- Rarity Filtering Demo ---");
+            
+            foreach (EquipmentRarity rarity in System.Enum.GetValues(typeof(EquipmentRarity)))
+            {
+                var equipment = equipmentDatabase.GetEquipmentByRarity(rarity);
+                Debug.Log($"{rarity} Equipment: {equipment.Count} items");
+            }
+        }
+        
+        private void DemonstrateStatistics()
+        {
+            Debug.Log("--- Equipment Statistics ---");
+            
+            var stats = equipmentDatabase.GetStatistics();
+            Debug.Log($"Total Equipment: {stats.TotalCount}");
+            Debug.Log($"  Weapons: {stats.WeaponCount}");
+            Debug.Log($"  Accessories: {stats.AccessoryCount}");
+            Debug.Log($"  Armor: {stats.ArmorCount}");
+            
+            Debug.Log("Breakdown by Rarity:");
+            foreach (var kvp in stats.CountByRarity)
+            {
+                Debug.Log($"  {kvp.Key}: {kvp.Value}");
+            }
+        }
+        
+        private void DemonstrateEquipmentFeatures()
+        {
+            Debug.Log("--- Equipment-Specific Features Demo ---");
+            
+            // Weapon features
+            var weapons = equipmentDatabase.GetEquipmentByType(EquipmentType.Weapon);
+            if (weapons.Count > 0 && weapons[0] is Weapon sampleWeapon)
+            {
+                Debug.Log($"Weapon '{sampleWeapon.EquipmentName}' DPS: {sampleWeapon.CalculateDPS():F2}");
+            }
+            
+            // Armor features
+            var armors = equipmentDatabase.GetEquipmentByType(EquipmentType.Armor);
+            if (armors.Count > 0 && armors[0] is Armor sampleArmor)
+            {
+                int totalDefense = sampleArmor.CalculateTotalDefense();
+                Debug.Log($"Armor '{sampleArmor.EquipmentName}' Total Defense: {totalDefense}");
+                Debug.Log($"Fire Resistance: {sampleArmor.GetDamageResistance(DamageType.Fire)}%");
+            }
+            
+            // Accessory features
+            var accessories = equipmentDatabase.GetEquipmentByType(EquipmentType.Accessory);
+            if (accessories.Count > 0 && accessories[0] is Accessory sampleAccessory)
+            {
+                Debug.Log($"Accessory '{sampleAccessory.EquipmentName}' has {sampleAccessory.StatModifiers.Length} stat modifiers");
+                if (sampleAccessory.StatModifiers.Length > 0)
+                {
+                    var modifier = sampleAccessory.StatModifiers[0];
+                    Debug.Log($"  First modifier: +{modifier.Value} {modifier.StatType} ({modifier.ModifierType})");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Updates the inspector display information.
+        /// </summary>
+        private void UpdateDisplayInfo()
+        {
+            if (equipmentDatabase != null)
+            {
+                var stats = equipmentDatabase.GetStatistics();
+                totalEquipmentCount = stats.TotalCount;
+                weaponCount = stats.WeaponCount;
+                accessoryCount = stats.AccessoryCount;
+                armorCount = stats.ArmorCount;
+            }
+        }
+        
+        /// <summary>
+        /// Demonstrates loading equipment directly from Resources.
+        /// This method shows how to bypass the database for direct loading.
+        /// </summary>
+        public void DemonstrateDirectResourceLoading()
+        {
+            Debug.Log("=== Direct Resource Loading Demo ===");
+            
+            // Load all weapons from Resources
+            Weapon[] allWeapons = Resources.LoadAll<Weapon>("Equipment/Weapons");
+            Debug.Log($"Loaded {allWeapons.Length} weapons directly from Resources");
+            
+            // Load all accessories from Resources
+            Accessory[] allAccessories = Resources.LoadAll<Accessory>("Equipment/Accessories");
+            Debug.Log($"Loaded {allAccessories.Length} accessories directly from Resources");
+            
+            // Load all armor from Resources
+            Armor[] allArmor = Resources.LoadAll<Armor>("Equipment/Armor");
+            Debug.Log($"Loaded {allArmor.Length} armor pieces directly from Resources");
+            
+            // Example of loading a specific item by path
+            // Weapon specificWeapon = Resources.Load<Weapon>("Equipment/Weapons/Epic_Sword_Legendary_Blade");
+            // if (specificWeapon != null)
+            // {
+            //     Debug.Log($"Loaded specific weapon: {specificWeapon.EquipmentName}");
+            // }
+        }
+        
+        /// <summary>
+        /// Public method to trigger demo from inspector or other scripts.
+        /// </summary>
+        [ContextMenu("Run Equipment Demo")]
+        public void RunDemo()
+        {
+            InitializeEquipmentSystem();
+            DemonstrateEquipmentUsage();
+            DemonstrateDirectResourceLoading();
+            UpdateDisplayInfo();
+        }
+        
+        /// <summary>
+        /// Validate that the equipment system is working correctly.
+        /// </summary>
+        [ContextMenu("Validate Equipment System")]
+        public void ValidateSystem()
+        {
+            Debug.Log("=== Equipment System Validation ===");
+            
+            bool isValid = true;
+            
+            // Check if database exists
+            if (equipmentDatabase == null)
+            {
+                Debug.LogError("Equipment Database is null!");
+                isValid = false;
+            }
+            
+            // Check if equipment assets exist
+            var allEquipment = EquipmentGenerator.GetAllExistingEquipment();
+            if (allEquipment.Count == 0)
+            {
+                Debug.LogWarning("No equipment assets found! Generate default equipment first.");
+                isValid = false;
+            }
+            
+            // Validate equipment IDs
+            foreach (var equipment in allEquipment)
+            {
+                if (string.IsNullOrEmpty(equipment.Id))
+                {
+                    Debug.LogError($"Equipment {equipment.name} has invalid ID!");
+                    isValid = false;
+                }
+            }
+            
+            if (isValid)
+            {
+                Debug.Log("✓ Equipment System validation passed!");
+            }
+            else
+            {
+                Debug.LogError("✗ Equipment System validation failed!");
             }
         }
     }

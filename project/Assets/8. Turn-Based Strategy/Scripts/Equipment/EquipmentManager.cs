@@ -161,7 +161,7 @@ namespace Sammoh.TurnBasedStrategy
             float total = 0f;
             foreach (var modifier in equipment.StatModifiers)
             {
-                if (modifier.StatType == statType && modifier.ModifierType == ModifierType.Additive)
+                if (modifier.StatType == statType && modifier.ModifierType == ModifierType.Flat)
                 {
                     total += modifier.Value;
                 }
@@ -174,7 +174,7 @@ namespace Sammoh.TurnBasedStrategy
             float total = 0f;
             foreach (var modifier in equipment.StatModifiers)
             {
-                if (modifier.StatType == statType && modifier.ModifierType == ModifierType.Multiplicative)
+                if (modifier.StatType == statType && modifier.ModifierType == ModifierType.Percentage)
                 {
                     total += modifier.Value;
                 }
