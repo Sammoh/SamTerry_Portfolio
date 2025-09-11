@@ -270,4 +270,77 @@ public class EquipmentTests
         Assert.AreEqual("-5 Speed", additiveModifier.ToString());
         Assert.AreEqual("-10% Attack", multiplicativeModifier.ToString());
     }
+
+    [Test]
+    public void Equipment_WithAbilities_StoresAbilitiesCorrectly()
+    {
+        var ability1 = new CharacterAbility("Fire Strike", AbilityType.Attack, 15, 10, "A fiery weapon attack");
+        var ability2 = new CharacterAbility("Shield Bash", AbilityType.Special, 10, 5, "A defensive strike");
+        
+        testWeapon.Abilities = new CharacterAbility[] { ability1, ability2 };
+        
+        Assert.AreEqual(2, testWeapon.Abilities.Length);
+        Assert.AreEqual("Fire Strike", testWeapon.Abilities[0].AbilityName);
+        Assert.AreEqual("Shield Bash", testWeapon.Abilities[1].AbilityName);
+    }
+
+    [Test]
+    public void Equipment_Abilities_DefaultsToEmpty()
+    {
+        var newEquipment = ScriptableObject.CreateInstance<Equipment>();
+        Assert.IsNotNull(newEquipment.Abilities);
+        Assert.AreEqual(0, newEquipment.Abilities.Length);
+    }
+
+    [Test]
+    public void EquipmentManager_GetEquipmentAbilities_ReturnsAllAbilities()
+    {
+        var weaponAbility = new CharacterAbility("Sword Slash", AbilityType.Attack, 20, 8, "Basic sword attack");
+        var armorAbility = new CharacterAbility("Iron Will", AbilityType.Defend, 15, 12, "Defensive boost from armor");
+        
+        testWeapon.Abilities = new CharacterAbility[] { weaponAbility };
+        testArmor.Abilities = new CharacterAbility[] { armorAbility };
+        
+        equipmentManager.EquipItem(testWeapon);
+        equipmentManager.EquipItem(testArmor);
+        
+        var abilities = equipmentManager.GetEquipmentAbilities();
+        
+        Assert.AreEqual(2, abilities.Length);
+        Assert.Contains(weaponAbility, abilities);
+        Assert.Contains(armorAbility, abilities);
+    }
+
+    [Test]
+    public void EquipmentManager_GetEquipmentAbilities_ReturnsEmptyWhenNoAbilities()
+    {
+        equipmentManager.EquipItem(testWeapon); // testWeapon has no abilities by default
+        
+        var abilities = equipmentManager.GetEquipmentAbilities();
+        
+        Assert.AreEqual(0, abilities.Length);
+    }
+
+    [Test]
+    public void EquipmentManager_GetAbilitiesFromSlot_ReturnsCorrectAbilities()
+    {
+        var weaponAbility = new CharacterAbility("Weapon Power", AbilityType.Attack, 25, 15, "Special weapon ability");
+        testWeapon.Abilities = new CharacterAbility[] { weaponAbility };
+        
+        equipmentManager.EquipItem(testWeapon);
+        
+        var weaponAbilities = equipmentManager.GetAbilitiesFromSlot(EquipmentSlot.Weapon);
+        var armorAbilities = equipmentManager.GetAbilitiesFromSlot(EquipmentSlot.Armor);
+        
+        Assert.AreEqual(1, weaponAbilities.Length);
+        Assert.AreEqual(weaponAbility, weaponAbilities[0]);
+        Assert.AreEqual(0, armorAbilities.Length);
+    }
+
+    [Test]
+    public void EquipmentManager_GetAbilitiesFromSlot_ReturnsEmptyWhenNothingEquipped()
+    {
+        var abilities = equipmentManager.GetAbilitiesFromSlot(EquipmentSlot.Weapon);
+        Assert.AreEqual(0, abilities.Length);
+    }
 }

@@ -317,4 +317,71 @@ public class CharacterEquipmentIntegrationTests
         Assert.AreEqual(10, manualStats.Defense);
         Assert.AreEqual(100, manualStats.MaxHealth);
     }
+
+    [Test]
+    public void Character_GetAllAbilities_ReturnsCharacterAndEquipmentAbilities()
+    {
+        var weaponAbility = new CharacterAbility("Weapon Strike", AbilityType.Attack, 20, 10, "Weapon-based attack");
+        var armorAbility = new CharacterAbility("Armor Guard", AbilityType.Defend, 15, 8, "Armor-based defense");
+        
+        testWeapon.Abilities = new CharacterAbility[] { weaponAbility };
+        testArmor.Abilities = new CharacterAbility[] { armorAbility };
+        
+        character.EquipItem(testWeapon);
+        character.EquipItem(testArmor);
+        
+        var allAbilities = character.GetAllAbilities();
+        
+        // Should include both character abilities (1) and equipment abilities (2)
+        Assert.AreEqual(3, allAbilities.Length);
+        Assert.Contains(weaponAbility, allAbilities);
+        Assert.Contains(armorAbility, allAbilities);
+        // Also check that character abilities are included
+        Assert.AreEqual("Test Attack", allAbilities[0].AbilityName);
+    }
+
+    [Test]
+    public void Character_GetEquipmentAbilities_ReturnsOnlyEquipmentAbilities()
+    {
+        var weaponAbility = new CharacterAbility("Weapon Strike", AbilityType.Attack, 20, 10, "Weapon-based attack");
+        testWeapon.Abilities = new CharacterAbility[] { weaponAbility };
+        
+        character.EquipItem(testWeapon);
+        
+        var equipmentAbilities = character.GetEquipmentAbilities();
+        
+        Assert.AreEqual(1, equipmentAbilities.Length);
+        Assert.AreEqual(weaponAbility, equipmentAbilities[0]);
+        Assert.AreEqual("Weapon Strike", equipmentAbilities[0].AbilityName);
+    }
+
+    [Test]
+    public void Character_GetEquipmentAbilities_ReturnsEmptyWhenNoEquipment()
+    {
+        var equipmentAbilities = character.GetEquipmentAbilities();
+        Assert.AreEqual(0, equipmentAbilities.Length);
+    }
+
+    [Test]
+    public void Character_GetAllAbilities_WorksWithoutEquipmentManager()
+    {
+        // Create character without initializing equipment manager
+        var newCharacterObject = new GameObject("NewTestCharacter");
+        var newCharacter = newCharacterObject.AddComponent<Character>();
+        
+        var stats = new CharacterStats(100, 15, 10, 12, 50);
+        var abilities = new CharacterAbility[]
+        {
+            new CharacterAbility("Basic Attack", AbilityType.Attack, 10, 5, "Basic attack")
+        };
+        
+        newCharacter.Initialize("NewTestCharacter", stats, abilities, true);
+        
+        var allAbilities = newCharacter.GetAllAbilities();
+        
+        Assert.AreEqual(1, allAbilities.Length);
+        Assert.AreEqual("Basic Attack", allAbilities[0].AbilityName);
+        
+        Object.DestroyImmediate(newCharacterObject);
+    }
 }

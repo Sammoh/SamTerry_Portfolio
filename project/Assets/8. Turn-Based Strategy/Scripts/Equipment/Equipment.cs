@@ -35,6 +35,9 @@ using Sammoh.TurnBasedStrategy;
         [Tooltip("Stat modifiers evaluated in additive -> multiplicative order (shared with Sammoh.TurnBasedStrategy)")]
         [SerializeField] protected StatModifier[] statModifiers = Array.Empty<StatModifier>();
 
+        [Tooltip("Abilities that can be used when this equipment is equipped (shared with Sammoh.TurnBasedStrategy)")]
+        [SerializeField] protected CharacterAbility[] abilities = Array.Empty<CharacterAbility>();
+
         /// <summary>
         /// Equipment ID derived from the asset file name for fast lookup tables.
         /// </summary>
@@ -104,6 +107,13 @@ using Sammoh.TurnBasedStrategy;
         {
             get => statModifiers ?? Array.Empty<StatModifier>();
             set => statModifiers = value ?? Array.Empty<StatModifier>();
+        }
+
+        /// <summary>Full set of abilities (shared with TBS).</summary>
+        public CharacterAbility[] Abilities
+        {
+            get => abilities ?? Array.Empty<CharacterAbility>();
+            set => abilities = value ?? Array.Empty<CharacterAbility>();
         }
         
         // public Equipment(string name, EquipmentSlot slot, StatModifier[] modifiers, string description)
@@ -206,6 +216,7 @@ using Sammoh.TurnBasedStrategy;
             weight = Mathf.Max(0f, weight);
             value = Mathf.Max(0, value);
             if (statModifiers == null) statModifiers = Array.Empty<StatModifier>();
+            if (abilities == null) abilities = Array.Empty<CharacterAbility>();
         }
 
         public override string ToString()

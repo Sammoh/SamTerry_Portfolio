@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Sammoh.TurnBasedStrategy
@@ -71,6 +72,37 @@ namespace Sammoh.TurnBasedStrategy
         public void RestoreToFull()
         {
             stats.FullRestore();
+        }
+
+        /// <summary>
+        /// Gets all abilities available to this character, including both character abilities and equipment abilities
+        /// </summary>
+        /// <returns>Array of all abilities (character + equipment)</returns>
+        public CharacterAbility[] GetAllAbilities()
+        {
+            var allAbilities = new List<CharacterAbility>();
+            
+            // Add character abilities
+            if (abilities != null)
+                allAbilities.AddRange(abilities);
+            
+            // Add equipment abilities
+            if (equipmentManager != null)
+                allAbilities.AddRange(equipmentManager.GetEquipmentAbilities());
+            
+            return allAbilities.ToArray();
+        }
+
+        /// <summary>
+        /// Gets abilities from equipped items only
+        /// </summary>
+        /// <returns>Array of abilities from equipped items</returns>
+        public CharacterAbility[] GetEquipmentAbilities()
+        {
+            if (equipmentManager == null)
+                return new CharacterAbility[0];
+            
+            return equipmentManager.GetEquipmentAbilities();
         }
 
         private void Start()
