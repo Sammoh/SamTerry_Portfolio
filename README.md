@@ -12,8 +12,9 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 3. [Advanced Interaction (3D or VR)](#advanced-interaction-3d-or-vr)
 4. [Origin Shifting (3D or VR)](#origin-shifting-3d-or-vr)
 5. [Crowd System](#crowd-system)
-6. [Multiplayer Netcode](#multiplayer-netcode)
-7. [Turn-Based Strategy Game](#turn-based-strategy-game)
+6. [Goal Oriented Action Planning (GOAP)](#goal-oriented-action-planning-goap)
+7. [Multiplayer Netcode](#multiplayer-netcode)
+8. [Turn-Based Strategy Game](#turn-based-strategy-game)
 
 ---
 
@@ -88,6 +89,24 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
   - Variants include, skin, body region type, and clothing color.
   
   https://github.com/user-attachments/assets/c8db3f9a-3be1-4190-a2c1-034acd2ad8f7
+
+---
+
+## Goal Oriented Action Planning (GOAP)
+
+**Project**: [Goal Oriented Action Planning](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/project/Assets/6.%20Goal%20Oriented%20Action%20Planning)
+**Tech Stack**: Unity3D, C#, GOAP Architecture, AI Planning
+**Description**: A complete Goal Oriented Action Planning system featuring a tamagotchi-like 3D character with autonomous behavior. The system demonstrates advanced AI planning techniques with a stable, extensible architecture designed for plugging in new behaviors without code churn.
+
+* Key Features:
+  - **6 Core Interfaces**: IAgentState, IWorldState, IGoal, IAction, IPlanner, IExecutor for maximum extensibility
+  - **Deterministic Game Loop**: Fixed 5-10Hz tick rate with continuous execution updates
+  - **Tamagotchi-like Character**: Autonomous agent with needs (hunger, thirst, sleep, play) and dynamic priority system
+  - **Intelligent Planning**: A* pathfinding with obstacle avoidance through world state facts and POI system
+  - **Real-time Debug Overlay**: Comprehensive visualization of agent state, current goals, and action plans
+  - **Comprehensive Testing**: PlayMode smoke tests and acceptance criteria validation
+  - **Stable Contracts**: New goals and actions can be added without modifying core interfaces
+  - **Obstacle Handling**: Planning system accounts for doors and environmental barriers through world facts
 
 ---
 
