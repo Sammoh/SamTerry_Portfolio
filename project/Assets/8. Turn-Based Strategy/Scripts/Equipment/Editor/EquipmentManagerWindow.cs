@@ -18,6 +18,7 @@ namespace Sammoh.Two
         private readonly Dictionary<Equipment, bool> selectedEquipment = new Dictionary<Equipment, bool>();
         private readonly Dictionary<Equipment, bool> expandedInlineEditor = new Dictionary<Equipment, bool>();
         private readonly Dictionary<Equipment, ReorderableList> modifierLists = new Dictionary<Equipment, ReorderableList>();
+        private readonly Dictionary<Equipment, ReorderableList> abilityLists = new Dictionary<Equipment, ReorderableList>();
 
         // Filters
         private EquipmentType filterType = EquipmentType.Weapon;
@@ -342,8 +343,8 @@ namespace Sammoh.Two
 
             // Quick summary
             EditorGUILayout.LabelField(
-                $"Lvl {equipmentSo.Level} • {equipmentSo.Rarity} • Slot {equipmentSo.Slot} • Mods {equipmentSo.StatModifiers?.Length ?? 0}",
-                GUILayout.MaxWidth(360));
+                $"Lvl {equipmentSo.Level} • {equipmentSo.Rarity} • Slot {equipmentSo.Slot} • Mods {equipmentSo.StatModifiers?.Length ?? 0} • Abilities {equipmentSo.Abilities?.Length ?? 0}",
+                GUILayout.MaxWidth(400));
 
             // Actions
             if (GUILayout.Button("Select", GUILayout.Height(20), GUILayout.Width(64)))
@@ -359,7 +360,7 @@ namespace Sammoh.Two
 
             // Inline editor
             bool expanded = expandedInlineEditor.GetValueOrDefault(equipmentSo, false);
-            expanded = EditorGUILayout.Foldout(expanded, "Inline Edit: Slot & Stat Modifiers", true);
+            expanded = EditorGUILayout.Foldout(expanded, "Inline Edit: Slot, Stat Modifiers & Abilities", true);
             if (expanded) DrawInlineModifierEditor(equipmentSo);
             expandedInlineEditor[equipmentSo] = expanded;
 
@@ -371,15 +372,24 @@ namespace Sammoh.Two
             var so = new SerializedObject(equipmentSo);
             var slotProp = so.FindProperty("slot");                  // protected in Equipment
             var modsProp = so.FindProperty("statModifiers");         // protected in Equipment (Two)
+            var abilitiesProp = so.FindProperty("abilities");        // protected in Equipment
 
             EditorGUI.indentLevel++;
 
             // Slot
             EditorGUILayout.PropertyField(slotProp, new GUIContent("Equipment Slot"));
 
+            EditorGUILayout.Space();
+
             // Reorderable list for StatModifiers (Two: fields are lowerCamel private: statType, value, modifierType)
             EnsureReorderableList(equipmentSo, so, modsProp);
             modifierLists[equipmentSo].DoLayoutList();
+
+            EditorGUILayout.Space();
+
+            // Reorderable list for Abilities 
+            EnsureAbilityReorderableList(equipmentSo, so, abilitiesProp);
+            abilityLists[equipmentSo].DoLayoutList();
 
             // Commit
             if (so.ApplyModifiedProperties())
@@ -429,6 +439,57 @@ namespace Sammoh.Two
             modifierLists[equipmentSo] = l;
         }
 
+        private void EnsureAbilityReorderableList(Equipment equipmentSo, SerializedObject so, SerializedProperty abilitiesProp)
+        {
+            if (abilityLists.TryGetValue(equipmentSo, out var list) && list.serializedProperty == abilitiesProp)
+                return;
+
+            var l = new ReorderableList(so, abilitiesProp, true, true, true, true);
+
+            l.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Equipment Abilities");
+            };
+
+            l.elementHeight = EditorGUIUtility.singleLineHeight * 5f + 12f;
+
+            l.drawElementCallback = (rect, index, active, focused) =>
+            {
+                var element = abilitiesProp.GetArrayElementAtIndex(index);
+                rect.y += 2;
+
+                // CharacterAbility fields: abilityName, abilityType, power, manaCost, description
+                var abilityNameProp = element.FindPropertyRelative("abilityName");
+                var abilityTypeProp = element.FindPropertyRelative("abilityType");
+                var powerProp = element.FindPropertyRelative("power");
+                var manaCostProp = element.FindPropertyRelative("manaCost");
+                var descriptionProp = element.FindPropertyRelative("description");
+
+                float lineHeight = EditorGUIUtility.singleLineHeight;
+                float spacing = 2f;
+
+                // Row 1: Ability Name
+                var r1 = new Rect(rect.x, rect.y, rect.width, lineHeight);
+                EditorGUI.PropertyField(r1, abilityNameProp, new GUIContent("Name"));
+
+                // Row 2: Type and Power
+                var r2a = new Rect(rect.x, r1.yMax + spacing, rect.width * 0.5f - 2, lineHeight);
+                EditorGUI.PropertyField(r2a, abilityTypeProp, new GUIContent("Type"));
+                var r2b = new Rect(rect.x + rect.width * 0.5f + 2, r1.yMax + spacing, rect.width * 0.5f - 2, lineHeight);
+                EditorGUI.PropertyField(r2b, powerProp, new GUIContent("Power"));
+
+                // Row 3: Mana Cost
+                var r3 = new Rect(rect.x, r2a.yMax + spacing, rect.width, lineHeight);
+                EditorGUI.PropertyField(r3, manaCostProp, new GUIContent("Mana Cost"));
+
+                // Row 4: Description
+                var r4 = new Rect(rect.x, r3.yMax + spacing, rect.width, lineHeight);
+                EditorGUI.PropertyField(r4, descriptionProp, new GUIContent("Description"));
+            };
+
+            abilityLists[equipmentSo] = l;
+        }
+
         private List<Equipment> GetFilteredEquipment()
         {
             var filtered = allEquipment.Where(e => e != null);
@@ -476,6 +537,7 @@ namespace Sammoh.Two
             selectedEquipment.Clear();
             expandedInlineEditor.Clear();
             modifierLists.Clear();
+            abilityLists.Clear();
         }
 
         private void AddModifierToSelected(StatType stat, ModifierType type, float value)
