@@ -342,9 +342,11 @@ namespace Sammoh.Two
             GUILayout.FlexibleSpace();
 
             // Quick summary
+            int abilityCount = equipmentSo.Abilities?.Length ?? 0;
+            string abilitiesDisplay = abilityCount > 0 ? $"• ⚡{abilityCount} Abilities" : "• No Abilities";
             EditorGUILayout.LabelField(
-                $"Lvl {equipmentSo.Level} • {equipmentSo.Rarity} • Slot {equipmentSo.Slot} • Mods {equipmentSo.StatModifiers?.Length ?? 0} • Abilities {equipmentSo.Abilities?.Length ?? 0}",
-                GUILayout.MaxWidth(400));
+                $"Lvl {equipmentSo.Level} • {equipmentSo.Rarity} • Slot {equipmentSo.Slot} • {equipmentSo.StatModifiers?.Length ?? 0} Mods {abilitiesDisplay}",
+                GUILayout.MaxWidth(420));
 
             // Actions
             if (GUILayout.Button("Select", GUILayout.Height(20), GUILayout.Width(64)))
@@ -379,13 +381,15 @@ namespace Sammoh.Two
             // Slot
             EditorGUILayout.PropertyField(slotProp, new GUIContent("Equipment Slot"));
 
-            EditorGUILayout.Space();
+            EditorGUILayout.Space(8);
+            EditorGUILayout.LabelField("Stat Modifiers", EditorStyles.boldLabel);
 
             // Reorderable list for StatModifiers (Two: fields are lowerCamel private: statType, value, modifierType)
             EnsureReorderableList(equipmentSo, so, modsProp);
             modifierLists[equipmentSo].DoLayoutList();
 
-            EditorGUILayout.Space();
+            EditorGUILayout.Space(8);
+            EditorGUILayout.LabelField("Equipment Abilities", EditorStyles.boldLabel);
 
             // Reorderable list for Abilities 
             EnsureAbilityReorderableList(equipmentSo, so, abilitiesProp);
@@ -451,7 +455,7 @@ namespace Sammoh.Two
                 EditorGUI.LabelField(rect, "Equipment Abilities");
             };
 
-            l.elementHeight = EditorGUIUtility.singleLineHeight * 5f + 12f;
+            l.elementHeight = EditorGUIUtility.singleLineHeight * 4f + 10f;
 
             l.drawElementCallback = (rect, index, active, focused) =>
             {
@@ -468,23 +472,21 @@ namespace Sammoh.Two
                 float lineHeight = EditorGUIUtility.singleLineHeight;
                 float spacing = 2f;
 
-                // Row 1: Ability Name
+                // Row 1: Ability Name (full width)
                 var r1 = new Rect(rect.x, rect.y, rect.width, lineHeight);
                 EditorGUI.PropertyField(r1, abilityNameProp, new GUIContent("Name"));
 
-                // Row 2: Type and Power
+                // Row 2: Type and Power (half width each)
                 var r2a = new Rect(rect.x, r1.yMax + spacing, rect.width * 0.5f - 2, lineHeight);
                 EditorGUI.PropertyField(r2a, abilityTypeProp, new GUIContent("Type"));
                 var r2b = new Rect(rect.x + rect.width * 0.5f + 2, r1.yMax + spacing, rect.width * 0.5f - 2, lineHeight);
                 EditorGUI.PropertyField(r2b, powerProp, new GUIContent("Power"));
 
-                // Row 3: Mana Cost
-                var r3 = new Rect(rect.x, r2a.yMax + spacing, rect.width, lineHeight);
-                EditorGUI.PropertyField(r3, manaCostProp, new GUIContent("Mana Cost"));
-
-                // Row 4: Description
-                var r4 = new Rect(rect.x, r3.yMax + spacing, rect.width, lineHeight);
-                EditorGUI.PropertyField(r4, descriptionProp, new GUIContent("Description"));
+                // Row 3: Mana Cost and Description (compact layout)
+                var r3a = new Rect(rect.x, r2a.yMax + spacing, rect.width * 0.3f - 2, lineHeight);
+                EditorGUI.PropertyField(r3a, manaCostProp, new GUIContent("MP"));
+                var r3b = new Rect(rect.x + rect.width * 0.3f + 2, r2a.yMax + spacing, rect.width * 0.7f - 2, lineHeight);
+                EditorGUI.PropertyField(r3b, descriptionProp, new GUIContent("Description"));
             };
 
             abilityLists[equipmentSo] = l;
