@@ -1,0 +1,17 @@
+{
+    "name": "GOAP",
+    "rootNamespace": "Sammoh.GOAP",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "Portfolio"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
