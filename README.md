@@ -13,7 +13,6 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 4. [Origin Shifting (3D or VR)](#origin-shifting-3d-or-vr)
 5. [Crowd System](#crowd-system)
 6. [Goal Oriented Action Planning (GOAP)](#goal-oriented-action-planning-goap)
-7. [Multiplayer Netcode](#multiplayer-netcode)
 8. [Turn-Based Strategy Game](#turn-based-strategy-game)
 
 ---
@@ -107,20 +106,6 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
   - **Comprehensive Testing**: PlayMode smoke tests and acceptance criteria validation
   - **Stable Contracts**: New goals and actions can be added without modifying core interfaces
   - **Obstacle Handling**: Planning system accounts for doors and environmental barriers through world facts
-
----
-
-
-## Multiplayer Netcode
-
-**Project**: [Multiplayer Netcode Integration](https://github.com/Sammoh/Multiplayer-Base)
-**Tech Stack**: Unity3D, Networking, Netcode, C#  
-**Description**: WORK IN PROGRESS: Multiplayer Lobby Client/Host Platform. Used to connect players with a lobby chat system through Vivox. 
-
-* Key Features:
-  - Networked synchronization of lobby states.
-  - Full chat channels.
-  - Host and Client network data for game initialization (maps, characters).
 
 ---
 
