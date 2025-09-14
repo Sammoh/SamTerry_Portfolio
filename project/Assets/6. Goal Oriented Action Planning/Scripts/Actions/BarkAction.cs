@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace Sammoh.GOAP
 {    
     /// <summary>
@@ -20,6 +19,7 @@ namespace Sammoh.GOAP
         {
             // Agent can bark anytime, but maybe not if sleeping
             return !agentState.HasEffect("sleeping");
+            // return true;
         }
         
         public Dictionary<string, object> GetEffects()
@@ -36,6 +36,15 @@ namespace Sammoh.GOAP
             IsExecuting = true;
             executionTime = 0f;
             Debug.Log("Started barking - Woof! Woof!");
+            
+            agentState.AddItem("barkBubble", 1); // Example of adding a bark bubble item
+            
+            // TODO: Get the bark bubble component from the agent
+            var barkBubble = agentState.AgentGameObject.GetComponentInChildren<BarkBubble>();
+            if (barkBubble != null)
+            {
+                barkBubble.ShowBark("Your bark message here!", 2f); // Show for 2 seconds
+            }
         }
         
         public ActionResult UpdateExecution(IAgentState agentState, IWorldState worldState, float deltaTime)

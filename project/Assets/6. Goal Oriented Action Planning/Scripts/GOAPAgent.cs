@@ -79,7 +79,7 @@ namespace Sammoh.GOAP
         private void InitializeSystems()
         {
             // Create core systems
-            agentState = new BasicAgentState();
+            agentState = new BasicAgentState(this);
             worldState = FindObjectOfType<BasicWorldState>();
             
             if (worldState == null)

@@ -12,7 +12,7 @@ namespace Sammoh.GOAP
         private Dictionary<string, int> inventory = new Dictionary<string, int>();
         private Dictionary<string, float> effects = new Dictionary<string, float>();
         
-        public BasicAgentState()
+        public BasicAgentState(GOAPAgent agent)
         {
             // Initialize basic needs
             needs["hunger"] = 0.3f;

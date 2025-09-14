@@ -23,10 +23,13 @@ namespace Sammoh.GOAP.Tests
         {
             // Create test world state
             var worldGO = new GameObject("TestWorldState");
+            var agent = new GameObject("GOAPAgent");
             worldState = worldGO.AddComponent<BasicWorldState>();
+
+            var goapAgent = agent.AddComponent<GOAPAgent>();
             
             // Create basic systems
-            agentState = new BasicAgentState();
+            agentState = new BasicAgentState(goapAgent);
             planner = new BasicPlanner();
             executor = new BasicExecutor();
             
