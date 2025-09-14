@@ -25,6 +25,13 @@ namespace Sammoh.GOAP
         private Transform target;
         private bool targetLocked;
 
+        // NavMesh flags
+        private bool useNav;
+        private bool warnedNavUnavailable;
+
+        // Rotation speed for manual movement
+        private float rotationSpeed = 10f;
+
         public MoveToAction(float cost = 1f, float stoppingDistance = 0.5f, float moveSpeed = 3.5f)
         {
             this.cost = Mathf.Max(0.01f, cost);
@@ -36,7 +43,7 @@ namespace Sammoh.GOAP
         public void InjectAgent(Transform agent, NavMeshAgent navAgent = null)
         {
             agentTransform = agent;
-            nav = navAgent;
+            nav = navAgent != null ? navAgent : agent != null ? agent.GetComponent<NavMeshAgent>() : null;
         }
         public void InjectCurrentGoal(IGoal goal) => currentGoal = goal;
 
@@ -49,17 +56,16 @@ namespace Sammoh.GOAP
         public Dictionary<string, object> GetEffects()
         {
             if (currentGoal == null) return Empty;
-            
-            // Map goal types to appropriate location facts for actions
+
             string locationFact = currentGoal.GoalType switch
             {
                 "hunger" => "at_food",
-                "thirst" => "at_water", 
+                "thirst" => "at_water",
                 "sleep" => "at_bed",
                 "play" => "at_toy",
                 _ => $"at_{currentGoal.GoalType}"
             };
-            
+
             return new Dictionary<string, object> { { locationFact, true } };
         }
 
@@ -68,10 +74,16 @@ namespace Sammoh.GOAP
             IsExecuting = TryResolveAndLockTarget();
             if (!IsExecuting) return;
 
-            if (nav != null)
+            useNav = EnsureNavUsable();
+
+            if (useNav)
             {
                 nav.stoppingDistance = Mathf.Max(nav.stoppingDistance, stoppingDistance);
                 nav.SetDestination(target.position);
+            }
+            else
+            {
+                WarnOnceNoNav();
             }
         }
 
@@ -82,54 +94,76 @@ namespace Sammoh.GOAP
             if (target == null || !target.gameObject.activeInHierarchy)
             {
                 if (!TryResolveAndLockTarget()) return ActionResult.Failed;
-                if (nav != null) nav.SetDestination(target.position);
+                if (useNav) nav.SetDestination(target.position);
             }
 
-            if (nav != null)
+            if (useNav)
             {
-                if (!nav.pathPending && nav.remainingDistance <= Mathf.Max(stoppingDistance, nav.stoppingDistance))
-                    return ActionResult.Success;
-                return ActionResult.Running;
+                if (!EnsureNavUsable())
+                {
+                    useNav = false;
+                    WarnOnceNoNav();
+                }
+                else
+                {
+                    if (!nav.pathPending && nav.remainingDistance <= Mathf.Max(stoppingDistance, nav.stoppingDistance))
+                        return ActionResult.Success;
+                    return ActionResult.Running;
+                }
             }
 
-            // Manual translation
+            // ---- Manual movement + rotation fallback ----
             Vector3 to = target.position - agentTransform.position;
-            if (to.sqrMagnitude <= stoppingDistance * stoppingDistance)
+            float sqrDist = to.sqrMagnitude;
+
+            if (sqrDist <= stoppingDistance * stoppingDistance)
                 return ActionResult.Success;
 
+            // Rotate smoothly toward the target
+            if (to != Vector3.zero)
+            {
+                Quaternion desiredRot = Quaternion.LookRotation(to.normalized, Vector3.up);
+                agentTransform.rotation = Quaternion.Slerp(agentTransform.rotation, desiredRot, rotationSpeed * deltaTime);
+            }
+
+            // Translate forward
             agentTransform.position += to.normalized * moveSpeed * deltaTime;
+
             return ActionResult.Running;
         }
 
         public void CancelExecution()
         {
-            if (nav != null && nav.isOnNavMesh) nav.ResetPath();
+            if (useNav && nav != null && nav.isOnNavMesh)
+                nav.ResetPath();
+
             IsExecuting = false;
             target = null;
             targetLocked = false;
+            useNav = false;
         }
 
         public void ApplyEffects(IAgentState agentState, IWorldState worldState)
         {
             if (currentGoal == null) return;
-            
-            // Map goal types to appropriate location facts for actions
+
             string locationFact = currentGoal.GoalType switch
             {
                 "hunger" => "at_food",
                 "thirst" => "at_water",
-                "sleep" => "at_bed", 
+                "sleep" => "at_bed",
                 "play" => "at_toy",
                 _ => $"at_{currentGoal.GoalType}"
             };
-            
+
             worldState.SetFact(locationFact, true);
         }
 
         public string GetDescription()
         {
             string tgt = target ? target.name : "(none)";
-            return $"MoveToAction → goal={currentGoal?.GoalType ?? "(none)"} target={tgt} stop={stoppingDistance}";
+            string mode = useNav ? "NavMesh" : "Direct";
+            return $"MoveToAction → mode={mode} goal={currentGoal?.GoalType ?? "(none)"} target={tgt} stop={stoppingDistance}";
         }
 
         private bool TryResolveAndLockTarget()
@@ -140,6 +174,38 @@ namespace Sammoh.GOAP
                 target = t; targetLocked = true; return true;
             }
             target = null; targetLocked = false; return false;
+        }
+
+        private bool EnsureNavUsable()
+        {
+            if (nav == null || !nav.enabled || !nav.gameObject.activeInHierarchy)
+                return false;
+
+            if (!nav.isOnNavMesh)
+            {
+                if (NavMesh.SamplePosition(nav.transform.position, out var hit, 2f, NavMesh.AllAreas))
+                {
+                    if (!nav.Warp(hit.position))
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            var dummyPath = new NavMeshPath();
+            bool pathOk = NavMesh.CalculatePath(nav.transform.position, nav.transform.position, NavMesh.AllAreas, dummyPath);
+            return pathOk;
+        }
+
+        private void WarnOnceNoNav()
+        {
+            if (warnedNavUnavailable) return;
+            warnedNavUnavailable = true;
+
+            string goal = currentGoal?.GoalType ?? "(none)";
+            Debug.LogWarning($"[MoveToAction] NavMesh unavailable or agent off-mesh; falling back to direct Transform movement for goal '{goal}'.");
         }
 
         private static readonly Dictionary<string, object> Empty = new();

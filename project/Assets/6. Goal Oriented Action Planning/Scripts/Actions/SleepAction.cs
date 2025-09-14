@@ -8,7 +8,7 @@ namespace Sammoh.GOAP
     /// Preconditions: at_bed == true
     /// Effects: sets the sleep need to 0 and clears at_bed.
     /// </summary>
-    internal class SleepAction : IAction
+    public class SleepAction : IAction
     {
         public string ActionType { get; }
         public float Cost { get; }
