@@ -32,12 +32,14 @@ namespace Sammoh.GOAP.Tests
             // Setup test actions and goals
             testActions = new List<IAction>
             {
-                new NoOpAction()
+                new NoOpAction(),
+                new BarkAction()
             };
             
             testGoals = new List<IGoal>
             {
-                new IdleGoal()
+                new IdleGoal(),
+                new CommunicationGoal()
             };
         }
         
@@ -166,6 +168,124 @@ namespace Sammoh.GOAP.Tests
             // Should be able to plan with custom actions
             var customActions = new List<IAction> { customAction };
             Assert.DoesNotThrow(() => planner.CreatePlan(customGoal, agentState, worldState, customActions));
+        }
+        
+        [Test]
+        public void BarkAction_CheckPreconditions_WorksCorrectly()
+        {
+            var barkAction = new BarkAction();
+            
+            // Should be able to bark when not sleeping
+            Assert.IsTrue(barkAction.CheckPreconditions(agentState, worldState));
+            
+            // Should not be able to bark when sleeping
+            agentState.ApplyEffect("sleeping");
+            Assert.IsFalse(barkAction.CheckPreconditions(agentState, worldState));
+        }
+        
+        [Test]
+        public void BarkAction_ExecutesSuccessfully()
+        {
+            var barkAction = new BarkAction();
+            
+            // Action should not be executing initially
+            Assert.IsFalse(barkAction.IsExecuting);
+            
+            // Start execution
+            barkAction.StartExecution(agentState, worldState);
+            Assert.IsTrue(barkAction.IsExecuting);
+            
+            // Update execution - should complete after enough time
+            var result = ActionResult.Running;
+            for (int i = 0; i < 20; i++) // Enough time for 1 second duration
+            {
+                result = barkAction.UpdateExecution(agentState, worldState, 0.1f);
+                if (result != ActionResult.Running) break;
+            }
+            
+            Assert.AreEqual(ActionResult.Success, result);
+            Assert.IsFalse(barkAction.IsExecuting);
+        }
+        
+        [Test]
+        public void BarkAction_AppliesEffectsCorrectly()
+        {
+            var barkAction = new BarkAction();
+            
+            // Apply effects
+            barkAction.ApplyEffects(agentState, worldState);
+            
+            // Check that bark effects are applied
+            Assert.IsTrue(worldState.GetFact("has_barked"));
+            Assert.IsTrue(worldState.GetFact("communicated"));
+        }
+        
+        [Test]
+        public void CommunicationGoal_CanSatisfy_WorksCorrectly()
+        {
+            var commGoal = new CommunicationGoal();
+            
+            // Should be able to communicate when not sleeping and hasn't barked
+            Assert.IsTrue(commGoal.CanSatisfy(agentState, worldState));
+            
+            // Should not be able to communicate when sleeping
+            agentState.ApplyEffect("sleeping");
+            Assert.IsFalse(commGoal.CanSatisfy(agentState, worldState));
+            
+            // Reset sleeping effect
+            agentState.RemoveEffect("sleeping");
+            
+            // Should not be able to communicate when already barked
+            worldState.SetFact("has_barked", true);
+            Assert.IsFalse(commGoal.CanSatisfy(agentState, worldState));
+        }
+        
+        [Test]
+        public void CommunicationGoal_IsCompleted_WorksCorrectly()
+        {
+            var commGoal = new CommunicationGoal();
+            
+            // Should not be completed initially
+            Assert.IsFalse(commGoal.IsCompleted(agentState, worldState));
+            
+            // Should be completed when has_barked is set
+            worldState.SetFact("has_barked", true);
+            Assert.IsTrue(commGoal.IsCompleted(agentState, worldState));
+            
+            // Reset and test with communicated fact
+            worldState.SetFact("has_barked", false);
+            worldState.SetFact("communicated", true);
+            Assert.IsTrue(commGoal.IsCompleted(agentState, worldState));
+        }
+        
+        [Test]
+        public void BarkSystem_Integration_CreatesAndExecutesPlan()
+        {
+            // Test integration: CommunicationGoal should create a plan with BarkAction
+            var commGoal = new CommunicationGoal();
+            var barkAction = new BarkAction();
+            var actionsWithBark = new List<IAction> { new NoOpAction(), barkAction };
+            
+            // Set up conditions where communication goal has high priority
+            agentState.SetNeed("hunger", 0.8f); // High hunger should increase communication priority
+            agentState.SetNeed("thirst", 0.8f); // High thirst too
+            
+            var plan = planner.CreatePlan(commGoal, agentState, worldState, actionsWithBark);
+            
+            Assert.IsNotNull(plan, "Planner should create a plan for communication goal");
+            Assert.AreEqual(commGoal, plan.Goal);
+            
+            // The plan should include the bark action since it satisfies the communication goal
+            bool containsBarkAction = false;
+            foreach (var action in plan.Actions)
+            {
+                if (action.ActionType == "bark")
+                {
+                    containsBarkAction = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(containsBarkAction, "Plan should contain bark action for communication goal");
         }
     }
     

@@ -164,8 +164,25 @@ GOAPAgent (MonoBehaviour)
 ├── BasicWorldState (IWorldState)
 ├── BasicPlanner (IPlanner)
 ├── BasicExecutor (IExecutor)
-├── Goals: IdleGoal, EatGoal, DrinkGoal, PlayGoal
-└── Actions: NoOpAction, MoveToAction, EatAction, DrinkAction
+├── Goals: IdleGoal, CommunicationGoal, EatGoal, DrinkGoal, PlayGoal
+└── Actions: NoOpAction, BarkAction, MoveToAction, EatAction, DrinkAction
+```
+
+### 🗣️ Bark System
+
+The GOAP agent now includes a bark/vocalization system:
+
+- **BarkAction**: Allows the agent to bark/vocalize for communication
+- **CommunicationGoal**: Triggers barking when multiple needs are urgent or for general communication
+- **Integration**: Bark action is available to all planning scenarios and integrates seamlessly with existing goals
+
+**Usage Example**:
+```csharp
+// Bark action is automatically available in the agent's action repertoire
+// Communication goal triggers when:
+// - Multiple needs are urgent (>= 0.7)
+// - Agent needs to express urgency
+// - Natural periodic communication behavior
 ```
 
 ## 🧪 Testing

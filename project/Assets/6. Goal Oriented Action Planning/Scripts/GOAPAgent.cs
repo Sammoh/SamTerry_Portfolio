@@ -117,11 +117,12 @@ namespace Sammoh.GOAP
             else
                 availableGoals = new List<IGoal>();
             
-            // If no goals loaded from database, add fallback idle goal
+            // If no goals loaded from database, add fallback goals
             if (availableGoals.Count == 0)
             {
                 availableGoals.Add(new IdleGoal());
-                Debug.LogWarning("No goals found in GoalDatabase, using fallback IdleGoal");
+                availableGoals.Add(new CommunicationGoal());
+                Debug.LogWarning("No goals found in GoalDatabase, using fallback IdleGoal and CommunicationGoal");
             }
 
             // Initialize available actions list
@@ -133,6 +134,7 @@ namespace Sammoh.GOAP
             availableActions.Add(new DrinkAction()); 
             availableActions.Add(new PlayAction());
             availableActions.Add(new SleepAction());
+            availableActions.Add(new BarkAction());
 
             // Create movement actions for each goal that requires POIs
             foreach (var goal in availableGoals)
