@@ -107,11 +107,13 @@ namespace Sammoh.GOAP
             // Enabler nudges
             bool wantsHunger = goalState.ContainsKey("need_hunger");
             bool wantsThirst = goalState.ContainsKey("need_thirst");
-            bool wantsSleep  = goalState.ContainsKey("need_sleep"); // harmless if unused
+            bool wantsSleep  = goalState.ContainsKey("need_sleep");
+            bool wantsPlay   = goalState.ContainsKey("need_play");
 
             if (wantsHunger && effects.ContainsKey("at_food"))  goalProgress += 3f;
             if (wantsThirst && effects.ContainsKey("at_water")) goalProgress += 3f;
             if (wantsSleep  && effects.ContainsKey("at_bed"))   goalProgress += 3f;
+            if (wantsPlay   && effects.ContainsKey("at_toy"))   goalProgress += 3f;
 
             // If nothing contributed, penalize slightly so we don't loop pointlessly
             if (goalProgress <= 0f) goalProgress = -1f;

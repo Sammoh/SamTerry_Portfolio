@@ -79,18 +79,9 @@ namespace Sammoh.GOAP
             IsExecuting = false;
             if (worldState == null || agentState == null) return;
 
-            // Write final effects into the live state
-            agentState.SetNeed(playNeedKey.Replace("need_", ""), targetNeedValue); // allow agent SetNeed("play", 0)
+            // Apply effects to agent state - use the simple need name without "need_" prefix
+            agentState.SetNeed("play", targetNeedValue);
             worldState.SetFact("at_toy", false);
-
-            // Also ensure the world-side need key (if directly stored in world) is updated for consistency with planner simulation.
-            // This is harmless if your system ignores it.
-            // If your needs are only on agentState, the planner will still work because it reads effects from GetEffects().
-            if (playNeedKey.StartsWith("need_"))
-            {
-                // No-op here; some implementations keep needs solely on agentState.
-                // Keeping this comment as a reminder of the split.
-            }
         }
 
         public string GetDescription()

@@ -92,41 +92,50 @@ namespace Sammoh.GOAP
         
         private void SetupGoalsAndActions()
         {
+            // Try to load GoalDatabase from Resources if not assigned
+            if (goalDatabase == null)
+            {
+                goalDatabase = Resources.Load<GoalDatabase>("GoalDatabase");
+                if (goalDatabase == null)
+                {
+                    Debug.LogWarning("GoalDatabase not found in Resources folder or assigned to agent");
+                }
+            }
+            
             // Goals from ScriptableObject database
             if (goalDatabase != null && goalDatabase.Goals != null && goalDatabase.Goals.Count > 0)
                 availableGoals = new List<IGoal>(goalDatabase.Goals);
             else
                 availableGoals = new List<IGoal>();
             
+            // If no goals loaded from database, add fallback idle goal
+            if (availableGoals.Count == 0)
+            {
+                availableGoals.Add(new IdleGoal());
+                Debug.LogWarning("No goals found in GoalDatabase, using fallback IdleGoal");
+            }
+
+            // Initialize available actions list
             availableActions = new List<IAction>();
 
-            //movement actions from goals
-            for (int i = availableGoals.Count - 1; i >= 0; i--)
+            // Add basic actions that work with any goal
+            availableActions.Add(new NoOpAction());
+            availableActions.Add(new EatAction());
+            availableActions.Add(new DrinkAction()); 
+            availableActions.Add(new PlayAction());
+            availableActions.Add(new SleepAction());
+
+            // Create movement actions for each goal that requires POIs
+            foreach (var goal in availableGoals)
             {
-                var moveToAction = new MoveToAction();
-                moveToAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
-                moveToAction.InjectCurrentGoal(availableGoals[i]);
-                
-                var move = ScriptableObject.CreateInstance<MoveToActionSO>();
-                typeof(MoveToActionSO).GetField("targetGoal", System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)
-                    ?.SetValue(move, availableGoals[i]);
-                typeof(MoveToActionSO).GetField("stoppingDistance", System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)
-                    ?.SetValue(move, 0.05f);
-                typeof(MoveToActionSO).GetField("moveSpeed", System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)
-                    ?.SetValue(move, 10f);
-                
-                availableActions.Add(moveToAction);
+                if (goal is NeedReductionGoalSO)
+                {
+                    var moveToAction = new MoveToAction();
+                    moveToAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
+                    moveToAction.InjectCurrentGoal(goal);
+                    availableActions.Add(moveToAction);
+                }
             }
-            
-            // // Initialize available actions
-            availableActions = new List<IAction>
-            {
-                new NoOpAction(),
-                new EatAction(),
-                new DrinkAction(),
-                new PlayAction(),
-                new SleepAction()
-            };
             
             Debug.Log($"Setup complete: {availableGoals.Count} goals, {availableActions.Count} actions");
         }

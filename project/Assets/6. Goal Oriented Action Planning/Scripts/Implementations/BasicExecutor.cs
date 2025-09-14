@@ -83,7 +83,7 @@ namespace Sammoh.GOAP
                     // Apply effects and move to next action
                     CurrentAction.ApplyEffects(agentState, worldState);
                     Debug.Log($"Action {CurrentAction.ActionType} completed successfully");
-                    CurrentPlan.RemoveFirstAction();
+                    CurrentPlan.Advance();
                     CurrentAction = null;
                     actionStarted = false;
                     break;

@@ -46,11 +46,21 @@ namespace Sammoh.GOAP
             return POIUtility.TryGetNearestPOI(currentGoal, agentTransform.position, out _);
         }
 
-        // Important: planner needs to see the "at_<goalType>" effect to sequence next action.
         public Dictionary<string, object> GetEffects()
         {
             if (currentGoal == null) return Empty;
-            return new Dictionary<string, object> { { $"at_{currentGoal.GoalType}", true } };
+            
+            // Map goal types to appropriate location facts for actions
+            string locationFact = currentGoal.GoalType switch
+            {
+                "hunger" => "at_food",
+                "thirst" => "at_water", 
+                "sleep" => "at_bed",
+                "play" => "at_toy",
+                _ => $"at_{currentGoal.GoalType}"
+            };
+            
+            return new Dictionary<string, object> { { locationFact, true } };
         }
 
         public void StartExecution(IAgentState agentState, IWorldState worldState)
@@ -102,7 +112,18 @@ namespace Sammoh.GOAP
         public void ApplyEffects(IAgentState agentState, IWorldState worldState)
         {
             if (currentGoal == null) return;
-            worldState.SetFact($"at_{currentGoal.GoalType}", true);
+            
+            // Map goal types to appropriate location facts for actions
+            string locationFact = currentGoal.GoalType switch
+            {
+                "hunger" => "at_food",
+                "thirst" => "at_water",
+                "sleep" => "at_bed", 
+                "play" => "at_toy",
+                _ => $"at_{currentGoal.GoalType}"
+            };
+            
+            worldState.SetFact(locationFact, true);
         }
 
         public string GetDescription()
