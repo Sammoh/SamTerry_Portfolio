@@ -2,7 +2,20 @@
 
 A complete Goal Oriented Action Planning system for Unity that demonstrates a tamagotchi-like 3D character with autonomous behavior based on needs and goals.
 
-## Core Features
+## 🎯 Overview
+
+**Tech Stack**: Unity3D, C#, GOAP Architecture, AI Planning, A* Pathfinding  
+**Scene**: `GOAP_Demo.unity` (if exists) or create with `GOAPSceneSetup`  
+**Description**: This project showcases an advanced AI planning system implementing Goal Oriented Action Planning (GOAP) architecture. The system features a tamagotchi-like character with autonomous behavior, demonstrating sophisticated AI decision-making, dynamic priority systems, and real-time planning with obstacle avoidance.
+
+### 🛠 Developer Setup:
+1. Add `GOAPSceneSetup` component to empty GameObject in scene
+2. Run in play mode to see autonomous agent behavior
+3. Press F1 to toggle debug overlay
+4. Run Unity Test Runner for "GOAP.Tests" assembly
+5. Watch agent select goals and execute actions based on needs
+
+## ✨ Core Features
 
 ### ✅ Stable Core Interfaces
 - **IAgentState**: Manages agent needs, inventory, and effects
@@ -34,7 +47,7 @@ A complete Goal Oriented Action Planning system for Unity that demonstrates a ta
 - PlayMode smoke tests
 - Visual feedback for agent state
 
-## Quick Start
+## 🚀 Quick Start
 
 ### 1. Setup Scene
 ```csharp
@@ -61,7 +74,7 @@ var agent = agentGO.AddComponent<GOAPAgent>();
 2. Press F1 to toggle debug overlay
 3. Watch agent select goals and execute actions based on needs
 
-## Adding Custom Goals
+## 🎮 Adding Custom Goals
 
 ```csharp
 public class CustomGoal : IGoal
@@ -96,7 +109,7 @@ public class CustomGoal : IGoal
 }
 ```
 
-## Adding Custom Actions
+## 🔧 Adding Custom Actions
 
 ```csharp
 public class CustomAction : IAction
@@ -143,7 +156,7 @@ public class CustomAction : IAction
 }
 ```
 
-## System Architecture
+## 🏗️ System Architecture
 
 ```
 GOAPAgent (MonoBehaviour)
@@ -155,7 +168,7 @@ GOAPAgent (MonoBehaviour)
 └── Actions: NoOpAction, MoveToAction, EatAction, DrinkAction
 ```
 
-## Testing
+## 🧪 Testing
 
 Run tests through Unity Test Runner:
 - Window > General > Test Runner
@@ -164,14 +177,14 @@ Run tests through Unity Test Runner:
 
 Key test: `AcceptanceCriteria_AgentSelectsGoalAndExecutesNoOpAction`
 
-## Performance Notes
+## ⚡ Performance Notes
 
 - **Tick Rate**: 5-10Hz for planning (configurable)
 - **Execution**: 60Hz for smooth action updates
 - **Scalability**: Single agent demonstration (easily extensible to multiple agents)
 - **Memory**: Minimal allocation during runtime
 
-## Extensibility
+## 🔧 Extensibility
 
 The system is designed for easy extension:
 
@@ -183,13 +196,13 @@ The system is designed for easy extension:
 
 No changes to core interfaces required for common extensions.
 
-## Debug Commands
+## 🐛 Debug Commands
 
 - **F1**: Toggle debug overlay
 - **Force Replan**: Button in debug overlay
 - **Console Logs**: Detailed action/goal information
 
-## Files Structure
+## 📁 Files Structure
 
 ```
 Assets/6. Goal Oriented Action Planning/
