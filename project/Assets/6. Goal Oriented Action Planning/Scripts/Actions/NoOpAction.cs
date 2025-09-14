@@ -24,7 +24,7 @@ namespace Sammoh.GOAP
         {
             return new Dictionary<string, object>
             {
-                { "fact_idle", true }
+                { "idle", true }
             };
         }
         

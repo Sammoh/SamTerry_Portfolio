@@ -17,14 +17,15 @@ namespace Sammoh.GOAP
 
         public bool IsCompleted(IAgentState agentState, IWorldState worldState)
         {
-            return false; // Never truly complete - it's a fallback
+            // Idle goal is completed when the idle fact is set
+            return worldState.GetFact("idle");
         }
 
         public Dictionary<string, object> GetDesiredState()
         {
             return new Dictionary<string, object>
             {
-                { "fact_idle", true }
+                { "idle", true }
             };
         }
 

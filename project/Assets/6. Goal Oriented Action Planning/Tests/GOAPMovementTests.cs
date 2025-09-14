@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using Sammoh.GOAP;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sammoh.GOAP.Tests
 {
@@ -61,6 +62,11 @@ namespace Sammoh.GOAP.Tests
             }
             testGoals.Add(hungerGoal);
             
+            // Create test POI for hunger goal
+            var foodPOI = new GameObject("TestFoodPOI");
+            var poiMarker = foodPOI.AddComponent<POIMarker>();
+            poiMarker.AddSupportedGoal(hungerGoal);
+            
             // Setup test actions
             testActions = new List<IAction>
             {
@@ -71,9 +77,14 @@ namespace Sammoh.GOAP.Tests
                 new SleepAction()
             };
             
-            // Add movement action for hunger goal
+            // Add movement action for hunger goal with agent setup
             var moveToAction = new MoveToAction();
             moveToAction.InjectCurrentGoal(hungerGoal);
+            
+            // Create a mock agent transform for movement action
+            var agentGO = new GameObject("TestAgent");
+            moveToAction.InjectAgent(agentGO.transform);
+            
             testActions.Add(moveToAction);
         }
         
@@ -82,6 +93,14 @@ namespace Sammoh.GOAP.Tests
         {
             if (worldState != null)
                 Object.DestroyImmediate(worldState.gameObject);
+                
+            // Clean up test POIs and agents
+            var testObjects = Object.FindObjectsOfType<GameObject>().Where(go => 
+                go.name.StartsWith("Test") && go.scene.name != null);
+            foreach (var obj in testObjects.ToArray())
+            {
+                Object.DestroyImmediate(obj);
+            }
         }
         
         [Test]
