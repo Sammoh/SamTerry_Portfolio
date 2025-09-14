@@ -106,6 +106,15 @@ namespace Sammoh.GOAP
                 var moveToAction = new MoveToAction();
                 moveToAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
                 moveToAction.InjectCurrentGoal(availableGoals[i]);
+                
+                var move = ScriptableObject.CreateInstance<MoveToActionSO>();
+                typeof(MoveToActionSO).GetField("targetGoal", System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)
+                    ?.SetValue(move, availableGoals[i]);
+                typeof(MoveToActionSO).GetField("stoppingDistance", System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)
+                    ?.SetValue(move, 0.05f);
+                typeof(MoveToActionSO).GetField("moveSpeed", System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)
+                    ?.SetValue(move, 10f);
+                
                 availableActions.Add(moveToAction);
             }
             

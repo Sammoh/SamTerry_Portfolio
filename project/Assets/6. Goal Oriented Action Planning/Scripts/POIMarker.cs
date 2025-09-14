@@ -4,31 +4,32 @@ using UnityEngine;
 namespace Sammoh.GOAP
 {
     /// <summary>
-    /// Point of Interest marker. Now supports asset-driven goals (while keeping optional legacy tag).
+    /// Point of Interest marker. Declares which goals this POI can satisfy.
     /// </summary>
     public class POIMarker : MonoBehaviour
     {
-        [Header("Supported Goals (ScriptableObjects)")]
+        [Header("Goals supported by this POI (drag Goal assets)")]
         [SerializeField] private List<NeedReductionGoalSO> supportedGoals = new();
-        //
-        // public string poiTag;
-        //
+
         public IReadOnlyList<NeedReductionGoalSO> SupportedGoals => supportedGoals;
-        //
+
+        /// <summary>True if this POI supports the given runtime goal (by GoalType).</summary>
         public bool SupportsGoal(IGoal goal)
         {
             if (goal == null) return false;
-            foreach (var g in supportedGoals)
+            for (int i = 0; i < supportedGoals.Count; i++)
+            {
+                var g = supportedGoals[i];
                 if (g != null && g.GoalType == goal.GoalType) return true;
+            }
             return false;
         }
-        
-        // Add new supported goal
-        public void AddSupportedGoal(NeedReductionGoalSO goal)
+
+        public void AddSupportedGoal(NeedReductionGoalSO goalAsset)
         {
-            if (goal == null) return;
-            if (!supportedGoals.Contains(goal))
-                supportedGoals.Add(goal);
+            if (goalAsset == null) return;
+            if (!supportedGoals.Contains(goalAsset))
+                supportedGoals.Add(goalAsset);
         }
     }
 }

@@ -5,16 +5,19 @@ using UnityEngine.AI;
 namespace Sammoh.GOAP
 {
     /// <summary>
-    /// Moves the agent to a POI that supports the current goal (SO-based only).
+    /// Moves the agent to a POI that supports the current goal (SO-only).
+    /// Declares/sets world-state fact: "at_<goalType>" = true on success.
     /// </summary>
     public class MoveToAction : IAction
     {
-        // ===================== CONFIG =====================
-        private readonly float stoppingDistance;   // World units
-        private readonly float moveSpeed;          // Used when not using NavMeshAgent
-        private readonly float cost;
+        public string ActionType => "move_to";
+        public float Cost => cost;
+        public bool IsExecuting { get; private set; }
 
-        // ===================== RUNTIME =====================
+        private readonly float cost;
+        private readonly float stoppingDistance;
+        private readonly float moveSpeed;
+
         private Transform agentTransform;
         private NavMeshAgent nav;
         private IGoal currentGoal;
@@ -22,9 +25,6 @@ namespace Sammoh.GOAP
         private Transform target;
         private bool targetLocked;
 
-        public bool IsExecuting { get; private set; }
-
-        // ===================== CTOR =====================
         public MoveToAction(float cost = 1f, float stoppingDistance = 0.5f, float moveSpeed = 3.5f)
         {
             this.cost = Mathf.Max(0.01f, cost);
@@ -32,21 +32,13 @@ namespace Sammoh.GOAP
             this.moveSpeed = Mathf.Max(0.01f, moveSpeed);
         }
 
-        // ===================== INJECTION HOOKS =====================
+        // ---- Injection from executor ----
         public void InjectAgent(Transform agent, NavMeshAgent navAgent = null)
         {
             agentTransform = agent;
             nav = navAgent;
         }
-
-        public void InjectCurrentGoal(IGoal goal)
-        {
-            currentGoal = goal;
-        }
-
-        // ===================== IAction =====================
-        public string ActionType => "move_to";
-        public float Cost => cost;
+        public void InjectCurrentGoal(IGoal goal) => currentGoal = goal;
 
         public bool CheckPreconditions(IAgentState agentState, IWorldState worldState)
         {
@@ -54,22 +46,17 @@ namespace Sammoh.GOAP
             return POIUtility.TryGetNearestPOI(currentGoal, agentTransform.position, out _);
         }
 
+        // Important: planner needs to see the "at_<goalType>" effect to sequence next action.
         public Dictionary<string, object> GetEffects()
         {
-            // Pure movement has no direct effects — effects are applied by subsequent actions (e.g., Eat, Sleep).
-            return EmptyDict;
+            if (currentGoal == null) return Empty;
+            return new Dictionary<string, object> { { $"at_{currentGoal.GoalType}", true } };
         }
 
         public void StartExecution(IAgentState agentState, IWorldState worldState)
         {
-            IsExecuting = true;
-            targetLocked = TryResolveAndLockTarget();
-
-            if (!targetLocked)
-            {
-                IsExecuting = false;
-                return;
-            }
+            IsExecuting = TryResolveAndLockTarget();
+            if (!IsExecuting) return;
 
             if (nav != null)
             {
@@ -80,47 +67,33 @@ namespace Sammoh.GOAP
 
         public ActionResult UpdateExecution(IAgentState agentState, IWorldState worldState, float deltaTime)
         {
-            if (!IsExecuting) return ActionResult.Failed;
-            if (agentTransform == null) return ActionResult.Failed;
+            if (!IsExecuting || agentTransform == null) return ActionResult.Failed;
 
-            // Reacquire if target is lost
             if (target == null || !target.gameObject.activeInHierarchy)
             {
-                targetLocked = TryResolveAndLockTarget();
-                if (!targetLocked) return ActionResult.Failed;
-
+                if (!TryResolveAndLockTarget()) return ActionResult.Failed;
                 if (nav != null) nav.SetDestination(target.position);
             }
 
-            // NavMeshAgent pathing
             if (nav != null)
             {
                 if (!nav.pathPending && nav.remainingDistance <= Mathf.Max(stoppingDistance, nav.stoppingDistance))
                     return ActionResult.Success;
-
                 return ActionResult.Running;
             }
 
-            // Manual transform move
+            // Manual translation
             Vector3 to = target.position - agentTransform.position;
-            float distSq = to.sqrMagnitude;
-            float stopSq = stoppingDistance * stoppingDistance;
-
-            if (distSq <= stopSq)
+            if (to.sqrMagnitude <= stoppingDistance * stoppingDistance)
                 return ActionResult.Success;
 
-            Vector3 step = to.normalized * moveSpeed * deltaTime;
-            agentTransform.position += step;
-
+            agentTransform.position += to.normalized * moveSpeed * deltaTime;
             return ActionResult.Running;
         }
 
         public void CancelExecution()
         {
-            if (nav != null && nav.isOnNavMesh)
-            {
-                nav.ResetPath();
-            }
+            if (nav != null && nav.isOnNavMesh) nav.ResetPath();
             IsExecuting = false;
             target = null;
             targetLocked = false;
@@ -128,30 +101,26 @@ namespace Sammoh.GOAP
 
         public void ApplyEffects(IAgentState agentState, IWorldState worldState)
         {
-            // No direct world state effects from movement.
+            if (currentGoal == null) return;
+            worldState.SetFact($"at_{currentGoal.GoalType}", true);
         }
 
         public string GetDescription()
         {
-            string tgt = target != null ? target.name : "(none)";
-            string goal = currentGoal != null ? currentGoal.GoalType : "(no-goal)";
-            return $"MoveToAction → target: {tgt}, goal: {goal}, stopDist: {stoppingDistance}";
+            string tgt = target ? target.name : "(none)";
+            return $"MoveToAction → goal={currentGoal?.GoalType ?? "(none)"} target={tgt} stop={stoppingDistance}";
         }
 
-        // ===================== INTERNALS =====================
         private bool TryResolveAndLockTarget()
         {
             if (agentTransform == null || currentGoal == null) return false;
-            if (POIUtility.TryGetNearestPOI(currentGoal, agentTransform.position, out var tGoal))
+            if (POIUtility.TryGetNearestPOI(currentGoal, agentTransform.position, out var t))
             {
-                target = tGoal;
-                return true;
+                target = t; targetLocked = true; return true;
             }
-
-            target = null;
-            return false;
+            target = null; targetLocked = false; return false;
         }
 
-        private static readonly Dictionary<string, object> EmptyDict = new Dictionary<string, object>();
+        private static readonly Dictionary<string, object> Empty = new();
     }
 }

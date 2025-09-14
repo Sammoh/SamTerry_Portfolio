@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54cecc0dc77d6594281d58a62190bd33, type: 3}
   m_Name: toy_Goal
   m_EditorClassIdentifier: 
-  goalType: toy
+  goalType: play
   needKey: play
-  desiredWorldStateKey: need_toy
-  activationThreshold: 0.5
+  desiredWorldStateKey: need_play
+  activationThreshold: 0.631
   completionThreshold: 0.05
-  priorityScale: 10
+  priorityScale: 5

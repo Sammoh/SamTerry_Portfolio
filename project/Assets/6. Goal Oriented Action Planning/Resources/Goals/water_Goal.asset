@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54cecc0dc77d6594281d58a62190bd33, type: 3}
   m_Name: water_Goal
   m_EditorClassIdentifier: 
-  goalType: water
+  goalType: thirst
   needKey: thirst
-  desiredWorldStateKey: need_water
-  activationThreshold: 0.5
-  completionThreshold: 0.05
-  priorityScale: 10
+  desiredWorldStateKey: need_thirst
+  activationThreshold: 0.813
+  completionThreshold: 0.138
+  priorityScale: 9

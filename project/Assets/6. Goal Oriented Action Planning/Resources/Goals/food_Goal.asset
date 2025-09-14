@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54cecc0dc77d6594281d58a62190bd33, type: 3}
   m_Name: food_Goal
   m_EditorClassIdentifier: 
-  goalType: food
+  goalType: hunger
   needKey: hunger
-  desiredWorldStateKey: need_food
-  activationThreshold: 0.5
+  desiredWorldStateKey: need_hunger
+  activationThreshold: 0.756
   completionThreshold: 0.05
-  priorityScale: 10
+  priorityScale: 7

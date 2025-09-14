@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54cecc0dc77d6594281d58a62190bd33, type: 3}
-  m_Name: bed_Goal
+  m_Script: {fileID: 11500000, guid: 88d644f6b2f394a439f8b4c5d697db8f, type: 3}
+  m_Name: MoveToBed
   m_EditorClassIdentifier: 
-  goalType: sleep
-  needKey: sleep
-  desiredWorldStateKey: need_sleep
-  activationThreshold: 0.9
-  completionThreshold: 0.252
-  priorityScale: 3
+  targetGoal: {fileID: 11400000, guid: 357a3f29e14e6604a990f83a38430fd1, type: 2}
+  cost: 1
+  stoppingDistance: 0.5
+  moveSpeed: 3.5

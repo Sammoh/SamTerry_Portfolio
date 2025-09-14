@@ -3,42 +3,12 @@ using UnityEngine;
 namespace Sammoh.GOAP
 {
     /// <summary>
-    /// Helper to locate Points Of Interest via POIMarker.
-    /// Supports both legacy string tags and asset-driven goal matching.
+    /// Helper to locate Points Of Interest via POIMarker using GOALS ONLY.
     /// </summary>
     public static class POIUtility
     {
-        // /// <summary>
-        // /// Legacy string-tag lookup (e.g., "food", "water", "sleep", "toy").
-        // /// </summary>
-        // public static bool TryGetNearestPOI(string poiType, Vector3 from, out Transform nearest)
-        // {
-        //     nearest = null;
-        //     float best = float.MaxValue;
-        //
-        //     var markers = Object.FindObjectsOfType<POIMarker>();
-        //     if (markers == null || markers.Length == 0) return false;
-        //
-        //     for (int i = 0; i < markers.Length; i++)
-        //     {
-        //         var m = markers[i];
-        //         if (m == null || !m.isActiveAndEnabled) continue;
-        //
-        //         if (!string.Equals(m.poiTag, poiType)) continue;
-        //
-        //         float d = (m.transform.position - from).sqrMagnitude;
-        //         if (d < best)
-        //         {
-        //             best = d;
-        //             nearest = m.transform;
-        //         }
-        //     }
-        //
-        //     return nearest != null;
-        // }
-
         /// <summary>
-        /// Asset-driven lookup: find nearest POI that supports the specified goal.
+        /// Find the nearest POI that supports the specified goal (no tag strings).
         /// </summary>
         public static bool TryGetNearestPOI(IGoal goal, Vector3 from, out Transform nearest)
         {
@@ -46,7 +16,7 @@ namespace Sammoh.GOAP
             float best = float.MaxValue;
 
             var markers = Object.FindObjectsOfType<POIMarker>();
-            if (markers == null || markers.Length == 0) return false;
+            if (markers == null || markers.Length == 0 || goal == null) return false;
 
             for (int i = 0; i < markers.Length; i++)
             {
@@ -61,7 +31,6 @@ namespace Sammoh.GOAP
                     nearest = m.transform;
                 }
             }
-
             return nearest != null;
         }
     }
