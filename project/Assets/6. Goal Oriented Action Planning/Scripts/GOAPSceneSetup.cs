@@ -16,6 +16,7 @@ namespace Sammoh.GOAP
         [SerializeField] private Vector3 foodPosition = new Vector3(5, 0, 0);
         [SerializeField] private Vector3 waterPosition = new Vector3(-5, 0, 0);
         [SerializeField] private Vector3 toyPosition = new Vector3(0, 0, 5);
+        [SerializeField] private Vector3 bedPosition = new Vector3(0, 0, -5);
         
         private void Start()
         {
@@ -86,7 +87,7 @@ namespace Sammoh.GOAP
             CreatePOI("Food Source", foodPosition, "food", Color.green);
             CreatePOI("Water Source", waterPosition, "water", Color.blue);
             CreatePOI("Toy", toyPosition, "toy", Color.yellow);
-            CreatePOI("Bed", toyPosition, "bed", Color.grey);
+            CreatePOI("Bed", bedPosition, "bed", Color.grey);
         }
         
         private void CreatePOI(string name, Vector3 position, string poiType, Color color)
@@ -106,10 +107,17 @@ namespace Sammoh.GOAP
             
             // Add POI marker
             var poiMarker = poiGO.AddComponent<POIMarker>();
-            // new NeedReductionGoalSO
+            // Load the appropriate goal asset for this POI type
             var goalAsset = Resources.Load<NeedReductionGoalSO>($"Goals/{poiType.ToLower()}_Goal");
-            if (goalAsset == null)
+            if (goalAsset != null)
+            {
                 poiMarker.AddSupportedGoal(goalAsset);
+                Debug.Log($"Added goal '{goalAsset.GoalType}' to POI '{name}'");
+            }
+            else
+            {
+                Debug.LogWarning($"Could not find goal asset for POI type '{poiType}' at path 'Goals/{poiType.ToLower()}_Goal'");
+            }
             
             // Add collider
             poiGO.AddComponent<BoxCollider>();

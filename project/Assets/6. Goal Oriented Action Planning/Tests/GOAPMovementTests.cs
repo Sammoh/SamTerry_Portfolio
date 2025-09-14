@@ -239,6 +239,23 @@ namespace Sammoh.GOAP.Tests
             Debug.Log($"Agent selected goal: {bestGoal.GoalType} with priority: {bestPriority:F2}");
             Debug.Log($"Plan created with {plan.Actions.Count} actions");
         }
+        
+        [Test]
+        public void GOAPSetup_ValidationPasses()
+        {
+            // Test that the GOAP setup validation passes
+            var issues = GOAPValidation.ValidateSetup(testGoals, testActions);
+            
+            if (issues.Count > 0)
+            {
+                foreach (var issue in issues)
+                {
+                    Debug.LogWarning($"Setup issue: {issue}");
+                }
+            }
+            
+            Assert.AreEqual(0, issues.Count, "GOAP setup should pass validation without issues");
+        }
     }
     
     /// <summary>

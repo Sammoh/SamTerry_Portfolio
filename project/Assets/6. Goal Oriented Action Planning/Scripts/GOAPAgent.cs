@@ -48,6 +48,15 @@ namespace Sammoh.GOAP
         {
             if (agentTransform == null)
                 agentTransform = transform;
+            
+            // Ensure agent has NavMeshAgent for movement
+            if (agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>() == null)
+            {
+                var navAgent = agentTransform.gameObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
+                navAgent.speed = 3.5f;
+                navAgent.stoppingDistance = 0.5f;
+                navAgent.enabled = true;
+            }
                 
             InitializeSystems();
             SetupGoalsAndActions();
@@ -138,6 +147,19 @@ namespace Sammoh.GOAP
             }
             
             Debug.Log($"Setup complete: {availableGoals.Count} goals, {availableActions.Count} actions");
+            
+            // Validate setup and log any issues
+            if (enableDebug)
+            {
+                var issues = GOAPValidation.ValidateSetup(availableGoals, availableActions);
+                GOAPValidation.LogValidationResults(issues, "GOAP Agent Setup");
+                
+                if (goalDatabase != null)
+                {
+                    var dbIssues = GOAPValidation.ValidateGoalDatabase(goalDatabase);
+                    GOAPValidation.LogValidationResults(dbIssues, "GOAP Goal Database");
+                }
+            }
         }
         
         private void Update()
