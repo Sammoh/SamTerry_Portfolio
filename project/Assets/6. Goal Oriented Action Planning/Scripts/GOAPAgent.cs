@@ -9,6 +9,9 @@ namespace Sammoh.GOAP
     /// </summary>
     public class GOAPAgent : MonoBehaviour
     {
+        [Header("Goals/Actions (SO-driven)")]
+        [SerializeField] private GoalDatabase goalDatabase;
+        
         [Header("Configuration")]
         [SerializeField] private float tickRate = 10f; // Hz (5-10Hz as specified)
         [SerializeField] private bool enableDebug = true;
@@ -18,6 +21,11 @@ namespace Sammoh.GOAP
         [SerializeField] private string currentGoalType = "none";
         [SerializeField] private string currentActionType = "none";
         [SerializeField] private int planActionsRemaining = 0;
+        
+        // Public read-only accessors for monitoring
+        public string CurrentGoalType => currentGoalType;
+        public string CurrentActionType => currentActionType;
+        public int PlanActionsRemaining => planActionsRemaining;
         
         // Core GOAP systems
         private IAgentState agentState;
@@ -84,24 +92,31 @@ namespace Sammoh.GOAP
         
         private void SetupGoalsAndActions()
         {
-            // Initialize available goals
-            availableGoals = new List<IGoal>
-            {
-                new IdleGoal(),
-                new EatGoal(),
-                new DrinkGoal(),
-                new PlayGoal()
-            };
+            // Goals from ScriptableObject database
+            if (goalDatabase != null && goalDatabase.Goals != null && goalDatabase.Goals.Count > 0)
+                availableGoals = new List<IGoal>(goalDatabase.Goals);
+            else
+                availableGoals = new List<IGoal>();
             
-            // Initialize available actions
+            availableActions = new List<IAction>();
+
+            //movement actions from goals
+            for (int i = availableGoals.Count - 1; i >= 0; i--)
+            {
+                var moveToAction = new MoveToAction();
+                moveToAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
+                moveToAction.InjectCurrentGoal(availableGoals[i]);
+                availableActions.Add(moveToAction);
+            }
+            
+            // // Initialize available actions
             availableActions = new List<IAction>
             {
                 new NoOpAction(),
-                new MoveToAction(agentTransform, "food"),
-                new MoveToAction(agentTransform, "water"),
-                new MoveToAction(agentTransform, "toy"),
                 new EatAction(),
-                new DrinkAction()
+                new DrinkAction(),
+                new PlayAction(),
+                new SleepAction()
             };
             
             Debug.Log($"Setup complete: {availableGoals.Count} goals, {availableActions.Count} actions");
@@ -162,14 +177,16 @@ namespace Sammoh.GOAP
             
             if (bestGoal != null)
             {
-                Debug.Log($"Selected new goal: {bestGoal.GoalType} (priority: {bestPriority:F2})");
+                // Debug.Log($"Selected new goal: {bestGoal.GoalType} (priority: {bestPriority:F2})");
                 
                 // Create plan for the goal
                 var plan = planner.CreatePlan(bestGoal, agentState, worldState, availableActions);
                 
                 if (plan != null)
                 {
-                    executor.SetPlan(plan);
+                    executor.SetPlan(plan); 
+                    currentGoalType = plan.Goal?.GoalType ?? "none";
+                    planActionsRemaining = plan.Actions?.Count ?? 0;
                     Debug.Log($"Plan created with {plan.Actions.Count} actions");
                 }
                 else
@@ -195,19 +212,32 @@ namespace Sammoh.GOAP
         private void OnPlanCompleted(Plan plan, bool success)
         {
             Debug.Log($"Plan completed for goal '{plan.Goal.GoalType}'. Success: {success}");
+            currentActionType = "none";
+            planActionsRemaining = 0;
+            if (!success)
+            {
+                currentGoalType = "none";
+            }
         }
         
         private void OnActionFailed(IAction action)
         {
             Debug.LogError($"Action '{action.ActionType}' failed");
+            currentActionType = action?.ActionType ?? "none";
         }
         
         private void OnActionStarted(IAction action)
         {
             Debug.Log($"Action '{action.ActionType}' started");
+            currentActionType = action?.ActionType ?? "none";
+            if (executor?.CurrentPlan?.Actions != null)
+            {
+                planActionsRemaining = executor.CurrentPlan.Actions.Count;
+            }
         }
         
         #endregion
+
         
         #region Public API for Debug/Testing
         

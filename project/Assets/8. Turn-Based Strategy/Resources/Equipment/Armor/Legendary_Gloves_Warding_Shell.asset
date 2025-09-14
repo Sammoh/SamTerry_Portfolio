@@ -19,8 +19,9 @@ MonoBehaviour:
   weight: 1.4
   value: 600
   rarity: 4
-  slot: 0
+  slot: 1
   statModifiers: []
+  abilities: []
   armorType: 4
   defense: 15
   magicResistance: 12

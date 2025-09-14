@@ -76,18 +76,31 @@ namespace Sammoh.GOAP
             return new List<GameObject>(pois[poiType]);
         }
         
-        public void RegisterPOI(GameObject poi, string poiType)
+        public void RegisterPOI(GameObject poi, NeedReductionGoalSO poiType)
         {
             if (poi == null) return;
             
-            if (!pois.ContainsKey(poiType))
-                pois[poiType] = new List<GameObject>();
+            if (!pois.ContainsKey(poiType.GoalType))
+                pois[poiType.GoalType] = new List<GameObject>();
                 
-            if (!pois[poiType].Contains(poi))
+            if (!pois[poiType.GoalType].Contains(poi))
             {
-                pois[poiType].Add(poi);
+                pois[poiType.GoalType].Add(poi);
                 if (debugMode)
                     Debug.Log($"Registered POI '{poi.name}' as type '{poiType}'");
+            }
+        }
+        
+        public void RegisterPOIs(GameObject poi, IReadOnlyList<NeedReductionGoalSO> goal)
+        {
+            if (poi == null || goal == null) return;
+            var marker = poi.GetComponent<POIMarker>();
+            if (marker == null) return;
+            
+            foreach (var g in goal)
+            {
+                if (!marker.SupportsGoal(g)) return;
+                RegisterPOI(poi, g);
             }
         }
         
@@ -124,22 +137,8 @@ namespace Sammoh.GOAP
             var poiComponents = FindObjectsOfType<POIMarker>();
             foreach (var poi in poiComponents)
             {
-                RegisterPOI(poi.gameObject, poi.POIType);
+                RegisterPOIs(poi.gameObject, poi.SupportedGoals);
             }
-        }
-    }
-    
-    /// <summary>
-    /// Component to mark GameObjects as Points of Interest
-    /// </summary>
-    public class POIMarker : MonoBehaviour
-    {
-        [SerializeField] public string POIType = "generic";
-        
-        private void OnValidate()
-        {
-            if (string.IsNullOrEmpty(POIType))
-                POIType = "generic";
         }
     }
 }

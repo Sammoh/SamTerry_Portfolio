@@ -41,7 +41,7 @@ namespace Sammoh.GOAP
         /// <summary>
         /// Register a new POI in the world
         /// </summary>
-        void RegisterPOI(GameObject poi, string poiType);
+        void RegisterPOI(GameObject poi, NeedReductionGoalSO poiType);
         
         /// <summary>
         /// Unregister a POI from the world

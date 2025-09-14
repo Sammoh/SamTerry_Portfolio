@@ -86,6 +86,7 @@ namespace Sammoh.GOAP
             CreatePOI("Food Source", foodPosition, "food", Color.green);
             CreatePOI("Water Source", waterPosition, "water", Color.blue);
             CreatePOI("Toy", toyPosition, "toy", Color.yellow);
+            CreatePOI("Bed", toyPosition, "bed", Color.grey);
         }
         
         private void CreatePOI(string name, Vector3 position, string poiType, Color color)
@@ -105,7 +106,10 @@ namespace Sammoh.GOAP
             
             // Add POI marker
             var poiMarker = poiGO.AddComponent<POIMarker>();
-            poiMarker.POIType = poiType;
+            // new NeedReductionGoalSO
+            var goalAsset = Resources.Load<NeedReductionGoalSO>($"Goals/{poiType.ToLower()}_Goal");
+            if (goalAsset == null)
+                poiMarker.AddSupportedGoal(goalAsset);
             
             // Add collider
             poiGO.AddComponent<BoxCollider>();
