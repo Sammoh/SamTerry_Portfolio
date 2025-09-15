@@ -111,6 +111,39 @@ public class CustomGoal : IGoal
 
 ## 🔧 Adding Custom Actions
 
+### ScriptableObject Actions (Recommended)
+
+The GOAP system now supports ScriptableObject-based actions for better configurability and runtime management:
+
+```csharp
+[CreateAssetMenu(fileName = "CustomAction", menuName = "GOAP/Actions/Custom")]
+public class CustomActionSO : NeedReductionActionSO
+{
+    private void OnValidate()
+    {
+        // Configure default values
+        actionType = "custom_action";
+        requiredLocationKey = "at_custom_location";
+        needKey = "custom_need";
+        worldStateNeedKey = "need_custom_need";
+        targetNeedValue = 0f;
+        duration = 2f;
+        cost = 1f;
+        debugMessage = "Performing custom action";
+    }
+}
+```
+
+### Creating Action Database
+
+Use the Unity Editor menu to set up actions:
+1. **GOAP > Setup > Create Default Action Database** - Creates ActionDatabase with EatActionSO, DrinkActionSO, PlayActionSO, SleepActionSO
+2. **GOAP > Setup > Validate Action Database** - Validates configuration and lists all actions
+
+### Traditional Code Actions
+
+For more complex behaviors, implement IAction directly:
+
 ```csharp
 public class CustomAction : IAction
 {
@@ -189,10 +222,12 @@ Key test: `AcceptanceCriteria_AgentSelectsGoalAndExecutesNoOpAction`
 The system is designed for easy extension:
 
 1. **New Goals**: Implement IGoal interface
-2. **New Actions**: Implement IAction interface  
+2. **New Actions**: Implement IAction interface OR inherit from NeedReductionActionSO (ScriptableObject)
 3. **Custom Needs**: Add to agent state
 4. **World Facts**: Add through world state
 5. **POI Types**: Register new types through POIMarker
+
+ScriptableObject actions provide better configurability and runtime management.
 
 No changes to core interfaces required for common extensions.
 
@@ -211,6 +246,8 @@ Assets/6. Goal Oriented Action Planning/
 │   ├── Implementations/    # Basic implementations
 │   ├── Goals/             # Goal definitions
 │   ├── Actions/           # Action definitions
+│   ├── SO/             # ScriptableObject actions  
+│   └── ActionDatabase.cs # Action container
 │   ├── GOAPAgent.cs       # Main controller
 │   ├── GOAPDebugOverlay.cs # Debug UI
 │   └── GOAPSceneSetup.cs  # Scene setup helper
