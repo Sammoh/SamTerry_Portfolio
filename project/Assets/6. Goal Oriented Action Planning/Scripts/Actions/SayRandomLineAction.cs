@@ -217,9 +217,12 @@ namespace Sammoh.GOAP
         private void TriggerBark(string message)
         {
             // Find the GOAP agent to trigger the bark
-            var goapAgent = Object.FindObjectOfType<GOAPAgent>();
-            if (goapAgent != null)
+            var goapAgents = Object.FindObjectsOfType<GOAPAgent>();
+            if (goapAgents != null && goapAgents.Length > 0)
             {
+                // Use the first found GOAP agent - in practice, you'd want to find the specific agent
+                var goapAgent = goapAgents[0];
+                
                 // Use reflection to access the private Bark method
                 var barkMethod = typeof(GOAPAgent).GetMethod("Bark", 
                     System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -227,15 +230,16 @@ namespace Sammoh.GOAP
                 if (barkMethod != null)
                 {
                     barkMethod.Invoke(goapAgent, new object[] { message, barkDuration, "Agent" });
+                    Debug.Log($"SayRandomLineAction: Agent says '{message}'");
                 }
                 else
                 {
-                    Debug.Log($"SayRandomLineAction: '{message}'");
+                    Debug.Log($"SayRandomLineAction: '{message}' (bark method not found)");
                 }
             }
             else
             {
-                Debug.Log($"SayRandomLineAction: '{message}'");
+                Debug.Log($"SayRandomLineAction: '{message}' (no GOAP agent found)");
             }
         }
 
