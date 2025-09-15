@@ -38,8 +38,12 @@ namespace Sammoh.GOAP
                 if (need > maxNeed) maxNeed = need;
             }
 
-            // Lower priority when needs are high
-            return 1f - maxNeed;
+            // Increase idle priority when needs are low, but add some base priority
+            // This ensures idle behaviors have a reasonable chance to execute
+            float basePriority = 0.3f; // Base priority for idle activities
+            float needBasedPriority = 1f - maxNeed;
+            
+            return basePriority + (needBasedPriority * 0.5f); // Max priority of 0.8 when all needs are satisfied
         }
     }
 }
