@@ -3,12 +3,15 @@
 namespace Sammoh.GOAP
 {
     /// <summary>
-    /// Simple idle goal - always available as a fallback
+    /// Enhanced idle goal with improved priority system.
+    /// Base priority of 0.3 ensures idle activities have reasonable chance to execute.
+    /// Additional priority boost when agent needs are satisfied (max 0.8 total).
+    /// Prevents idle behaviors from being completely suppressed by high-priority needs.
     /// </summary>
     public class IdleGoal : IGoal
     {
         public string GoalType => "idle";
-        public float Priority => 1f; // Low priority
+        public float Priority => 0.3f; // Base priority for reasonable execution chance
 
         public bool CanSatisfy(IAgentState agentState, IWorldState worldState)
         {
@@ -31,15 +34,28 @@ namespace Sammoh.GOAP
 
         public float CalculatePriority(IAgentState agentState, IWorldState worldState)
         {
-            // Higher priority when no urgent needs
+            // Base priority of 0.3 ensures idle activities have reasonable chance to execute
+            float basePriority = 0.3f;
+            
+            // Calculate the maximum need level
             float maxNeed = 0f;
-            foreach (var need in agentState.GetAllNeeds().Values)
+            if (agentState != null)
             {
-                if (need > maxNeed) maxNeed = need;
+                foreach (var need in agentState.GetAllNeeds().Values)
+                {
+                    if (need > maxNeed) maxNeed = need;
+                }
             }
-
-            // Lower priority when needs are high
-            return 1f - maxNeed;
+            
+            // When needs are satisfied (low), boost priority up to 0.8 total
+            // When needs are high, priority stays at base level (0.3)
+            // This prevents idle behaviors from being completely suppressed by high-priority needs
+            float needSatisfactionBonus = (1f - maxNeed) * 0.5f; // Max bonus of 0.5
+            
+            float finalPriority = basePriority + needSatisfactionBonus;
+            
+            // Ensure we don't exceed max priority of 0.8
+            return Mathf.Min(finalPriority, 0.8f);
         }
     }
 }

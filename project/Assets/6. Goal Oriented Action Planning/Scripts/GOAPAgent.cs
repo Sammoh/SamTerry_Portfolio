@@ -101,6 +101,11 @@ namespace Sammoh.GOAP
             cannedBarks["Play"] = new List<string> { "Whee!", "This is fun!", "Let's play more!" };
             cannedBarks["Idle"] = new List<string> { "Just chilling...", "What a nice day!", "I'm bored..." };
             cannedBarks["MoveTo"] = new List<string> { "On my way!", "Heading out!", "Moving..." };
+            
+            // New idle action bark categories
+            cannedBarks["wander"] = new List<string> { "Time for a walk...", "Let's explore a bit.", "Going for a stroll.", "Wandering around..." };
+            cannedBarks["investigate"] = new List<string> { "What's that over there?", "Let me take a closer look.", "Interesting...", "Wonder what this is..." };
+            cannedBarks["say_random"] = new List<string> { "Just thinking out loud...", "Hmm...", "You know...", "Speaking of which..." };
 
             if (barkBubblePrefab != null)
             {
@@ -144,6 +149,17 @@ namespace Sammoh.GOAP
                 new PlayAction(),
                 new SleepAction()
             };
+            
+            // Add new idle actions with agent injection
+            var wanderAction = new WanderAction();
+            wanderAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
+            availableActions.Add(wanderAction);
+            
+            var investigateAction = new InvestigateAction();
+            investigateAction.InjectAgent(agentTransform);
+            availableActions.Add(investigateAction);
+            
+            availableActions.Add(new SayRandomLineAction());
 
             foreach (var goal in availableGoals)
             {
