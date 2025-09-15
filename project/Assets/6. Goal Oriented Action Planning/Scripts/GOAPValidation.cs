@@ -129,6 +129,66 @@ namespace Sammoh.GOAP
         }
         
         /// <summary>
+        /// Validate action database configuration
+        /// </summary>
+        public static List<string> ValidateActionDatabase(ActionDatabase actionDatabase)
+        {
+            var issues = new List<string>();
+            
+            if (actionDatabase == null)
+            {
+                issues.Add("ActionDatabase is null - agent will have no ScriptableObject actions");
+                return issues;
+            }
+            
+            var allActions = actionDatabase.GetAllActions();
+            if (allActions == null || allActions.Count == 0)
+            {
+                issues.Add("ActionDatabase has no actions configured");
+                return issues;
+            }
+            
+            var actionTypes = new HashSet<string>();
+            foreach (var action in allActions)
+            {
+                if (action == null)
+                {
+                    issues.Add("ActionDatabase contains null action reference");
+                    continue;
+                }
+                
+                if (string.IsNullOrEmpty(action.ActionType))
+                {
+                    issues.Add("Action has empty or null ActionType");
+                    continue;
+                }
+                
+                if (actionTypes.Contains(action.ActionType))
+                {
+                    issues.Add($"Duplicate action type '{action.ActionType}' found in database");
+                }
+                else
+                {
+                    actionTypes.Add(action.ActionType);
+                }
+                
+                // Validate action configuration
+                if (action.Cost < 0)
+                {
+                    issues.Add($"Action '{action.ActionType}' has negative cost ({action.Cost})");
+                }
+                
+                var effects = action.GetEffects();
+                if (effects == null || effects.Count == 0)
+                {
+                    issues.Add($"Action '{action.ActionType}' has no effects defined - planner cannot use it");
+                }
+            }
+            
+            return issues;
+        }
+        
+        /// <summary>
         /// Validate goal database configuration
         /// </summary>
         public static List<string> ValidateGoalDatabase(GoalDatabase goalDatabase)

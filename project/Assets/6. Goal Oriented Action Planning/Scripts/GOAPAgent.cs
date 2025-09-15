@@ -8,6 +8,7 @@ namespace Sammoh.GOAP
     {
         [Header("Goals/Actions (SO-driven)")]
         [SerializeField] private GoalDatabase goalDatabase;
+        [SerializeField] private ActionDatabase actionDatabase;
 
         [Header("Configuration")]
         [SerializeField] private float tickRate = 10f;
@@ -118,6 +119,7 @@ namespace Sammoh.GOAP
 
         private void SetupGoalsAndActions()
         {
+            // Setup goals
             if (goalDatabase == null)
             {
                 goalDatabase = Resources.Load<GoalDatabase>("GoalDatabase");
@@ -136,25 +138,8 @@ namespace Sammoh.GOAP
                 Debug.LogWarning("No goals found. Added fallback IdleGoal.");
             }
 
-            availableActions = new List<IAction>
-            {
-                new NoOpAction(),
-                new EatAction(),
-                new DrinkAction(),
-                new PlayAction(),
-                new SleepAction()
-            };
-
-            foreach (var goal in availableGoals)
-            {
-                if (goal is NeedReductionGoalSO)
-                {
-                    var moveToAction = new MoveToAction();
-                    moveToAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
-                    moveToAction.InjectCurrentGoal(goal);
-                    availableActions.Add(moveToAction);
-                }
-            }
+            // Setup actions using ActionDatabase
+            SetupActionsFromDatabase();
 
             Debug.Log($"Setup complete: {availableGoals.Count} goals, {availableActions.Count} actions");
 
@@ -167,6 +152,88 @@ namespace Sammoh.GOAP
                 {
                     var dbIssues = GOAPValidation.ValidateGoalDatabase(goalDatabase);
                     GOAPValidation.LogValidationResults(dbIssues, "GOAP Goal Database");
+                }
+
+                if (actionDatabase != null)
+                {
+                    var actionDbIssues = GOAPValidation.ValidateActionDatabase(actionDatabase);
+                    GOAPValidation.LogValidationResults(actionDbIssues, "GOAP Action Database");
+                }
+            }
+        }
+
+        private void SetupActionsFromDatabase()
+        {
+            availableActions = new List<IAction>();
+
+            // Load ActionDatabase if not assigned
+            if (actionDatabase == null)
+            {
+                actionDatabase = Resources.Load<ActionDatabase>("ActionDatabase");
+                if (actionDatabase == null)
+                {
+                    Debug.LogWarning("ActionDatabase not found in Resources or not assigned. Using fallback hardcoded actions.");
+                    SetupFallbackActions();
+                    return;
+                }
+            }
+
+            if (actionDatabase != null)
+            {
+                // Add all ScriptableObject actions from database
+                var databaseActions = actionDatabase.GetAllActions();
+                foreach (var action in databaseActions)
+                {
+                    availableActions.Add(action);
+                    
+                    // Inject agent reference for MoveToActionSO instances
+                    if (action is MoveToActionSO moveToActionSO)
+                    {
+                        moveToActionSO.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
+                    }
+                }
+            }
+
+            // Always add NoOpAction as fallback (hardcoded for now)
+            availableActions.Add(new NoOpAction());
+
+            // Create dynamic MoveToAction instances for each goal (backward compatibility)
+            foreach (var goal in availableGoals)
+            {
+                if (goal is NeedReductionGoalSO)
+                {
+                    var moveToAction = new MoveToAction();
+                    moveToAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
+                    moveToAction.InjectCurrentGoal(goal);
+                    availableActions.Add(moveToAction);
+                }
+            }
+        }
+
+        private void SetupFallbackActions()
+        {
+            // Fallback to hardcoded actions if no ActionDatabase
+            availableActions = new List<IAction>
+            {
+                new NoOpAction(),
+                new EatAction(),
+                new DrinkAction(),
+                new PlayAction(),
+                new SleepAction()
+            };
+
+            // Create dynamic MoveToAction instances for each goal  
+            foreach (var goal in availableGoals)
+            {
+                if (goal is NeedReductionGoalSO)
+                {
+                    var moveToAction = new MoveToAction();
+                    moveToAction.InjectAgent(agentTransform, agentTransform.GetComponent<UnityEngine.AI.NavMeshAgent>());
+                    moveToAction.InjectCurrentGoal(goal);
+                    availableActions.Add(moveToAction);
+                }
+            }
+        }
                 }
             }
         }
