@@ -203,5 +203,59 @@ namespace Sammoh.GOAP
                 }
             }
         }
+        
+        /// <summary>
+        /// Validate ActionDatabase configuration
+        /// </summary>
+        public static List<string> ValidateActionDatabase(ActionDatabase actionDatabase)
+        {
+            var issues = new List<string>();
+            
+            if (actionDatabase == null)
+            {
+                issues.Add("ActionDatabase is null");
+                return issues;
+            }
+            
+            // Use the built-in validation from ActionDatabase
+            var dbIssues = actionDatabase.ValidateActions();
+            issues.AddRange(dbIssues);
+            
+            // Additional validation specific to GOAP system
+            var actions = actionDatabase.Actions;
+            if (actions != null && actions.Count > 0)
+            {
+                // Check for essential action types
+                bool hasNoOp = false;
+                var actionTypes = new HashSet<string>();
+                
+                foreach (var action in actions)
+                {
+                    if (action == null) continue;
+                    
+                    if (action.ActionType == "noop")
+                        hasNoOp = true;
+                        
+                    actionTypes.Add(action.ActionType);
+                }
+                
+                if (!hasNoOp)
+                {
+                    issues.Add("ActionDatabase missing NoOp action - recommended for fallback behavior");
+                }
+                
+                // Check for common need reduction actions
+                var expectedActions = new[] { "eat", "drink", "sleep", "play" };
+                foreach (var expected in expectedActions)
+                {
+                    if (!actionTypes.Contains(expected))
+                    {
+                        issues.Add($"ActionDatabase missing common action type '{expected}' - may cause planning issues");
+                    }
+                }
+            }
+            
+            return issues;
+        }
     }
 }

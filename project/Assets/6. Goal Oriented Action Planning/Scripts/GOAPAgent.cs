@@ -8,6 +8,7 @@ namespace Sammoh.GOAP
     {
         [Header("Goals/Actions (SO-driven)")]
         [SerializeField] private GoalDatabase goalDatabase;
+        [SerializeField] private ActionDatabase actionDatabase;
 
         [Header("Configuration")]
         [SerializeField] private float tickRate = 10f;
@@ -118,6 +119,7 @@ namespace Sammoh.GOAP
 
         private void SetupGoalsAndActions()
         {
+            // Setup Goals
             if (goalDatabase == null)
             {
                 goalDatabase = Resources.Load<GoalDatabase>("GoalDatabase");
@@ -136,15 +138,10 @@ namespace Sammoh.GOAP
                 Debug.LogWarning("No goals found. Added fallback IdleGoal.");
             }
 
-            availableActions = new List<IAction>
-            {
-                new NoOpAction(),
-                new EatAction(),
-                new DrinkAction(),
-                new PlayAction(),
-                new SleepAction()
-            };
+            // Setup Actions - try ActionDatabase first, fallback to hardcoded
+            SetupActions();
 
+            // Add MoveToAction for each NeedReductionGoalSO
             foreach (var goal in availableGoals)
             {
                 if (goal is NeedReductionGoalSO)
@@ -167,6 +164,83 @@ namespace Sammoh.GOAP
                 {
                     var dbIssues = GOAPValidation.ValidateGoalDatabase(goalDatabase);
                     GOAPValidation.LogValidationResults(dbIssues, "GOAP Goal Database");
+                }
+                
+                if (actionDatabase != null)
+                {
+                    var actionIssues = GOAPValidation.ValidateActionDatabase(actionDatabase);
+                    GOAPValidation.LogValidationResults(actionIssues, "GOAP Action Database");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Setup actions using ActionDatabase if available, otherwise fallback to hardcoded actions
+        /// </summary>
+        private void SetupActions()
+        {
+            availableActions = new List<IAction>();
+            
+            // Try to load ActionDatabase from Resources if not assigned
+            if (actionDatabase == null)
+            {
+                actionDatabase = Resources.Load<ActionDatabase>("ActionDatabase");
+            }
+            
+            // Use ScriptableObject actions if available
+            if (actionDatabase != null)
+            {
+                var soActions = actionDatabase.Actions;
+                if (soActions != null && soActions.Count > 0)
+                {
+                    availableActions.AddRange(soActions);
+                    Debug.Log($"Loaded {soActions.Count} actions from ActionDatabase");
+                }
+                else
+                {
+                    Debug.LogWarning("ActionDatabase found but contains no valid actions. Using fallback.");
+                    LoadFallbackActions();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("ActionDatabase not found in Resources or not assigned. Using fallback hardcoded actions.");
+                LoadFallbackActions();
+            }
+            
+            // Always add NoOpAction if not present
+            bool hasNoOp = false;
+            foreach (var action in availableActions)
+            {
+                if (action.ActionType == "noop")
+                {
+                    hasNoOp = true;
+                    break;
+                }
+            }
+            
+            if (!hasNoOp)
+            {
+                availableActions.Add(new NoOpAction());
+                Debug.Log("Added fallback NoOpAction");
+            }
+        }
+        
+        /// <summary>
+        /// Load hardcoded fallback actions for backward compatibility
+        /// </summary>
+        private void LoadFallbackActions()
+        {
+            availableActions.AddRange(new List<IAction>
+            {
+                new NoOpAction(),
+                new EatAction(),
+                new DrinkAction(),
+                new PlayAction(),
+                new SleepAction()
+            });
+            Debug.Log("Loaded fallback hardcoded actions");
+        }
                 }
             }
         }
