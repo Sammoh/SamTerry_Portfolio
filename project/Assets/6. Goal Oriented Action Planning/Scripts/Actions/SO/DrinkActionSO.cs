@@ -8,7 +8,7 @@ namespace Sammoh.GOAP
     [CreateAssetMenu(fileName = "DrinkAction", menuName = "GOAP/Actions/Drink Action", order = 2)]
     public class DrinkActionSO : NeedReductionActionSO
     {
-        private void Awake()
+        protected override void OnValidate()
         {
             // Set default values for drinking
             actionType = "drink";
@@ -18,6 +18,8 @@ namespace Sammoh.GOAP
             targetNeedValue = 0f;
             requiredWorldFact = "at_water";
             needWorldStateKey = "need_thirst";
+            
+            base.OnValidate();
         }
         
         protected override void OnStartExecution(IAgentState agentState, IWorldState worldState)

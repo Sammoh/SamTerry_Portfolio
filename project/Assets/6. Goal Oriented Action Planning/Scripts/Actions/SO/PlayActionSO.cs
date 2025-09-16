@@ -8,7 +8,7 @@ namespace Sammoh.GOAP
     [CreateAssetMenu(fileName = "PlayAction", menuName = "GOAP/Actions/Play Action", order = 4)]
     public class PlayActionSO : NeedReductionActionSO
     {
-        private void Awake()
+        protected override void OnValidate()
         {
             // Set default values for playing
             actionType = "play";
@@ -18,6 +18,8 @@ namespace Sammoh.GOAP
             targetNeedValue = 0f;
             requiredWorldFact = "at_toy";
             needWorldStateKey = "need_play";
+            
+            base.OnValidate();
         }
         
         protected override void OnStartExecution(IAgentState agentState, IWorldState worldState)

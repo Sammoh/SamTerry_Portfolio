@@ -111,6 +111,43 @@ public class CustomGoal : IGoal
 
 ## 🔧 Adding Custom Actions
 
+### ScriptableObject Actions (Recommended)
+
+The GOAP system now supports configurable ScriptableObject-based actions for dynamic configuration without code changes:
+
+```csharp
+// Create custom need reduction action
+[CreateAssetMenu(fileName = "CustomAction", menuName = "GOAP/Actions/Custom Action")]
+public class CustomActionSO : NeedReductionActionSO
+{
+    protected override void OnValidate()
+    {
+        actionType = "custom";
+        cost = 2f;
+        duration = 3f;
+        needType = "custom_need";
+        requiredWorldFact = "at_custom_location";
+        needWorldStateKey = "need_custom";
+        
+        base.OnValidate();
+    }
+}
+```
+
+**Setup Process:**
+1. Use `GOAP > Setup > Create Action Database` to create ActionDatabase
+2. Create action ScriptableObjects in Project window or via menu
+3. Add actions to ActionDatabase in Inspector
+4. Actions are automatically loaded by GOAPAgent
+
+**Key Benefits:**
+- **Dynamic Configuration**: Modify cost, duration, and effects in Inspector
+- **No Code Changes**: Create new action variants without programming
+- **Backward Compatible**: Falls back to hardcoded actions if no ActionDatabase
+- **Validation**: Built-in validation and error checking
+
+### Hardcoded Actions (Legacy)
+
 ```csharp
 public class CustomAction : IAction
 {
@@ -211,10 +248,27 @@ Assets/6. Goal Oriented Action Planning/
 │   ├── Implementations/    # Basic implementations
 │   ├── Goals/             # Goal definitions
 │   ├── Actions/           # Action definitions
+│   │   ├── SO/            # ScriptableObject actions
+│   │   │   ├── NeedReductionActionSO.cs
+│   │   │   ├── EatActionSO.cs
+│   │   │   ├── DrinkActionSO.cs
+│   │   │   ├── SleepActionSO.cs
+│   │   │   ├── PlayActionSO.cs
+│   │   │   └── ActionDatabase.cs
+│   │   └── [Legacy hardcoded actions]
+│   ├── Editor/            # Unity Editor tools
+│   │   └── GOAPActionDatabaseEditor.cs
 │   ├── GOAPAgent.cs       # Main controller
 │   ├── GOAPDebugOverlay.cs # Debug UI
+│   ├── GOAPValidation.cs  # System validation
 │   └── GOAPSceneSetup.cs  # Scene setup helper
 ├── Tests/                 # Unit tests
+│   ├── GOAPSystemTests.cs
+│   ├── GOAPScriptableObjectActionTests.cs
+│   └── GOAPAgentActionDatabaseIntegrationTests.cs
+├── Resources/             # Runtime assets
+│   ├── ActionDatabase.asset
+│   └── Actions/          # Action ScriptableObject assets
 ├── Scenes/               # Demo scenes
 ├── Prefabs/              # Agent/POI prefabs
 └── GOAP.asmdef           # Assembly definition

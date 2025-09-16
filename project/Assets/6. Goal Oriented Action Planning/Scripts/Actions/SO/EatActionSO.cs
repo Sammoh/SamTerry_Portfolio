@@ -8,7 +8,7 @@ namespace Sammoh.GOAP
     [CreateAssetMenu(fileName = "EatAction", menuName = "GOAP/Actions/Eat Action", order = 1)]
     public class EatActionSO : NeedReductionActionSO
     {
-        private void Awake()
+        protected override void OnValidate()
         {
             // Set default values for eating
             actionType = "eat";
@@ -18,6 +18,8 @@ namespace Sammoh.GOAP
             targetNeedValue = 0f;
             requiredWorldFact = "at_food";
             needWorldStateKey = "need_hunger";
+            
+            base.OnValidate();
         }
         
         protected override void OnStartExecution(IAgentState agentState, IWorldState worldState)

@@ -8,7 +8,7 @@ namespace Sammoh.GOAP
     [CreateAssetMenu(fileName = "SleepAction", menuName = "GOAP/Actions/Sleep Action", order = 3)]
     public class SleepActionSO : NeedReductionActionSO
     {
-        private void Awake()
+        protected override void OnValidate()
         {
             // Set default values for sleeping
             actionType = "sleep";
@@ -18,6 +18,8 @@ namespace Sammoh.GOAP
             targetNeedValue = 0f;
             requiredWorldFact = "at_bed";
             needWorldStateKey = "need_sleep";
+            
+            base.OnValidate();
         }
         
         protected override void OnStartExecution(IAgentState agentState, IWorldState worldState)
