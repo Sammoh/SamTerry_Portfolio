@@ -1,10 +1,10 @@
+#if UNITY_EDITOR
+
 using System.Collections.Generic;
 using System.IO;
 using Sammoh.TurnBasedStrategy;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 namespace Sammoh.Two
 {
@@ -63,7 +63,6 @@ namespace Sammoh.Two
         /// </summary>
         public static void GenerateDefaultEquipment()
         {
-#if UNITY_EDITOR
             EnsureDirectoriesExist();
             
             int weaponsCreated = GenerateDefaultWeapons();
@@ -79,7 +78,6 @@ namespace Sammoh.Two
             
             Debug.Log($"Equipment generation complete! Created {weaponsCreated} weapons, " +
                      $"{accessoriesCreated} accessories, {armorsCreated} armor pieces.");
-#endif
         }
         
         /// <summary>
@@ -87,7 +85,6 @@ namespace Sammoh.Two
         /// </summary>
         public static Equipment GenerateEquipment(EquipmentType type, EquipmentRarity rarity, string customName = null)
         {
-#if UNITY_EDITOR
             Equipment equipmentSo = null;
             string fileName = customName ?? GenerateEquipmentName(type, rarity);
             string assetPath = GetAssetPath(type, fileName);
@@ -132,7 +129,6 @@ namespace Sammoh.Two
                 Debug.Log($"Created {type} asset: {assetPath}");
                 return equipmentSo;
             }
-#endif
             return null;
         }
         
@@ -141,7 +137,6 @@ namespace Sammoh.Two
         /// </summary>
         public static bool UpdateEquipment(Equipment equipmentSo, bool regenerateValues = false)
         {
-#if UNITY_EDITOR
             if (equipmentSo == null) return false;
             
             if (regenerateValues)
@@ -152,10 +147,9 @@ namespace Sammoh.Two
             EditorUtility.SetDirty(equipmentSo);
             AssetDatabase.SaveAssets();
             Debug.Log($"Updated equipment asset: {equipmentSo.name}");
-            return true;
-#else
+
             return false;
-#endif
+
         }
         
         /// <summary>
@@ -234,7 +228,6 @@ namespace Sammoh.Two
             return db;
         }
         
-#if UNITY_EDITOR
         private static void EnsureDirectoriesExist()
         {
             if (!Directory.Exists(EQUIPMENT_RESOURCES_PATH))
@@ -375,6 +368,6 @@ namespace Sammoh.Two
             string noun = ArmorNouns[Random.Range(0, ArmorNouns.Length)];
             return $"{adjective}_{noun}";
         }
-#endif
     }
 }
+#endif

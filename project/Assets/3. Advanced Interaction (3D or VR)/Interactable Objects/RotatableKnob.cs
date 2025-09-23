@@ -175,6 +175,7 @@ namespace Sammoh.Three
 
         #region Debugging
         
+		#if UNITY_EDITOR
         
 
         // consider only the selected object
@@ -303,7 +304,7 @@ namespace Sammoh.Three
             // Update the previous heading
             // _previousValue = yRotation;
         }
-        
+		#endif
         #endregion
 
     }

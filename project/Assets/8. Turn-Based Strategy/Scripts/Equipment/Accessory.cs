@@ -10,7 +10,7 @@ namespace Sammoh.TurnBasedStrategy
     {
         [Header("Accessory Properties")]
         [SerializeField] private AccessoryType accessoryType = AccessoryType.Ring;
-        [SerializeField] private StatModifier[] statModifiers = new StatModifier[0];
+        // [SerializeField] private StatModifier[] statModifiers = new StatModifier[0];
         [SerializeField] private bool isStackable = false;
         [SerializeField] private int maxStackSize = 1;
         

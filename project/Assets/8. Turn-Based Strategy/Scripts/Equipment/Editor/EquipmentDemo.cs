@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections.Generic;
 using Sammoh.TurnBasedStrategy;
@@ -288,3 +289,4 @@ namespace Sammoh.Two
         }
     }
 }
+#endif

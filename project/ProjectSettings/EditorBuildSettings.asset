@@ -4,5 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Git Exclude/Make Webhook/send_new_web-request.unity
+    guid: 1b2d2946df3aab6449410c7e097775f2
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
