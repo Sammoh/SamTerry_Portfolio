@@ -219,6 +219,54 @@ namespace Sammoh.Advertisement.Tests
         }
         
         [Test]
+        public void BannerService_SetBannerContainerConfiguration_WorksCorrectly()
+        {
+            // Arrange
+            _adManager.Initialize("TEST_APP_ID", true);
+            var bannerService = _adManager.BannerService;
+            var testConfig = ScriptableObject.CreateInstance<BannerContainerConfiguration>();
+            testConfig.ResetToDefaults();
+            
+            try
+            {
+                // Act
+                bannerService.SetBannerContainerConfiguration(testConfig);
+                
+                // Assert - if no exception is thrown, the method works
+                Assert.Pass("SetBannerContainerConfiguration method executed successfully");
+            }
+            finally
+            {
+                Object.DestroyImmediate(testConfig);
+            }
+        }
+        
+        [Test]
+        public void BannerService_ShowBannerWithConfiguration_DisplaysCorrectly()
+        {
+            // Arrange
+            _adManager.Initialize("TEST_APP_ID", true);
+            var bannerService = _adManager.BannerService;
+            var testConfig = ScriptableObject.CreateInstance<BannerContainerConfiguration>();
+            testConfig.ResetToDefaults();
+            
+            try
+            {
+                // Act
+                bannerService.SetBannerContainerConfiguration(testConfig);
+                bannerService.ShowBanner(BannerPosition.Top);
+                
+                // Assert
+                Assert.IsTrue(bannerService.IsBannerVisible);
+                Assert.AreEqual(BannerPosition.Top, bannerService.CurrentPosition);
+            }
+            finally
+            {
+                Object.DestroyImmediate(testConfig);
+            }
+        }
+        
+        [Test]
         public void AdLogger_EnableLogging_ControlsOutput()
         {
             // Arrange

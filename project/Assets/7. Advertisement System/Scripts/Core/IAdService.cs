@@ -105,6 +105,13 @@ namespace Sammoh.Advertisement
         /// </summary>
         /// <param name="size">The desired banner size</param>
         void SetBannerSize(BannerSize size);
+        
+        /// <summary>
+        /// Sets a custom banner container configuration for user-friendly editing.
+        /// This allows runtime configuration changes without code modifications.
+        /// </summary>
+        /// <param name="config">The banner container configuration to use</param>
+        void SetBannerContainerConfiguration(BannerContainerConfiguration config);
     }
     
     /// <summary>
