@@ -132,11 +132,6 @@ namespace Sammoh.Advertisement
             // Initialize event dispatcher
             _eventDispatcher = gameObject.GetComponent<AdEventDispatcher>() 
                 ?? gameObject.AddComponent<AdEventDispatcher>();
-            
-            if (autoInitialize)
-            {
-                Initialize();
-            }
         }
         
         private void Start()
@@ -244,6 +239,22 @@ namespace Sammoh.Advertisement
             Type serviceType = typeof(T);
             _services.TryGetValue(serviceType, out IAdService service);
             return service as T;
+        }
+        
+        /// <summary>
+        /// Tries to get a registered and initialized ad service by its interface type.
+        /// Returns null if the service is not available or not initialized.
+        /// </summary>
+        /// <typeparam name="T">The service interface type</typeparam>
+        /// <returns>The service implementation or null</returns>
+        public T TryGetService<T>() where T : class, IAdService
+        {
+            Type serviceType = typeof(T);
+            if (_services.TryGetValue(serviceType, out IAdService service) && service.IsInitialized)
+            {
+                return service as T;
+            }
+            return null;
         }
         
         /// <summary>

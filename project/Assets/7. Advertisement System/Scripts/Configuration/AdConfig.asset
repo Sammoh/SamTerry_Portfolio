@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c640bfae61e8ca4aa95c7769b079e41, type: 3}
+  m_Name: AdConfig
+  m_EditorClassIdentifier: 
+  appId: YOUR_APP_ID
+  testMode: 1
+  enableLogging: 1
+  enableBannerAds: 1
+  enableInterstitialAds: 1
+  enableRewardedVideoAds: 1
+  enablePlayableAds: 1
+  enableNativeAds: 1
+  defaultBannerPosition: 1
+  defaultBannerSize: 0
+  bannerRefreshRate: 60
+  interstitialCooldown: 300
+  interstitialFrequencyCap: 3
+  defaultRewardType: Coins
+  defaultRewardAmount: 100
+  rewardedVideoCooldown: 180
+  defaultNativeTemplate: 1
+  showDebugOverlay: 1
+  simulateSlowNetwork: 0
+  networkDelayMultiplier: 1

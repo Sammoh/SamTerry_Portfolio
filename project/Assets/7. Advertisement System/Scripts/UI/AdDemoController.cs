@@ -64,8 +64,15 @@ namespace Sammoh.Advertisement
             InitializeAdManager();
             SetupEventListeners();
             UpdateUI();
+            AddKeyboardController();
         }
-        
+
+        private void AddKeyboardController()
+        {
+            var keyboardController = gameObject.AddComponent<AdDemoKeyboardController>();
+            keyboardController.Initialize(this, bannerPositionDropdown, bannerSizeDropdown, nativeTemplateDropdown);
+        }
+
         private void OnDestroy()
         {
             RemoveEventListeners();
@@ -242,8 +249,8 @@ namespace Sammoh.Advertisement
         #endregion
         
         #region Button Handlers
-        
-        private void OnShowBannerClicked()
+
+        internal void OnShowBannerClicked()
         {
             if (_adManager?.BannerService == null)
             {
@@ -259,8 +266,8 @@ namespace Sammoh.Advertisement
             
             AddLog($"Showing banner: {position}, {size}");
         }
-        
-        private void OnHideBannerClicked()
+
+        internal void OnHideBannerClicked()
         {
             if (_adManager?.BannerService == null)
             {
@@ -271,8 +278,8 @@ namespace Sammoh.Advertisement
             _adManager.BannerService.HideBanner();
             AddLog("Hiding banner");
         }
-        
-        private void OnLoadInterstitialClicked()
+
+        internal void OnLoadInterstitialClicked()
         {
             if (_adManager?.InterstitialService == null)
             {
@@ -283,8 +290,8 @@ namespace Sammoh.Advertisement
             _adManager.InterstitialService.LoadAd();
             AddLog("Loading interstitial ad");
         }
-        
-        private void OnShowInterstitialClicked()
+
+        internal void OnShowInterstitialClicked()
         {
             if (_adManager?.InterstitialService == null)
             {
@@ -298,8 +305,8 @@ namespace Sammoh.Advertisement
             });
             AddLog("Showing interstitial ad");
         }
-        
-        private void OnLoadRewardedVideoClicked()
+
+        internal void OnLoadRewardedVideoClicked()
         {
             if (_adManager?.RewardedVideoService == null)
             {
@@ -310,8 +317,8 @@ namespace Sammoh.Advertisement
             _adManager.RewardedVideoService.LoadAd();
             AddLog("Loading rewarded video ad");
         }
-        
-        private void OnShowRewardedVideoClicked()
+
+        internal void OnShowRewardedVideoClicked()
         {
             if (_adManager?.RewardedVideoService == null)
             {
@@ -333,8 +340,8 @@ namespace Sammoh.Advertisement
             });
             AddLog("Showing rewarded video ad");
         }
-        
-        private void OnLoadPlayableClicked()
+
+        internal void OnLoadPlayableClicked()
         {
             if (_adManager?.PlayableService == null)
             {
@@ -345,8 +352,8 @@ namespace Sammoh.Advertisement
             _adManager.PlayableService.LoadAd();
             AddLog("Loading playable ad");
         }
-        
-        private void OnShowPlayableClicked()
+
+        internal void OnShowPlayableClicked()
         {
             if (_adManager?.PlayableService == null)
             {
@@ -360,8 +367,8 @@ namespace Sammoh.Advertisement
             });
             AddLog("Showing playable ad");
         }
-        
-        private void OnLoadNativeClicked()
+
+        internal void OnLoadNativeClicked()
         {
             if (_adManager?.NativeService == null)
             {
@@ -373,8 +380,8 @@ namespace Sammoh.Advertisement
             _adManager.NativeService.LoadNativeAd(template);
             AddLog($"Loading native ad: {template}");
         }
-        
-        private void OnShowNativeClicked()
+
+        internal void OnShowNativeClicked()
         {
             if (_adManager?.NativeService == null)
             {
@@ -391,8 +398,8 @@ namespace Sammoh.Advertisement
             _adManager.NativeService.ShowNativeAd(nativeAdContainer);
             AddLog("Showing native ad");
         }
-        
-        private void OnRemoveNativeClicked()
+
+        internal void OnRemoveNativeClicked()
         {
             if (_adManager?.NativeService == null)
             {
@@ -403,8 +410,8 @@ namespace Sammoh.Advertisement
             _adManager.NativeService.RemoveNativeAd();
             AddLog("Removing native ad");
         }
-        
-        private void OnAddCoinsClicked()
+
+        internal void OnAddCoinsClicked()
         {
             AddCoins(50);
             AddLog("Added 50 bonus coins");
@@ -545,29 +552,36 @@ namespace Sammoh.Advertisement
         private void AddLog(string message)
         {
             string timestampedMessage = $"[{System.DateTime.Now:HH:mm:ss}] {message}";
-            _logMessages.Add(timestampedMessage);
-            
-            // Keep only the last MAX_LOG_MESSAGES
+            _logMessages.Insert(0, timestampedMessage);
+
             while (_logMessages.Count > MAX_LOG_MESSAGES)
             {
-                _logMessages.RemoveAt(0);
+                _logMessages.RemoveAt(_logMessages.Count - 1);
             }
-            
+
             UpdateLogDisplay();
             Debug.Log($"[AdDemo] {message}");
         }
-        
+
         private void UpdateLogDisplay()
         {
             if (logText == null) return;
-            
-            logText.text = string.Join("\\n", _logMessages);
-            
-            // Scroll to bottom
+
+            if (_logMessages.Count == 0)
+            {
+                logText.text = "";
+                return;
+            }
+
+            // Rich text for newest log
+            string newestLog = $"<b><color=#FFD700>{_logMessages[0]}</color></b>";
+            string otherLogs = string.Join("\n", _logMessages.GetRange(1, _logMessages.Count - 1));
+            logText.text = newestLog + (otherLogs.Length > 0 ? "\n" + otherLogs : "");
+
             if (logScrollRect != null)
             {
                 Canvas.ForceUpdateCanvases();
-                logScrollRect.verticalNormalizedPosition = 0f;
+                logScrollRect.verticalNormalizedPosition = 1f; // Scroll to top
             }
         }
         
