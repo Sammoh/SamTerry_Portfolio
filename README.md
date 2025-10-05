@@ -31,7 +31,8 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 6. [Goal Oriented Action Planning (GOAP)](#goal-oriented-action-planning-goap)
 7. [Multiplayer Netcode](#multiplayer-netcode)
 8. [Turn-Based Strategy Game](#turn-based-strategy-game)
-9. [Third-Party Assets](#third-party-assets)
+9. [Discord Bot](#discord-bot)
+10. [Third-Party Assets](#third-party-assets)
 
 ---
 
@@ -209,6 +210,40 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
   - Comprehensive UI with ability selection and target choosing
   - Extensive test suite covering all major systems and edge cases
   - Modular design allowing for easy expansion and customization
+
+---
+
+## Discord Bot
+
+**Project**: [Discord Bot](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/discord-bot)  
+**Tech Stack**: Node.js, Discord.js v14, JavaScript (ES Modules)  
+**Description**: A feature-rich Discord bot with slash commands demonstrating modern Discord bot development practices. Built with Discord.js v14, featuring interactive commands with embeds, buttons, and real-time event handling.
+
+### 🎯 Key Features:
+- **Slash Commands**: Modern Discord slash command implementation
+- **Test Command**: `/test` - Verify bot functionality with optional message echoing
+- **Challenge Command**: `/challenge` - Interactive user challenges with accept/decline buttons
+- **Rich Embeds**: Beautiful embed responses with user avatars and timestamps
+- **Interactive Components**: Button-based interactions with 60-second timeouts
+- **Challenge System**: Challenge types including Gaming, Trivia, Creative, Fitness, and Random
+- **Error Handling**: Comprehensive error handling and validation
+- **Environment Configuration**: Secure credential management with dotenv
+
+### 🛠 Developer Setup:
+1. Install Node.js 16.9.0 or higher
+2. Create a Discord bot in the [Discord Developer Portal](https://discord.com/developers/applications)
+3. Copy `.env.example` to `.env` and add your bot token and client ID
+4. Run `npm install` to install dependencies
+5. Start the bot with `npm start`
+6. Use `/test` and `/challenge` commands in your Discord server
+
+### 📋 Commands:
+- **`/test [message]`**: Test bot responsiveness and optionally echo a message
+- **`/challenge <opponent> [type]`**: Challenge another user with optional challenge type
+  - Types: Gaming, Trivia, Creative, Fitness, Random
+
+### 🔗 Documentation:
+Full setup instructions, usage guide, and troubleshooting available in [discord-bot/README.md](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/discord-bot/README.md)
 
 ---
 
