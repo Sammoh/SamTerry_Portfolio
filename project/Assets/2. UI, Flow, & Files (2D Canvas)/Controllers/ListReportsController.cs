@@ -68,8 +68,12 @@ namespace Sammoh.Two
         public void InitializeListController()
         {
             priorityDropdown.ClearOptions();
-            priorityDropdown.AddOptions(new List<string> { "High", "Low" });
-            stateDropdown.onValueChanged.AddListener(FilterByPriority);
+            // Use enum values to ensure consistency
+            var priorityOptions = Enum.GetNames(typeof(PriorityLevel))
+                .Where(name => name != "none") // Skip the "none" value
+                .ToList();
+            priorityDropdown.AddOptions(priorityOptions);
+            priorityDropdown.onValueChanged.AddListener(FilterByPriority);
 
 
             // initialize the dropdown with states
@@ -129,8 +133,9 @@ namespace Sammoh.Two
         /// <param name="priority"></param>
         private void FilterByPriority(int priority)
         {
-            var isPriority = priority == 0;
-            var filteredReports = FilterReports(isPriority ? PriorityLevel.High : PriorityLevel.Low, null, null);
+            // Map dropdown index to enum value (skip "none" so index 0 = Low, index 1 = High)
+            var priorityLevel = priority == 0 ? PriorityLevel.Low : PriorityLevel.High;
+            var filteredReports = FilterReports(priorityLevel, null, null);
             DisplayReports(filteredReports);
         }
 

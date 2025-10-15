@@ -33,7 +33,7 @@ namespace Sammoh.Two
         /// <summary>
         /// Gets or sets the type of the report.
         /// </summary>
-        public string Type { get; set; }
+        public ReportType Type { get; set; }
 
         /// <summary>
         /// Gets or sets the state of the report.
@@ -67,6 +67,22 @@ namespace Sammoh.Two
         /// The review of the report is complete.
         /// </summary>
         Complete
+    }
+
+    /// <summary>
+    /// Represents the type of a report.
+    /// </summary>
+    public enum ReportType
+    {
+        /// <summary>
+        /// The report is for internal use.
+        /// </summary>
+        Internal,
+
+        /// <summary>
+        /// The report is from an external source.
+        /// </summary>
+        External
     }
 
     /// <summary>
