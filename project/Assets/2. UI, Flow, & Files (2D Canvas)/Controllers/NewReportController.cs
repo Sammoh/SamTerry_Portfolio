@@ -83,7 +83,7 @@ namespace Sammoh.Two
                 // short string date to string
                 Description = DateTime.Now.ToShortDateString(),
                 Priority = priorityToggle.isOn ? PriorityLevel.High : PriorityLevel.Low,
-                Type = typeToggle.isOn ? "External" : "Internal",
+                Type = typeToggle.isOn ? ReportType.External : ReportType.Internal,
                 State = _currentState
             };
 

@@ -63,7 +63,7 @@ namespace Sammoh.Two
                 priorityToggle.isOn = _currentReport.Priority == PriorityLevel.High;
 
                 // fix these.
-                type.text = _currentReport.Type;
+                type.text = _currentReport.Type.ToString();
                 state.text = _currentReport.State.ToString();
                 date.text = _currentReport.SubmissionDate.ToShortDateString();
                 
@@ -110,7 +110,7 @@ namespace Sammoh.Two
                 titleText.text = _currentReport.Title;
                 emailText.text = _currentReport.ReporterEmail;
                 priorityToggle.isOn = _currentReport.Priority == PriorityLevel.High;
-                type.text = _currentReport.Type;
+                type.text = _currentReport.Type.ToString();
                 state.text = _currentReport.State.ToString();
                 date.text = _currentReport.SubmissionDate.ToShortDateString();
             }
