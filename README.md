@@ -176,20 +176,83 @@ Welcome to my portfolio! I am Samuel Terry, a senior Unity3D developer with exte
 
 ## Multiplayer Netcode
 
-**Project**: [Multiplayer Netcode Integration](https://github.com/Sammoh/Multiplayer-Base)  
-**Tech Stack**: Unity3D, Unity Netcode, Vivox, C#  
-**Status**: 🚧 WORK IN PROGRESS  
-**Description**: Multiplayer Lobby Client/Host Platform designed to connect players with a comprehensive lobby system. Features integrated voice chat through Vivox and networked game state synchronization.
+**Project**: [Multiplayer Netcode - Peer-Hosted](https://github.com/Sammoh/SamTerry_Portfolio/tree/main/project/Assets/9.%20Multiplayer%20Netcode)  
+**Tech Stack**: Unity3D, Unity Netcode for GameObjects, Unity Relay, Unity Lobby, C#  
+**Status**: ✅ CORE IMPLEMENTATION COMPLETE  
+**Scene Setup**: Requires Unity Editor configuration (see SCENE_SETUP_GUIDE.md)  
+**Description**: Complete peer-hosted multiplayer system using Unity Netcode for GameObjects with Relay and Lobby services. Features lobby code-based matchmaking, NAT traversal via Unity Relay, and automatic player spawning. One player acts as both host and player while others connect as clients.
 
 ### 🎯 Key Features:
-- **Lobby System**: Client/Host architecture with room management
-- **Voice Chat Integration**: Full chat channels through Vivox SDK
-- **Network Synchronization**: Synchronized lobby states across clients
-- **Game Initialization**: Host and Client network data for maps and characters
-- **Connection Management**: Robust connection handling and player management
+- **Peer-Hosted Architecture**: Client-host model where one player acts as both server and player
+- **Unity Relay Integration**: NAT traversal for connecting players across different networks
+- **Unity Lobby System**: Join code-based matchmaking without requiring IP addresses
+- **Automatic Player Spawning**: Players spawn automatically when connecting to the game
+- **Network Player Controller**: Basic movement synchronization demonstration
+- **Connection Management**: Robust connection, disconnection, and lobby lifecycle handling
+- **Easy-to-Use UI System**: Simple interface for hosting and joining games
+- **Lobby Code Sharing**: Generate and share short lobby codes for easy player connection
 
 ### 🛠 Developer Setup:
-> **Note**: This project is located in a separate repository and is currently under active development. Integration with the main portfolio is planned for future releases.
+1. **Install Unity 6000.0.49f1** as per main setup instructions
+2. **Configure Unity Gaming Services**:
+   - Link project to Unity Project ID (Edit > Project Settings > Services)
+   - Enable Relay service in Unity Dashboard
+   - Enable Lobby service in Unity Dashboard
+3. **Create the Bootstrap Scene**:
+   - Follow step-by-step instructions in `Assets/9. Multiplayer Netcode/SCENE_SETUP_GUIDE.md`
+   - Configure NetworkManager, ConnectionManager, and UI components
+   - Create and register the NetworkPlayer prefab
+4. **Build and Test**:
+   - Build for your platform
+   - Run one instance as host, another as client
+   - Test lobby code connection and player spawning
+
+### 📋 Network Topology:
+```
+Host Player (Peer-Hosted)
+    ├── Acts as Server + Plays as Client
+    └── Unity Relay (NAT Traversal)
+            ├── Client 1 connects via Lobby Code
+            ├── Client 2 connects via Lobby Code
+            └── Client 3 connects via Lobby Code
+```
+
+### 🔧 Components:
+- **ConnectionManager**: Manages Unity Gaming Services, Relay allocation, and Lobby lifecycle
+- **LobbyUI**: User interface for hosting games and joining via lobby codes
+- **PeerHostedBootstrap**: Handles player spawning and game session management  
+- **NetworkPlayer**: Basic networked player with movement synchronization
+
+### 📖 Documentation:
+- **README.md**: Overview, features, and architecture notes
+- **SCENE_SETUP_GUIDE.md**: Detailed step-by-step Unity Editor setup instructions
+
+### 🚀 Usage:
+**As Host:**
+1. Click "Host Game"
+2. Wait for lobby code to generate
+3. Share lobby code with other players
+
+**As Client:**
+1. Click "Join Game"
+2. Enter host's lobby code
+3. Click "Connect"
+
+### ⚠️ Important Notes:
+- **Requires Unity Editor** for scene setup (scripts are complete)
+- **Internet connection required** for Unity Gaming Services (Relay, Lobby)
+- **Unity Gaming Services** must be configured for your project
+- **Scene not included** in repository (must be created in Unity Editor per setup guide)
+
+### 🔮 Future Enhancements:
+- Host migration for seamless host disconnection handling
+- Lobby browser for discovering available games
+- Player customization (names, avatars, colors)
+- Voice chat integration (Vivox)
+- Advanced game state synchronization
+- Reconnection handling
+
+> **Related Work**: A more advanced dedicated server implementation with Vivox voice chat is in development at [Multiplayer-Base Repository](https://github.com/Sammoh/Multiplayer-Base)
 
 ---
 
